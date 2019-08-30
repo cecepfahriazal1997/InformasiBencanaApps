@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="64dp"
+            android:background="@color/colorGrayLight2" />
+
+        <FrameLayout
+            android:id="@+id/notifBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/contentProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-6dp"
+            android:foreground="?attr/selectableItemBackground"
+            card_view:cardBackgroundColor="@color/colorWhite"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardElevation="8dp"
+            card_view:cardPreventCornerOverlap="false"
+            card_view:cardUseCompatPadding="false">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorWhite"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/colorWhite"
+                app:tabIndicatorHeight="0dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextAppearance="@style/styleTextTab"
+                app:tabTextColor="@color/colorGrayDark" />
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrayLight2"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="148dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_fragment" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/sfprodisplay_bold"
+                android:text="Account"
+                android:textColor="@color/colorWhite"
+                android:textSize="28dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/colorWhite" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:clickable="false"
+                android:foreground="?attr/selectableItemBackground"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/avatar"
+                        app:civ_border_color="@color/colorWhite"
+                        app:civ_border_width="2dp" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_toLeftOf="@+id/detailProfile"
+                        android:layout_toRightOf="@+id/avatar"
+                        android:fontFamily="@font/sfprodisplay_bold"
+                        android:singleLine="true"
+                        android:text="John Connor"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_toLeftOf="@+id/detailProfile"
+                        android:layout_toRightOf="@+id/avatar"
+                        android:fontFamily="@font/sfprodisplay_regular"
+                        android:singleLine="true"
+                        android:text="johnconnor@gmail.com"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/detailProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/sfprodisplay_regular"
+                        android:text="Detail"
+                        android:textColor="@color/colorGrayDark"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:clickable="false"
+                android:foreground="?attr/selectableItemBackground"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="cmd-book-open" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/iconDetail"
+                        android:layout_toRightOf="@+id/icon"
+                        android:fontFamily="@font/sfprodisplay_regular"
+                        android:text="Download User Guide"
+                        android:textColor="@color/colorGrayDark"
+                        android:textSize="16dp" />
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/iconDetail"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="gmd-keyboard-arrow-right" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:clickable="false"
+                android:foreground="?attr/selectableItemBackground"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/icon2"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="gmd-lock" />
+
+                    <TextView
+                        android:id="@+id/title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/iconDetail2"
+                        android:layout_toRightOf="@+id/icon2"
+                        android:fontFamily="@font/sfprodisplay_regular"
+                        android:text="Download Change Password"
+                        android:textColor="@color/colorGrayDark"
+                        android:textSize="16dp" />
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/iconDetail2"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="gmd-keyboard-arrow-right" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:clickable="false"
+                android:foreground="?attr/selectableItemBackground"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/icon3"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="gmd-lock" />
+
+                    <TextView
+                        android:id="@+id/title3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/iconDetail3"
+                        android:layout_toRightOf="@+id/icon3"
+                        android:fontFamily="@font/sfprodisplay_regular"
+                        android:text="Contact Us"
+                        android:textColor="@color/colorGrayDark"
+                        android:textSize="16dp" />
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/iconDetail3"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="gmd-keyboard-arrow-right" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:clickable="false"
+                android:foreground="?attr/selectableItemBackground"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/icon4"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="gmd-security" />
+
+                    <TextView
+                        android:id="@+id/title4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/iconDetail4"
+                        android:layout_toRightOf="@+id/icon4"
+                        android:fontFamily="@font/sfprodisplay_regular"
+                        android:text="Privacy Police"
+                        android:textColor="@color/colorGrayDark"
+                        android:textSize="16dp" />
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/iconDetail4"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="gmd-keyboard-arrow-right" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:clickable="false"
+                android:foreground="?attr/selectableItemBackground"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="8dp"
+                card_view:cardElevation="4dp"
+                card_view:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/icon5"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="gmd-receipt" />
+
+                    <TextView
+                        android:id="@+id/title5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/iconDetail5"
+                        android:layout_toRightOf="@+id/icon5"
+                        android:fontFamily="@font/sfprodisplay_regular"
+                        android:text="Term of Service"
+                        android:textColor="@color/colorGrayDark"
+                        android:textSize="16dp" />
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:id="@+id/iconDetail5"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="gmd-keyboard-arrow-right" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_focusColor="@color/colorPrimaryDark"
+                fancy:fb_radius="32dp"
+                fancy:fb_text="Logout"
+                fancy:fb_textFontRes="@font/sfprodisplay_bold"
+                fancy:fb_textSize="16dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
