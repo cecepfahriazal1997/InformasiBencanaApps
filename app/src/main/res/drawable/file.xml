@@ -2,7 +2,7 @@
     android:viewportWidth="35.136" android:width="35dp" xmlns:android="http://schemas.android.com/apk/res/android">
     <path android:fillColor="#e9e9e0" android:pathData="M24.91,0L1.2,0c-0.66,0 -1.2,0.535 -1.2,1.574L0,44.941a1.231,1.231 0,0 0,1.2 0.817L33.94,45.758a1.231,1.231 0,0 0,1.2 -0.817L35.14,10.6c0,-0.569 -0.076,-0.752 -0.21,-0.887L25.418,0.21A0.722,0.722 0,0 0,24.91 0Z"/>
     <path android:fillColor="#d9d7ca" android:pathData="M25.3311,0.123L25.3311,9.805h9.682Z"/>
-    <path android:fillColor="#0096e6" android:pathData="M33.94,45.758L1.2,45.758a1.2,1.2 0,0 1,-1.2 -1.2L0,31.867L35.136,31.867L35.136,44.567A1.2,1.2 0,0 1,33.94 45.758Z"/>
+    <path android:fillColor="#8f8f8f" android:pathData="M33.94,45.758L1.2,45.758a1.2,1.2 0,0 1,-1.2 -1.2L0,31.867L35.136,31.867L35.136,44.567A1.2,1.2 0,0 1,33.94 45.758Z"/>
     <path android:fillColor="#fff" android:pathData="M7,39m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
     <path android:fillColor="#fff" android:pathData="M14,39m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
     <path android:fillColor="#fff" android:pathData="M21,39m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>

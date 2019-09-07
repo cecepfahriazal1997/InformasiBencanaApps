@@ -5,30 +5,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
 import com.informasi.bencana.R;
-import com.informasi.bencana.model.UserGuideModel;
+import com.informasi.bencana.model.PatientModel;
 
 import java.util.List;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 /**
  * Created by Cecep Rokani on 3/18/2019.
  */
-public class UserGuideAdapter extends BaseAdapter {
+public class PatientAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private List<UserGuideModel> items;
-    private UserGuideModel item;
+    private List<PatientModel> items;
+    private PatientModel item;
 
     ViewHolder holder;
 
-    public UserGuideAdapter(Context context, List<UserGuideModel> items) {
+    public PatientAdapter(Context context, List<PatientModel> items) {
         this.context = context;
         this.items = items;
     }
@@ -54,34 +54,67 @@ public class UserGuideAdapter extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if(convertView == null) {
-            convertView         = inflater.inflate(R.layout.item_user_guide, null);
+            convertView         = inflater.inflate(R.layout.item_patient, null);
             holder              = new ViewHolder();
-            holder.Title        = (TextView) convertView.findViewById(R.id.title);
-            holder.Description  = (TextView) convertView.findViewById(R.id.description);
-            holder.Images       = (ImageView) convertView.findViewById(R.id.image);
-            holder.Download     = (Button) convertView.findViewById(R.id.download);
+            holder.Id           = (TextView) convertView.findViewById(R.id.id);
+            holder.Name         = (TextView) convertView.findViewById(R.id.name);
+            holder.Doctor       = (TextView) convertView.findViewById(R.id.doctor);
+            holder.Gender       = (TextView) convertView.findViewById(R.id.gender);
+            holder.Age          = (TextView) convertView.findViewById(R.id.age);
+            holder.StepOne      = (TextView) convertView.findViewById(R.id.stepOne);
+            holder.StepTwo      = (TextView) convertView.findViewById(R.id.stepTwo);
+            holder.StepThree    = (TextView) convertView.findViewById(R.id.stepThree);
+            holder.Edit         = (FancyButton) convertView.findViewById(R.id.btnEdit);
+            holder.Delete       = (FancyButton) convertView.findViewById(R.id.btnDelete);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        UserGuideModel item = items.get(position);
+        PatientModel item = items.get(position);
 
-        holder.Title.setText(item.getTitle());
-        holder.Description.setText(item.getDescription());
+        holder.Id.setText(item.getId());
+        holder.Name.setText(item.getName());
+        holder.Doctor.setText("Doctor : " + item.getDoctor());
+        holder.Gender.setText("Gender : " + item.getGender() + " tahun");
+        holder.Age.setText("Age : " + item.getAge());
 
-        if (item.getType().equals("pdf"))
-            holder.Images.setImageResource(R.drawable.file_pdf);
-        else if (item.getType().matches("doc(.*)"))
-            holder.Images.setImageResource(R.drawable.file_doc);
-        else
-            holder.Images.setImageResource(R.drawable.file);
+        if (item.getStepOne().equals("1")) {
+            holder.StepOne.setText("");
+            holder.StepOne.setBackground(ContextCompat.getDrawable(context, R.drawable.success));
+        } else {
+            holder.StepOne.setText("1");
+            holder.StepOne.setBackground(ContextCompat.getDrawable(context, R.drawable.circle_gray));
+        }
 
-        holder.Download.setOnClickListener(new View.OnClickListener() {
+        if (item.getStepTwo().equals("1")) {
+            holder.StepTwo.setText("");
+            holder.StepTwo.setBackground(ContextCompat.getDrawable(context, R.drawable.success));
+        } else {
+            holder.StepTwo.setText("2");
+            holder.StepTwo.setBackground(ContextCompat.getDrawable(context, R.drawable.circle_gray));
+        }
+
+        if (item.getStepThree().equals("1")) {
+            holder.StepThree.setText("");
+            holder.StepThree.setBackground(ContextCompat.getDrawable(context, R.drawable.success));
+        } else {
+            holder.StepThree.setText("3");
+            holder.StepThree.setBackground(ContextCompat.getDrawable(context, R.drawable.circle_gray));
+        }
+
+        holder.Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "File downloaded !", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Data Edit !", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.Delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Data Edit !", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -89,12 +122,11 @@ public class UserGuideAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView Title, Description;
-        ImageView Images;
-        Button Download;
+        TextView Id, Name, Doctor, Gender, Age, StepOne, StepTwo, StepThree;
+        FancyButton Edit, Delete;
     }
 
-    public List<UserGuideModel> getData() {
+    public List<PatientModel> getData() {
         return items;
     }
 }

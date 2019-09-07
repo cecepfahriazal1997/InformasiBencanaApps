@@ -2,11 +2,14 @@ package com.informasi.bencana.other;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -22,12 +25,16 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.informasi.bencana.R;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -35,6 +42,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class FunctionHelper {
     private Activity activity;
@@ -285,6 +294,45 @@ public class FunctionHelper {
         builder.setMessage((CharSequence) title)
                 .setPositiveButton((CharSequence) "Ya", dialogClickListener)
                 .setNegativeButton((CharSequence) "Tidak", dialogClickListener).show();
+    }
+
+    public void popupNotification(Dialog builder, int image, String textTitle,
+                                  String textDescription, View.OnClickListener positiveListener,
+                                  View.OnClickListener negativeListener, boolean allowClose) {
+        if (allowClose) {
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    //nothing;
+                }
+            });
+        }
+
+        View customView         = activity.getLayoutInflater().inflate(R.layout.popup_notification, null);
+        FancyButton btnPositive = (FancyButton) customView.findViewById(R.id.btnPositive);
+        FancyButton btnNegative = (FancyButton) customView.findViewById(R.id.btnNegative);
+        TextView title          = (TextView) customView.findViewById(R.id.title);
+        TextView description    = (TextView) customView.findViewById(R.id.description);
+        ImageView icon          = (ImageView) customView.findViewById(R.id.icon);
+
+        icon.setImageResource(image);
+        title.setText(textTitle);
+        description.setText(textDescription);
+        if (positiveListener != null) {
+            btnPositive.setVisibility(View.VISIBLE);
+            btnPositive.setOnClickListener(positiveListener);
+        }
+
+        if (negativeListener != null) {
+            btnNegative.setVisibility(View.VISIBLE);
+            btnNegative.setOnClickListener(negativeListener);
+        }
+
+        builder.setContentView(customView);
+        builder.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        builder.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        builder.show();
     }
 
     // Fungsi ini digunakan untuk membuat height listview menjadi dinamis

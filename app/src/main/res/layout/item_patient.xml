@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:foreground="?attr/selectableItemBackground"
+        card_view:cardBackgroundColor="@android:color/white"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="4dp"
+        card_view:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/date"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Rinto Rivanto"
+                android:textColor="@color/colorGrayDark2"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:text="9/Aug/2011"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/doctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/sfprodisplay_light"
+                android:text="Dokter : Putri Agustin"
+                android:textColor="@color/colorGrayDark"
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:id="@+id/contentStep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/stepOne"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/success"
+                    android:fontFamily="@font/sfprodisplay_medium"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorTransparentGray" />
+
+                <TextView
+                    android:id="@+id/stepTwo"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/success"
+                    android:fontFamily="@font/sfprodisplay_medium"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12dp" />
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorTransparentGray" />
+
+                <TextView
+                    android:id="@+id/stepThree"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/success"
+                    android:fontFamily="@font/sfprodisplay_medium"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/doctor"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/sfprodisplay_light"
+                android:text="Gender : Laki - laki"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gender"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/sfprodisplay_light"
+                android:text="Umur : 31 tahun"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/contentStep">
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/btnEdit"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginRight="4dp"
+                    fancy:fb_defaultColor="@color/colorYellow"
+                    fancy:fb_focusColor="@color/colorYellowDark"
+                    fancy:fb_radius="4dp"
+                    fancy:fb_text=""
+                    fancy:fb_textSize="16dp"
+                    fancy:fb_fontIconResource="&#xf044;"
+                    fancy:fb_fontIconSize="24dp" />
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/btnDelete"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="4dp"
+                    fancy:fb_defaultColor="@color/colorRed"
+                    fancy:fb_focusColor="@color/colorRedDark"
+                    fancy:fb_radius="4dp"
+                    fancy:fb_text=""
+                    fancy:fb_textSize="16dp"
+                    fancy:fb_fontIconResource="&#xf1f8;"
+                    fancy:fb_fontIconSize="24dp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

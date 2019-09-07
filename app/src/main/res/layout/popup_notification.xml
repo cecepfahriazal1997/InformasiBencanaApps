@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="32dp">
 
             <ImageView
                 android:id="@+id/icon"
@@ -43,7 +43,8 @@
                 android:fontFamily="@font/sfprodisplay_medium"
                 android:text="Title"
                 android:textColor="@color/colorGrayDark2"
-                android:textSize="24dp" />
+                android:textSize="24dp"
+                android:gravity="center" />
 
             <TextView
                 android:id="@+id/description"
@@ -52,12 +53,12 @@
                 android:fontFamily="@font/sfprodisplay_medium"
                 android:text="Description of message"
                 android:textColor="@color/colorGray"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:gravity="center"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
                 <mehdi.sakout.fancybuttons.FancyButton
@@ -68,6 +69,7 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:layout_marginRight="8dp"
+                    android:layout_marginTop="32dp"
                     fancy:fb_defaultColor="@color/colorPrimary"
                     fancy:fb_focusColor="@color/colorPrimaryDark"
                     fancy:fb_radius="32dp"
@@ -83,6 +85,7 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="32dp"
                     fancy:fb_defaultColor="@color/colorGray2"
                     fancy:fb_focusColor="@color/colorGrayDark"
                     fancy:fb_radius="32dp"

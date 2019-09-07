@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -11,9 +12,12 @@ import androidx.fragment.app.Fragment;
 import com.informasi.bencana.R;
 import com.informasi.bencana.adapter.NewsAdapter;
 import com.informasi.bencana.app.DashboardActivity;
+import com.informasi.bencana.app.DetailNewsActivity;
 import com.informasi.bencana.model.NewsModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NewsFragment extends Fragment {
     private NewsAdapter adapter;
@@ -55,6 +59,7 @@ public class NewsFragment extends Fragment {
             NewsModel model = new NewsModel();
             model.setTitle(title[i]);
             model.setDate("2" + i + " Agustus 2019");
+            model.setDescription(getString(R.string.content_news));
 
             listData.add(model);
         }
@@ -63,5 +68,15 @@ public class NewsFragment extends Fragment {
         adapter = new NewsAdapter(getActivity(), listData);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parents, View view, int position, long id) {
+                Map<String, String> param = new HashMap<>();
+                param.put("title", listData.get(position).getTitle());
+                param.put("date", listData.get(position).getDate());
+                param.put("content", listData.get(position).getDescription());
+                parent.functionHelper.startIntent(DetailNewsActivity.class, false, false, param);
+            }
+        });
     }
 }

@@ -1,43 +1,47 @@
 package com.informasi.bencana.app;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.informasi.bencana.R;
 import com.informasi.bencana.other.FunctionHelper;
 
-import mehdi.sakout.fancybuttons.FancyButton;
-
-public class SignUpActivity extends Activity {
-    private FancyButton btnSubmit, btnBack;
+public class ProfileActivity extends AppCompatActivity {
     private FunctionHelper functionHelper;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_profile);
 
-         btnSubmit          = findViewById(R.id.btnSubmit);
-         btnBack            = findViewById(R.id.btnBack);
-         functionHelper     = new FunctionHelper(this);
+        toolbar            = findViewById(R.id.toolbar);
+        functionHelper     = new FunctionHelper(this);
 
-         initial();
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Detail Profile");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void initial() {
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                functionHelper.showToast("Register account has successfuly !", 0);
-            }
-        });
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

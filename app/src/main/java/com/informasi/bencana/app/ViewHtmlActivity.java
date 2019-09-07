@@ -1,15 +1,16 @@
-package com.application.xolving.app;
+package com.informasi.bencana.app;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.application.xolving.R;
+import com.informasi.bencana.R;
 
-public class ActivityViewHtml extends ActivityMaster {
+public class ViewHtmlActivity extends AppCompatActivity {
     private WebView privacyPolicy;
     private String urlPrivacy;
     private Toolbar toolbar;
@@ -30,7 +31,13 @@ public class ActivityViewHtml extends ActivityMaster {
 
         privacyPolicy.getSettings().setJavaScriptEnabled(true);
         privacyPolicy.loadUrl(urlPrivacy);
-        privacyPolicy.setWebViewClient(new loadHtml());
+        privacyPolicy.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(urlPrivacy);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -41,14 +48,6 @@ public class ActivityViewHtml extends ActivityMaster {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private class loadHtml extends WebViewClient {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(urlPrivacy);
-            return true;
         }
     }
 }

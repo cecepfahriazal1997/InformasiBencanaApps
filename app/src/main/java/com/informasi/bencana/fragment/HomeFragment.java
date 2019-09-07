@@ -4,14 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ScrollView;
 
 import androidx.fragment.app.Fragment;
 
 import com.informasi.bencana.R;
 import com.informasi.bencana.adapter.GridViewAdapter;
 import com.informasi.bencana.app.DashboardActivity;
+import com.informasi.bencana.app.PatientActivity;
 import com.informasi.bencana.model.GridViewModel;
 
 import java.util.ArrayList;
@@ -74,6 +75,16 @@ public class HomeFragment extends Fragment {
         customGridAdapter = new GridViewAdapter(getActivity(), R.layout.item_menu_home, listData);
         gridView.setAdapter(customGridAdapter);
         customGridAdapter.notifyDataSetChanged();
-//        parent.functionHelper.setGridViewHeightBasedOnChildren(gridView, 2);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parents, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        parent.functionHelper.startIntent(PatientActivity.class, false, false, null);
+                        break;
+                    default: break;
+                }
+            }
+        });
     }
 }

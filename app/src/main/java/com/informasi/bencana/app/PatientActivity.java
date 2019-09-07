@@ -9,42 +9,87 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.informasi.bencana.R;
-import com.informasi.bencana.adapter.UserGuideAdapter;
-import com.informasi.bencana.model.UserGuideModel;
+import com.informasi.bencana.adapter.PatientAdapter;
+import com.informasi.bencana.model.PatientModel;
 import com.informasi.bencana.other.FunctionHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserGuideActivity extends AppCompatActivity {
+import mehdi.sakout.fancybuttons.FancyButton;
+
+public class PatientActivity extends AppCompatActivity {
     private FunctionHelper functionHelper;
     private ListView listView;
-    private UserGuideAdapter adapter;
-    private List<UserGuideModel> list = new ArrayList<>();
+    private PatientAdapter adapter;
+    private List<PatientModel> list = new ArrayList<>();
     private Toolbar toolbar;
+    private FancyButton btnAdd;
 
-    private String title[] = {
-            "Petunjuk Pemakaian / User Guide",
-            "Diagram Alir / Flowchart"
+    private String id[] = {
+            "9/Aug/2011",
+            "11/Aug/2011",
+            "14/Aug/2011",
+            "15/Aug/2011"
     };
 
-    private String description[] = {
-            "Petunjuk pemakaian dalam Sistem Informasi Medis Bencana, mencakup dari memasukkan data, mengedit data, serta menghapus data.",
-            "Bagan atau diagram alir dari Sistem Informasi Medis Bencana"
+    private String name[] = {
+            "Rinto Rivanto",
+            "Supriyanto",
+            "Hani Nurhaini",
+            "Susi Nuralisah"
     };
 
-    private String type[] = {
-            "doc",
-            "pdf"
+    private String doctor[] = {
+            "Putri Agustin",
+            "Handoyo",
+            "Boyke",
+            "Putri Agustin"
+    };
+
+    private String gender[] = {
+            "Laki-laki",
+            "Laki-laki",
+            "Perempuan",
+            "Perempuan"
+    };
+
+    private String age[] = {
+            "21",
+            "31",
+            "21",
+            "24"
+    };
+
+    private String stepOne[] = {
+            "1",
+            "1",
+            "1",
+            "1"
+    };
+
+    private String stepTwo[] = {
+            "0",
+            "1",
+            "0",
+            "1"
+    };
+
+    private String stepThree[] = {
+            "0",
+            "0",
+            "1",
+            "1"
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_guide);
+        setContentView(R.layout.activity_patient);
         functionHelper      = new FunctionHelper(this);
         toolbar             = findViewById(R.id.toolbar);
         listView            = findViewById(R.id.listView);
+        btnAdd              = findViewById(R.id.btnAdd);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Download User Guide");
@@ -55,19 +100,25 @@ public class UserGuideActivity extends AppCompatActivity {
     }
 
     private void initialData() {
-        adapter         = new UserGuideAdapter(this, list);
+        adapter         = new PatientAdapter(this, list);
         listView.setAdapter(adapter);
 
-        for (int i = 0; i < title.length; i++) {
-            UserGuideModel model = new UserGuideModel();
-            model.setTitle(title[i]);
-            model.setDescription(description[i]);
-            model.setType(type[i]);
+        for (int i = 0; i < id.length; i++) {
+            PatientModel model = new PatientModel();
+            model.setId(id[i]);
+            model.setName(name[i]);
+            model.setDoctor(doctor[i]);
+            model.setGender(gender[i]);
+            model.setAge(age[i]);
+            model.setStepOne(stepOne[i]);
+            model.setStepTwo(stepTwo[i]);
+            model.setStepThree(stepThree[i]);
 
             list.add(model);
         }
 
         adapter.notifyDataSetChanged();
+        functionHelper.setListViewHeightBasedOnChildren(listView);
     }
 
     @Override

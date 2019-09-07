@@ -31,7 +31,7 @@ public class LoginActivity extends Activity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                functionHelper.startIntent(DashboardActivity.class, false, false, null);
+                functionHelper.startIntent(DashboardActivity.class, true, true, null);
             }
         });
 

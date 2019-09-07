@@ -65,6 +65,7 @@ public class NewsAdapter extends BaseAdapter {
 
         holder.Title.setText(item.getTitle());
         holder.Dates.setText(item.getDate());
+        holder.Description.setText(item.getDescription());
 
         return convertView;
     }

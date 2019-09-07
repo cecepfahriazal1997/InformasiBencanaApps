@@ -5,10 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.core.content.ContextCompat;
+import android.widget.Toast;
 
 import com.informasi.bencana.R;
 import com.informasi.bencana.model.UserGuideModel;
@@ -19,7 +19,6 @@ import java.util.List;
  * Created by Cecep Rokani on 3/18/2019.
  */
 public class UserGuideAdapter extends BaseAdapter {
-
     private Context context;
     private LayoutInflater inflater;
     private List<UserGuideModel> items;
@@ -58,6 +57,7 @@ public class UserGuideAdapter extends BaseAdapter {
             holder.Title        = (TextView) convertView.findViewById(R.id.title);
             holder.Description  = (TextView) convertView.findViewById(R.id.description);
             holder.Images       = (ImageView) convertView.findViewById(R.id.image);
+            holder.Download     = (Button) convertView.findViewById(R.id.download);
 
             convertView.setTag(holder);
         } else {
@@ -71,10 +71,17 @@ public class UserGuideAdapter extends BaseAdapter {
 
         if (item.getType().equals("pdf"))
             holder.Images.setImageResource(R.drawable.file_pdf);
-        else if (item.getType().equals("docx"))
+        else if (item.getType().matches("doc(.*)"))
             holder.Images.setImageResource(R.drawable.file_doc);
         else
             holder.Images.setImageResource(R.drawable.file);
+
+        holder.Download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "File downloaded !", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return convertView;
     }
@@ -82,6 +89,7 @@ public class UserGuideAdapter extends BaseAdapter {
     static class ViewHolder {
         TextView Title, Description;
         ImageView Images;
+        Button Download;
     }
 
     public List<UserGuideModel> getData() {

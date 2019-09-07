@@ -128,6 +128,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardUserGuide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -178,6 +179,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardChangePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -212,7 +214,7 @@
                         android:layout_toLeftOf="@+id/iconDetail2"
                         android:layout_toRightOf="@+id/icon2"
                         android:fontFamily="@font/sfprodisplay_regular"
-                        android:text="Download Change Password"
+                        android:text="Change Password"
                         android:textColor="@color/colorGrayDark"
                         android:textSize="16dp" />
 
@@ -228,6 +230,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -250,7 +253,7 @@
                         android:layout_height="24dp"
                         android:layout_centerVertical="true"
                         app:iiv_color="@color/colorGray"
-                        app:iiv_icon="gmd-lock" />
+                        app:iiv_icon="gmd-phone-in-talk" />
 
                     <TextView
                         android:id="@+id/title3"
@@ -278,6 +281,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardPrivacy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -312,7 +316,7 @@
                         android:layout_toLeftOf="@+id/iconDetail4"
                         android:layout_toRightOf="@+id/icon4"
                         android:fontFamily="@font/sfprodisplay_regular"
-                        android:text="Privacy Police"
+                        android:text="Privacy Policy"
                         android:textColor="@color/colorGrayDark"
                         android:textSize="16dp" />
 
@@ -328,6 +332,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardTermService"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -378,14 +383,14 @@
             </androidx.cardview.widget.CardView>
 
             <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 fancy:fb_defaultColor="@color/colorPrimary"
                 fancy:fb_focusColor="@color/colorPrimaryDark"
                 fancy:fb_radius="32dp"
