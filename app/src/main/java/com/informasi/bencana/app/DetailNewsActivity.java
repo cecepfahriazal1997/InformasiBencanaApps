@@ -6,12 +6,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.informasi.bencana.R;
 
-public class DetailNewsActivity extends AppCompatActivity {
+public class DetailNewsActivity extends MasterActivity {
     private WebView Content;
     private Toolbar toolbar;
     private TextView Title, Dates;

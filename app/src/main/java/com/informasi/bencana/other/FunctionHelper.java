@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.http.SslError;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.Html;
@@ -23,11 +24,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AbsListView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -506,5 +511,76 @@ public class FunctionHelper {
             e.printStackTrace();
             return false;
         }
+    }
+
+    // Fungsi ini digunakan untuk setup webview yang memiliki konten text
+    public void formatIsText(final WebView webView, final String urlContent, final String textColor)
+    {
+        webView.clearCache(true);
+        webView.clearHistory();
+        webView.setVerticalScrollBarEnabled(true);
+        webView.setHorizontalScrollBarEnabled(true);
+        webView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);
+        webView.getSettings().setSupportZoom(true);
+        webView.setLongClickable(false);
+        webView.setHapticFeedbackEnabled(false);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.setBackgroundColor(Color.TRANSPARENT);
+        webView.setLayerType(WebView.LAYER_TYPE_NONE, null);
+        if (urlContent.contains("{") && urlContent.contains("}") || urlContent.contains("\\(")) {
+            webView.loadDataWithBaseURL("http://bar",
+                    "<head><style type='text/css'>body{color: " + textColor
+                            + "; font-size: 14px}</style></head><script type='text/javascript' "
+                            + "src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>"
+                            + "</script><math>" + urlContent + "</math>",
+                    "text/html", "utf-8", "");
+        } else {
+            String text = "<html><head>"
+                    + "<style type='text/css'>body{color: " + textColor + ";font-size: 14px;}"
+                    + "</style></head>"
+                    + "<body>"
+                    + urlContent
+                    + "</body></html>";
+            webView.loadData(text, "text/html", null);
+        }
+    }
+
+    // Fungsi ini digunakan untuk menampilkan konten doc, ppt, serta pdf pada webview
+    public void formatIsEmbed(final ProgressDialog pDialog, WebView webView, String url){
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams((int)(RelativeLayout
+                .LayoutParams.MATCH_PARENT), RelativeLayout.LayoutParams.MATCH_PARENT);
+
+        showProgressDialog(pDialog, true);
+        webView.setLayoutParams(lp);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                // TODO Auto-generated method stub
+                view.loadUrl(url);
+                return true;
+            }
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                showProgressDialog(pDialog, false);
+                super.onReceivedSslError(view, handler, error);
+            }
+
+            @Override
+            public void onPageFinished(final WebView view, final String url) {
+                showProgressDialog(pDialog, false);
+            }
+        });
+        webView.loadUrl(url);
     }
 }

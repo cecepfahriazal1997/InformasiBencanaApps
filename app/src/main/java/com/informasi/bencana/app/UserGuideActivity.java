@@ -5,44 +5,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.informasi.bencana.R;
 import com.informasi.bencana.adapter.UserGuideAdapter;
 import com.informasi.bencana.model.UserGuideModel;
-import com.informasi.bencana.other.FunctionHelper;
+import com.informasi.bencana.other.ApiService;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class UserGuideActivity extends AppCompatActivity {
-    private FunctionHelper functionHelper;
+public class UserGuideActivity extends MasterActivity {
     private ListView listView;
     private UserGuideAdapter adapter;
-    private List<UserGuideModel> list = new ArrayList<>();
+    private List<UserGuideModel> listData = new ArrayList<>();
     private Toolbar toolbar;
-
-    private String title[] = {
-            "Petunjuk Pemakaian / User Guide",
-            "Diagram Alir / Flowchart"
-    };
-
-    private String description[] = {
-            "Petunjuk pemakaian dalam Sistem Informasi Medis Bencana, mencakup dari memasukkan data, mengedit data, serta menghapus data.",
-            "Bagan atau diagram alir dari Sistem Informasi Medis Bencana"
-    };
-
-    private String type[] = {
-            "doc",
-            "pdf"
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_guide);
-        functionHelper      = new FunctionHelper(this);
         toolbar             = findViewById(R.id.toolbar);
         listView            = findViewById(R.id.listView);
 
@@ -50,26 +36,44 @@ public class UserGuideActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Download User Guide");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        initialData();
+        initial();
     }
 
-    private void initialData() {
-        adapter         = new UserGuideAdapter(this, list);
-        listView.setAdapter(adapter);
+    private void initial() {
+        clientApiService.getData(urlUserGuide, "object", false,
+                new ApiService.hashMapListener() {
+                    @Override
+                    public String getHashMap(Map<String, String> hashMap) {
+                        try {
+                            if (hashMap.get("success").equals("1")) {
+                                JSONObject result   = new JSONObject(hashMap.get("result"));
+                                JSONArray list      = result.getJSONArray("data");
+                                for (int i = 0; i < list.length(); i++) {
+                                    JSONObject detail       = list.getJSONObject(i);
+                                    UserGuideModel model    = new UserGuideModel();
 
-        for (int i = 0; i < title.length; i++) {
-            UserGuideModel model = new UserGuideModel();
-            model.setTitle(title[i]);
-            model.setDescription(description[i]);
-            model.setType(type[i]);
+                                    model.setTitle(detail.getString("title"));
+                                    model.setDescription(detail.getString("description"));
+                                    model.setType(detail.getString("type"));
+                                    model.setUrl(urlGoogleDoc + detail.getString("file"));
 
-            list.add(model);
-        }
+                                    listData.add(model);
+                                }
 
-        adapter.notifyDataSetChanged();
+                                adapter         = new UserGuideAdapter(UserGuideActivity.this, listData);
+                                listView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                helper.popupDialog("Oops", hashMap.get("message"), false);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                });
     }
-
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.main, menu);

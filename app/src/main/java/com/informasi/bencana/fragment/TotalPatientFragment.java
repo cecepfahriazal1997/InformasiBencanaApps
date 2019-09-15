@@ -12,33 +12,20 @@ import com.informasi.bencana.R;
 import com.informasi.bencana.adapter.TotalPatientAdapter;
 import com.informasi.bencana.app.DashboardActivity;
 import com.informasi.bencana.model.TotalPatientModel;
+import com.informasi.bencana.other.ApiService;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class TotalPatientFragment extends Fragment {
     private TotalPatientAdapter customGridAdapter;
     private ArrayList<TotalPatientModel> listData = new ArrayList();
     private GridView gridView;
     private DashboardActivity parent;
-
-    private String country[] = {
-            "Indonesia",
-            "Bouvet Island",
-            "Bangladesh",
-            "Azerbaijan",
-            "Australia",
-            "Islandia"
-    };
-
-    private String total[] = {
-            "33",
-            "8",
-            "63",
-            "21",
-            "14",
-            "45"
-    };
-
+    
     public TotalPatientFragment() {
     }
 
@@ -60,17 +47,36 @@ public class TotalPatientFragment extends Fragment {
     }
 
     private void initial() {
-        for (int i = 0; i < country.length; i++) {
-            TotalPatientModel model = new TotalPatientModel();
-            model.setCountry(country[i]);
-            model.setTotal(total[i]);
+        parent.apiService.getData(parent.urlPatientCountries, "object", false,
+                new ApiService.hashMapListener() {
+            @Override
+            public String getHashMap(Map<String, String> hashMap) {
+                try {
+                    if (hashMap.get("success").equals("1")) {
+                        JSONObject result   = new JSONObject(hashMap.get("result"));
+                        JSONArray list      = result.getJSONArray("data");
+                        for (int i = 0; i < list.length(); i++) {
+                            JSONObject detail   = list.getJSONObject(i);
+                            TotalPatientModel model     = new TotalPatientModel();
 
-            listData.add(model);
-        }
+                            model.setCountry(detail.getString("name"));
+                            model.setTotal(detail.getString("total"));
 
-        gridView.setFocusable(false);
-        customGridAdapter = new TotalPatientAdapter(getActivity(), R.layout.item_total_patient, listData);
-        gridView.setAdapter(customGridAdapter);
-        customGridAdapter.notifyDataSetChanged();
+                            listData.add(model);
+                        }
+
+                        gridView.setFocusable(false);
+                        customGridAdapter = new TotalPatientAdapter(getActivity(), R.layout.item_total_patient, listData);
+                        gridView.setAdapter(customGridAdapter);
+                        customGridAdapter.notifyDataSetChanged();
+                    } else {
+                        parent.functionHelper.popupDialog("Oops", hashMap.get("message"), false);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        });
     }
 }

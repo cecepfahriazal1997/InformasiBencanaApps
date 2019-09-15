@@ -23,6 +23,7 @@ import com.informasi.bencana.app.LoginActivity;
 import com.informasi.bencana.app.ProfileActivity;
 import com.informasi.bencana.app.UserGuideActivity;
 import com.informasi.bencana.app.ViewHtmlActivity;
+import com.informasi.bencana.other.ApiService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class AccountFragment extends Fragment {
     private DashboardActivity parent;
     private CardView cardUserGuide, cardChangePassword, cardContact, cardPrivacy, cardTermService;
     private FancyButton btnLogout;
-    private TextView detailProfile;
+    private TextView detailProfile, name, email;
 
     public AccountFragment() {
         parent          = (DashboardActivity) getActivity();
@@ -57,12 +58,16 @@ public class AccountFragment extends Fragment {
         cardTermService     = rootView.findViewById(R.id.cardTermService);
         btnLogout           = rootView.findViewById(R.id.btnLogout);
         detailProfile       = rootView.findViewById(R.id.detailProfile);
+        name                = rootView.findViewById(R.id.name);
+        email               = rootView.findViewById(R.id.email);
 
         initial();
         return rootView;
     }
 
     private void initial() {
+        name.setText("" + parent.functionHelper.getSession("name"));
+        email.setText("" + parent.functionHelper.getSession("email"));
         detailProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,6 +126,7 @@ public class AccountFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
+                        parent.functionHelper.clearSession();
                         parent.functionHelper.startIntent(LoginActivity.class, true, true, null);
                     }
                 };
@@ -134,6 +140,23 @@ public class AccountFragment extends Fragment {
 
                 parent.functionHelper.popupNotification(dialog, R.drawable.confirmation,
                         title, message, positive, negative, false);
+            }
+        });
+    }
+
+    private void processChangePassword(Dialog builder, String password, String newPass, String confirmPass) {
+        Map<String, String> param = new HashMap<>();
+        param.put("id", parent.functionHelper.getSession("id"));
+        param.put("password", password);
+        param.put("newPassword", newPass);
+        param.put("confirmPassword", confirmPass);
+        parent.apiService.changePassword(parent.urlChangePassword, param, new ApiService.hashMapListener() {
+            @Override
+            public String getHashMap(Map<String, String> hashMap) {
+                parent.functionHelper.showToast(hashMap.get("message"), 0);
+                if (hashMap.get("status").equals("1"))
+                    builder.dismiss();
+                return null;
             }
         });
     }
@@ -210,7 +233,8 @@ public class AccountFragment extends Fragment {
                         contentConfirmPassword.setPasswordVisibilityToggleEnabled(false);
                         confirmPassword.setError("Your confirmation password is not match !");
                     } else {
-                        parent.functionHelper.showToast("Change password has been successfully !", 0);
+                        processChangePassword(builder, oldPassword.getText().toString(),
+                                newPassword.getText().toString(), confirmPassword.getText().toString());
                     }
                 }
             }

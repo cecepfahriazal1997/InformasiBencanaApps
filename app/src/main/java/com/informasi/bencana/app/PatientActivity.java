@@ -3,90 +3,37 @@ package com.informasi.bencana.app;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.informasi.bencana.R;
 import com.informasi.bencana.adapter.PatientAdapter;
 import com.informasi.bencana.model.PatientModel;
-import com.informasi.bencana.other.FunctionHelper;
+import com.informasi.bencana.other.ApiService;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
-public class PatientActivity extends AppCompatActivity {
-    private FunctionHelper functionHelper;
+public class PatientActivity extends MasterActivity {
     private ListView listView;
     private PatientAdapter adapter;
-    private List<PatientModel> list = new ArrayList<>();
+    private List<PatientModel> listData = new ArrayList<>();
     private Toolbar toolbar;
     private FancyButton btnAdd;
-
-    private String id[] = {
-            "9/Aug/2011",
-            "11/Aug/2011",
-            "14/Aug/2011",
-            "15/Aug/2011"
-    };
-
-    private String name[] = {
-            "Rinto Rivanto",
-            "Supriyanto",
-            "Hani Nurhaini",
-            "Susi Nuralisah"
-    };
-
-    private String doctor[] = {
-            "Putri Agustin",
-            "Handoyo",
-            "Boyke",
-            "Putri Agustin"
-    };
-
-    private String gender[] = {
-            "Laki-laki",
-            "Laki-laki",
-            "Perempuan",
-            "Perempuan"
-    };
-
-    private String age[] = {
-            "21",
-            "31",
-            "21",
-            "24"
-    };
-
-    private String stepOne[] = {
-            "1",
-            "1",
-            "1",
-            "1"
-    };
-
-    private String stepTwo[] = {
-            "0",
-            "1",
-            "0",
-            "1"
-    };
-
-    private String stepThree[] = {
-            "0",
-            "0",
-            "1",
-            "1"
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient);
-        functionHelper      = new FunctionHelper(this);
         toolbar             = findViewById(R.id.toolbar);
         listView            = findViewById(R.id.listView);
         btnAdd              = findViewById(R.id.btnAdd);
@@ -95,30 +42,54 @@ public class PatientActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Download User Guide");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-        initialData();
+        initial();
     }
+    
+    private void initial() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, String> param = new HashMap<>();
+                param.put("title", "Add Patient");
+                helper.startIntent(FormPatientActivity.class, false, false, param);
+            }
+        });
+        clientApiService.getData(listPatient, "object", false,
+                new ApiService.hashMapListener() {
+                    @Override
+                    public String getHashMap(Map<String, String> hashMap) {
+                        try {
+                            if (hashMap.get("success").equals("1")) {
+                                JSONObject result   = new JSONObject(hashMap.get("result"));
+                                JSONArray list      = result.getJSONArray("data");
+                                for (int i = 0; i < list.length(); i++) {
+                                    JSONObject detail       = list.getJSONObject(i);
+                                    PatientModel model = new PatientModel();
+                                    model.setId(detail.getString("PatientId"));
+                                    model.setName(detail.getString("PatientNm"));
+                                    model.setDoctor(detail.getString("DoctorNm"));
+                                    model.setGender(detail.getString("Sex").equals("0") ? "Laki-laki" : "Perempuan");
+                                    model.setAge(detail.getString("Age"));
+                                    model.setStepOne("0");
+                                    model.setStepTwo("0");
+                                    model.setStepThree("0");
 
-    private void initialData() {
-        adapter         = new PatientAdapter(this, list);
-        listView.setAdapter(adapter);
+                                    listData.add(model);
+                                }
 
-        for (int i = 0; i < id.length; i++) {
-            PatientModel model = new PatientModel();
-            model.setId(id[i]);
-            model.setName(name[i]);
-            model.setDoctor(doctor[i]);
-            model.setGender(gender[i]);
-            model.setAge(age[i]);
-            model.setStepOne(stepOne[i]);
-            model.setStepTwo(stepTwo[i]);
-            model.setStepThree(stepThree[i]);
-
-            list.add(model);
-        }
-
-        adapter.notifyDataSetChanged();
-        functionHelper.setListViewHeightBasedOnChildren(listView);
+                                adapter         = new PatientAdapter(PatientActivity.this, listData);
+                                listView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                                helper.setListViewHeightBasedOnChildren(listView);
+                            } else {
+                                helper.popupDialog("Oops", hashMap.get("message"), false);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+                });
     }
 
     @Override

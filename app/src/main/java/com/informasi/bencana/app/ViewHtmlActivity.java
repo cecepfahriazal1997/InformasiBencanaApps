@@ -5,12 +5,11 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.informasi.bencana.R;
 
-public class ViewHtmlActivity extends AppCompatActivity {
+public class ViewHtmlActivity extends MasterActivity {
     private WebView privacyPolicy;
     private String urlPrivacy;
     private Toolbar toolbar;

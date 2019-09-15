@@ -68,7 +68,6 @@
                     android:fontFamily="@font/sfprodisplay_bold"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="John Connor"
                     android:textColor="@color/colorPrimary"
                     android:textSize="22dp" />
 
@@ -81,7 +80,6 @@
                     android:fontFamily="@font/sfprodisplay_regular"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="johnconnor@gmail.com"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14dp" />
             </LinearLayout>
@@ -115,12 +113,12 @@
                     android:textSize="14dp" />
 
                 <TextView
+                    android:id="@+id/username"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
                     android:fontFamily="@font/sfprodisplay_medium"
                     android:gravity="right"
-                    android:text="JohnConnor26124"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16dp" />
             </LinearLayout>
@@ -154,90 +152,12 @@
                     android:textSize="14dp" />
 
                 <TextView
+                    android:id="@+id/phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
                     android:fontFamily="@font/sfprodisplay_medium"
                     android:gravity="right"
-                    android:text="087223441234"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:clickable="false"
-            android:foreground="?attr/selectableItemBackground"
-            card_view:cardBackgroundColor="@android:color/white"
-            card_view:cardCornerRadius="8dp"
-            card_view:cardElevation="4dp"
-            card_view:cardUseCompatPadding="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:fontFamily="@font/sfprodisplay_light"
-                    android:text="Gender"
-                    android:textColor="@color/colorGrayDark"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:fontFamily="@font/sfprodisplay_medium"
-                    android:gravity="right"
-                    android:text="Male"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:clickable="false"
-            android:foreground="?attr/selectableItemBackground"
-            card_view:cardBackgroundColor="@android:color/white"
-            card_view:cardCornerRadius="8dp"
-            card_view:cardElevation="4dp"
-            card_view:cardUseCompatPadding="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:fontFamily="@font/sfprodisplay_light"
-                    android:text="Address"
-                    android:textColor="@color/colorGrayDark"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:fontFamily="@font/sfprodisplay_medium"
-                    android:gravity="right"
-                    android:text="Jl. Sukawarna No 52 Kota Bandung"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16dp" />
             </LinearLayout>

@@ -4,7 +4,6 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
@@ -15,9 +14,10 @@ import com.informasi.bencana.fragment.AccountFragment;
 import com.informasi.bencana.fragment.HomeFragment;
 import com.informasi.bencana.fragment.NewsFragment;
 import com.informasi.bencana.fragment.TotalPatientFragment;
+import com.informasi.bencana.other.ApiService;
 import com.informasi.bencana.other.FunctionHelper;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends MasterActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private boolean doubleBackToExitPressedOnce = false;
@@ -42,13 +42,15 @@ public class DashboardActivity extends AppCompatActivity {
 
     private ViewPagerAdapter adapter;
     public FunctionHelper functionHelper;
+    public ApiService apiService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        functionHelper          = new FunctionHelper(this);
+        functionHelper          = helper;
+        apiService              = clientApiService;
         viewPager               = (ViewPager) findViewById(R.id.viewpager);
         tabLayout               = (TabLayout) findViewById(R.id.tabs);
 

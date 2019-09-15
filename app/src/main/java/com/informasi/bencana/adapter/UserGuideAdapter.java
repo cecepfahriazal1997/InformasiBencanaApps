@@ -1,5 +1,6 @@
 package com.informasi.bencana.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,27 +9,32 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.informasi.bencana.R;
+import com.informasi.bencana.app.MultiFormatActivity;
 import com.informasi.bencana.model.UserGuideModel;
+import com.informasi.bencana.other.FunctionHelper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Cecep Rokani on 3/18/2019.
  */
 public class UserGuideAdapter extends BaseAdapter {
-    private Context context;
+    private Activity context;
     private LayoutInflater inflater;
     private List<UserGuideModel> items;
     private UserGuideModel item;
+    private FunctionHelper functionHelper;
 
     ViewHolder holder;
 
-    public UserGuideAdapter(Context context, List<UserGuideModel> items) {
+    public UserGuideAdapter(Activity context, List<UserGuideModel> items) {
         this.context = context;
         this.items = items;
+        this.functionHelper = new FunctionHelper(context);
     }
 
     @Override
@@ -79,7 +85,11 @@ public class UserGuideAdapter extends BaseAdapter {
         holder.Download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "File downloaded !", Toast.LENGTH_SHORT).show();
+                Map<String, String> hashMap = new HashMap<>();
+                hashMap.put("title", item.getTitle());
+                hashMap.put("typeFile", item.getType());
+                hashMap.put("content", item.getUrl());
+                functionHelper.startIntent(MultiFormatActivity.class, false, false, hashMap);
             }
         });
 

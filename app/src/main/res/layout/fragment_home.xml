@@ -31,19 +31,19 @@
                 android:src="@drawable/avatar" />
 
             <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_bold"
-                android:text="John Connor"
                 android:textColor="@color/colorWhite"
                 android:textSize="24dp" />
 
             <TextView
+                android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:text="johnconnor@gmail.com"
                 android:textColor="@color/colorWhite"
                 android:textSize="18dp" />
         </LinearLayout>

@@ -14,6 +14,10 @@ import com.informasi.bencana.adapter.NewsAdapter;
 import com.informasi.bencana.app.DashboardActivity;
 import com.informasi.bencana.app.DetailNewsActivity;
 import com.informasi.bencana.model.NewsModel;
+import com.informasi.bencana.other.ApiService;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,15 +28,6 @@ public class NewsFragment extends Fragment {
     private ArrayList<NewsModel> listData = new ArrayList();
     private ListView listView;
     private DashboardActivity parent;
-
-    private String title[] = {
-            "PERGURUAN TINGGI MH THAMRIN SERAHKAN BEASISWA",
-            "MAHASISWA KEBIDANAN DAN KEPERAWATAN DI KUNJUNGI",
-            "LATIHAN DASAR BELA NEGARA",
-            "PENANDATANGANAN MOU DENGAN RS PLUIT JAKARTA",
-            "MARKETING RADJAK GROUP KOMPAK DAN FOKUS",
-            "MAHASISWA THAMRIN GELAR SIMULASI KESIAPSIAGAAN BENCANA"
-    };
 
     public NewsFragment() {
     }
@@ -55,27 +50,45 @@ public class NewsFragment extends Fragment {
     }
 
     private void initial() {
-        for (int i = 0; i < title.length; i++) {
-            NewsModel model = new NewsModel();
-            model.setTitle(title[i]);
-            model.setDate("2" + i + " Agustus 2019");
-            model.setDescription(getString(R.string.content_news));
-
-            listData.add(model);
-        }
-
-        listView.setFocusable(false);
-        adapter = new NewsAdapter(getActivity(), listData);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        parent.apiService.getData(parent.urlNews, "object", false, new ApiService.hashMapListener() {
             @Override
-            public void onItemClick(AdapterView<?> parents, View view, int position, long id) {
-                Map<String, String> param = new HashMap<>();
-                param.put("title", listData.get(position).getTitle());
-                param.put("date", listData.get(position).getDate());
-                param.put("content", listData.get(position).getDescription());
-                parent.functionHelper.startIntent(DetailNewsActivity.class, false, false, param);
+            public String getHashMap(Map<String, String> hashMap) {
+                try {
+                    if (hashMap.get("success").equals("1")) {
+                        JSONObject result   = new JSONObject(hashMap.get("result"));
+                        JSONArray list      = result.getJSONArray("data");
+                        for (int i = 0; i < list.length(); i++) {
+                            JSONObject detail   = list.getJSONObject(i);
+                            NewsModel model     = new NewsModel();
+
+                            model.setTitle(detail.getString("judul"));
+                            model.setDate(detail.getString("tgl"));
+                            model.setDescription(detail.getString("isi"));
+
+                            listData.add(model);
+                        }
+
+                        listView.setFocusable(false);
+                        adapter = new NewsAdapter(getActivity(), listData);
+                        listView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parents, View view, int position, long id) {
+                                Map<String, String> param = new HashMap<>();
+                                param.put("title", listData.get(position).getTitle());
+                                param.put("date", listData.get(position).getDate());
+                                param.put("content", listData.get(position).getDescription());
+                                parent.functionHelper.startIntent(DetailNewsActivity.class, false, false, param);
+                            }
+                        });
+                    } else {
+                        parent.functionHelper.popupDialog("Oops", hashMap.get("message"), false);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
             }
         });
     }

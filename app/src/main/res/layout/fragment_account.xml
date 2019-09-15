@@ -93,7 +93,6 @@
                         android:layout_toRightOf="@+id/avatar"
                         android:fontFamily="@font/sfprodisplay_bold"
                         android:singleLine="true"
-                        android:text="John Connor"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18dp" />
 
@@ -108,7 +107,6 @@
                         android:layout_toRightOf="@+id/avatar"
                         android:fontFamily="@font/sfprodisplay_regular"
                         android:singleLine="true"
-                        android:text="johnconnor@gmail.com"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14dp" />
 
