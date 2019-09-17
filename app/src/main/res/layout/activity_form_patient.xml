@@ -144,6 +144,7 @@
                             android:background="@color/colorTransparentGray" />
 
                         <com.mikepenz.iconics.view.IconicsImageView
+                            android:id="@+id/datePicker"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_margin="8dp"

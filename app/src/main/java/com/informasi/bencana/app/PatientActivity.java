@@ -1,9 +1,12 @@
 package com.informasi.bencana.app;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -27,8 +30,11 @@ public class PatientActivity extends MasterActivity {
     private ListView listView;
     private PatientAdapter adapter;
     private List<PatientModel> listData = new ArrayList<>();
+    private List<PatientModel> searchData = new ArrayList<>();
     private Toolbar toolbar;
     private FancyButton btnAdd;
+    private EditText keyword;
+    private boolean onPaused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,23 +43,31 @@ public class PatientActivity extends MasterActivity {
         toolbar             = findViewById(R.id.toolbar);
         listView            = findViewById(R.id.listView);
         btnAdd              = findViewById(R.id.btnAdd);
+        keyword             = findViewById(R.id.keyword);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Download User Guide");
+        getSupportActionBar().setTitle("Patient");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initial();
     }
     
     private void initial() {
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        keyword.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                Map<String, String> param = new HashMap<>();
-                param.put("title", "Add Patient");
-                helper.startIntent(FormPatientActivity.class, false, false, param);
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                search(keyword.getText().toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
+
         clientApiService.getData(listPatient, "object", false,
                 new ApiService.hashMapListener() {
                     @Override
@@ -76,11 +90,16 @@ public class PatientActivity extends MasterActivity {
 
                                     listData.add(model);
                                 }
-
-                                adapter         = new PatientAdapter(PatientActivity.this, listData);
-                                listView.setAdapter(adapter);
-                                adapter.notifyDataSetChanged();
-                                helper.setListViewHeightBasedOnChildren(listView);
+                                search(null);
+                                btnAdd.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Map<String, String> param = new HashMap<>();
+                                        param.put("title", "Add Patient");
+                                        param.put("number", String.valueOf(listData.size()));
+                                        helper.startIntent(FormPatientActivity.class, false, false, param);
+                                    }
+                                });
                             } else {
                                 helper.popupDialog("Oops", hashMap.get("message"), false);
                             }
@@ -90,6 +109,28 @@ public class PatientActivity extends MasterActivity {
                         return null;
                     }
                 });
+    }
+
+    private void search(String keyword) {
+        try {
+            searchData.clear();
+            for (int i = 0; i < listData.size(); i++) {
+                if (keyword != null) {
+                    if (listData.get(i).getName().toLowerCase().contains(keyword.toLowerCase()) ||
+                        listData.get(i).getDoctor().toLowerCase().contains(keyword.toLowerCase())) {
+                        searchData.add(listData.get(i));
+                    }
+                } else {
+                    searchData.addAll(listData);
+                }
+            }
+            adapter         = new PatientAdapter(PatientActivity.this, searchData);
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+            helper.setListViewHeightBasedOnChildren(listView);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -108,5 +149,19 @@ public class PatientActivity extends MasterActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        onPaused    = true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (onPaused)
+            initial();
     }
 }

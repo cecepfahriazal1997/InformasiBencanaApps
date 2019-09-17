@@ -13,22 +13,25 @@ import androidx.appcompat.widget.Toolbar;
 import com.informasi.bencana.R;
 import com.informasi.bencana.adapter.DataMasterAdapter;
 import com.informasi.bencana.model.DataMasterModel;
+import com.informasi.bencana.other.ApiService;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DataMasterActivity extends MasterActivity {
     private ListView listView;
     private DataMasterAdapter adapter;
-    private List<DataMasterModel> list = new ArrayList<>();
+    private List<DataMasterModel> listData = new ArrayList<>();
     private Toolbar toolbar;
+    private String type;
 
     private String title[] = {
-            "Indonesia",
-            "Australia",
-            "Bangladesh",
-            "Italia",
-            "Inggris",
+            "Laki-laki",
+            "Perempuan"
     };
 
     @Override
@@ -42,31 +45,83 @@ public class DataMasterActivity extends MasterActivity {
         getSupportActionBar().setTitle("Choose Data");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        initialData();
+        initial();
     }
 
-    private void initialData() {
-        adapter         = new DataMasterAdapter(this, list);
-        listView.setAdapter(adapter);
+    private void initial() {
+        type        = getIntent().getStringExtra("type");
+        if (type.equals("location")) {
+            loadFromApi(listCountries);
+        } else if (type.equals("gender")) {
+            loadGender();
+        }
+    }
 
+    private void loadGender() {
         for (int i = 0; i < title.length; i++) {
-            DataMasterModel model = new DataMasterModel();
-            model.setId(i + "");
+            DataMasterModel model     = new DataMasterModel();
+            model.setId("" + i);
             model.setTitle(title[i]);
 
-            list.add(model);
+            listData.add(model);
         }
 
+        adapter         = new DataMasterAdapter(DataMasterActivity.this, listData);
+        listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         helper.setListViewHeightBasedOnChildren(listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("id", list.get(position).getId());
-                resultIntent.putExtra("title", list.get(position).getTitle());
+                resultIntent.putExtra("id", listData.get(position).getId());
+                resultIntent.putExtra("title", listData.get(position).getTitle());
                 setResult(RESULT_OK, resultIntent);
                 finish();
+            }
+        });
+    }
+    
+    private void loadFromApi(final String url) {
+        clientApiService.getData(url, "object", false,
+                new ApiService.hashMapListener() {
+            @Override
+            public String getHashMap(Map<String, String> hashMap) {
+                try {
+                    if (hashMap.get("success").equals("1")) {
+                        JSONObject result   = new JSONObject(hashMap.get("result"));
+                        JSONArray list      = result.getJSONArray("data");
+                        for (int i = 0; i < list.length(); i++) {
+                            JSONObject detail   = list.getJSONObject(i);
+                            DataMasterModel model     = new DataMasterModel();
+
+                            model.setTitle(detail.getString("name"));
+                            model.setId(detail.getString("iso1_code"));
+
+                            listData.add(model);
+                        }
+
+                        adapter         = new DataMasterAdapter(DataMasterActivity.this, listData);
+                        listView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                        helper.setListViewHeightBasedOnChildren(listView);
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent resultIntent = new Intent();
+                                resultIntent.putExtra("id", listData.get(position).getId());
+                                resultIntent.putExtra("title", listData.get(position).getTitle());
+                                setResult(RESULT_OK, resultIntent);
+                                finish();
+                            }
+                        });
+                    } else {
+                        helper.popupDialog("Oops", hashMap.get("message"), false);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
             }
         });
     }

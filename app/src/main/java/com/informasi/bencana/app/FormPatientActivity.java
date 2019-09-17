@@ -11,6 +11,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import com.informasi.bencana.R;
+import com.informasi.bencana.other.ApiService;
+import com.mikepenz.iconics.view.IconicsImageView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +28,7 @@ public class FormPatientActivity extends MasterActivity {
     private FancyButton btnSubmit;
     private Map<String, String> param = new HashMap<>();
     private String locationId, genderCode;
+    private IconicsImageView datePicker;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class FormPatientActivity extends MasterActivity {
         nameNurse           = (EditText) findViewById(R.id.nameNurse);
         nameSupport         = (EditText) findViewById(R.id.nameSupport);
         btnSubmit           = (FancyButton) findViewById(R.id.btnSubmit);
+        datePicker          = (IconicsImageView) findViewById(R.id.datePicker);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("" + getIntent().getStringExtra("title"));
@@ -71,6 +75,69 @@ public class FormPatientActivity extends MasterActivity {
                 param.clear();
                 param.put("type", "gender");
                 helper.startIntentForResult(DataMasterActivity.class, param, 1);
+            }
+        });
+        datePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helper.showDatePicker(date);
+            }
+        });
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (location.getText().toString().isEmpty()) {
+                    location.setError("Please choose location !");
+                } else if (date.getText().toString().isEmpty()) {
+                    location.setError("Please choose date !");
+                } else if (id.getText().toString().isEmpty()) {
+                    location.setError("Please enter patient id !");
+                } else if (name.getText().toString().isEmpty()) {
+                    location.setError("Please enter name !");
+                } else if (gender.getText().toString().isEmpty()) {
+                    location.setError("Please choose gender !");
+                } else if (age.getText().toString().isEmpty()) {
+                    location.setError("Please enter age !");
+                } else if (weaknessCondition.getText().toString().isEmpty()) {
+                    location.setError("Please enter weakness condition !");
+                } else if (threadCondition.getText().toString().isEmpty()) {
+                    location.setError("Please enter thread condition !");
+                } else if (remark.getText().toString().isEmpty()) {
+                    location.setError("Please enter remark !");
+                } else if (nameDoctor.getText().toString().isEmpty()) {
+                    location.setError("Please enter doctor name !");
+                } else if (nameNurse.getText().toString().isEmpty()) {
+                    location.setError("Please enter nurse name !");
+                } else if (nameSupport.getText().toString().isEmpty()) {
+                    location.setError("Please enter support name !");
+                } else {
+                    Map<String, String> param = new HashMap<>();
+                    param.put("location", locationId);
+                    param.put("date", date.getText().toString());
+                    param.put("number", getIntent().getStringExtra("number"));
+                    param.put("name", name.getText().toString());
+                    param.put("gender", genderCode);
+                    param.put("age", age.getText().toString());
+                    param.put("weaknessCondition", weaknessCondition.getText().toString());
+                    param.put("threadCondition", threadCondition.getText().toString());
+                    param.put("doctorName", nameDoctor.getText().toString());
+                    param.put("nurseName", nameNurse.getText().toString());
+                    param.put("supportName", nameSupport.getText().toString());
+                    param.put("remark", remark.getText().toString());
+                    param.put("userInput", helper.getSession("name"));
+                    clientApiService.insertPatient(insertPatient, param, new ApiService.hashMapListener() {
+                        @Override
+                        public String getHashMap(Map<String, String> hashMap) {
+                            if (hashMap.get("status").equals("1")) {
+                                helper.showToast(hashMap.get("message"), 0);
+                                finish();
+                            } else {
+                                helper.showToast(hashMap.get("message"), 1);
+                            }
+                            return null;
+                        }
+                    });
+                }
             }
         });
     }
