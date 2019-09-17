@@ -43,7 +43,6 @@ import android.widget.Toast;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.informasi.bencana.R;
-import com.informasi.bencana.app.FormPatientActivity;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;

@@ -50,6 +50,7 @@ public class NewsFragment extends Fragment {
     }
 
     private void initial() {
+        listData.clear();
         parent.apiService.getData(parent.urlNews, "object", false, new ApiService.hashMapListener() {
             @Override
             public String getHashMap(Map<String, String> hashMap) {

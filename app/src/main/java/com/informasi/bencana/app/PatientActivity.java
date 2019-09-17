@@ -53,6 +53,7 @@ public class PatientActivity extends MasterActivity {
     }
     
     private void initial() {
+        helper.setupProgressDialog(pDialog, "Loading data ...");
         keyword.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -68,12 +69,14 @@ public class PatientActivity extends MasterActivity {
             }
         });
 
-        clientApiService.getData(listPatient, "object", false,
+        listData.clear();
+        clientApiService.getData(listPatient, "object", true,
                 new ApiService.hashMapListener() {
                     @Override
                     public String getHashMap(Map<String, String> hashMap) {
                         try {
                             if (hashMap.get("success").equals("1")) {
+                                helper.showProgressDialog(pDialog, true);
                                 JSONObject result   = new JSONObject(hashMap.get("result"));
                                 JSONArray list      = result.getJSONArray("data");
                                 for (int i = 0; i < list.length(); i++) {
@@ -81,9 +84,16 @@ public class PatientActivity extends MasterActivity {
                                     PatientModel model = new PatientModel();
                                     model.setId(detail.getString("PatientId"));
                                     model.setName(detail.getString("PatientNm"));
-                                    model.setDoctor(detail.getString("DoctorNm"));
-                                    model.setGender(detail.getString("Sex").equals("0") ? "Laki-laki" : "Perempuan");
+                                    model.setGender(detail.getString("Sex"));
                                     model.setAge(detail.getString("Age"));
+                                    model.setLocation(detail.getString("Location"));
+                                    model.setDate(detail.getString("Time"));
+                                    model.setWeaknessCondition(detail.getString("WaknessCon"));
+                                    model.setThreadCondition(detail.getString("ThreadCon"));
+                                    model.setDoctor(detail.getString("DoctorNm"));
+                                    model.setNurse(detail.getString("NurseNm"));
+                                    model.setSupport(detail.getString("SupportNm"));
+                                    model.setRemark(detail.getString("Remark"));
                                     model.setStepOne("0");
                                     model.setStepTwo("0");
                                     model.setStepThree("0");
@@ -95,11 +105,13 @@ public class PatientActivity extends MasterActivity {
                                     @Override
                                     public void onClick(View v) {
                                         Map<String, String> param = new HashMap<>();
+                                        param.put("type", "add");
                                         param.put("title", "Add Patient");
                                         param.put("number", String.valueOf(listData.size()));
                                         helper.startIntent(FormPatientActivity.class, false, false, param);
                                     }
                                 });
+                                helper.showProgressDialog(pDialog, false);
                             } else {
                                 helper.popupDialog("Oops", hashMap.get("message"), false);
                             }
@@ -121,10 +133,11 @@ public class PatientActivity extends MasterActivity {
                         searchData.add(listData.get(i));
                     }
                 } else {
-                    searchData.addAll(listData);
+                    searchData.add(listData.get(i));
                 }
             }
-            adapter         = new PatientAdapter(PatientActivity.this, searchData);
+            adapter         = new PatientAdapter(PatientActivity.this, searchData, helper,
+                                clientApiService, deletePatient);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
             helper.setListViewHeightBasedOnChildren(listView);

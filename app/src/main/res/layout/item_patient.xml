@@ -56,61 +56,6 @@
                 android:textColor="@color/colorGrayDark"
                 android:textSize="16dp" />
 
-            <LinearLayout
-                android:id="@+id/contentStep"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/id"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/stepOne"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/success"
-                    android:fontFamily="@font/sfprodisplay_medium"
-                    android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12dp" />
-
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:background="@color/colorTransparentGray" />
-
-                <TextView
-                    android:id="@+id/stepTwo"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/success"
-                    android:fontFamily="@font/sfprodisplay_medium"
-                    android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12dp" />
-
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:background="@color/colorTransparentGray" />
-
-                <TextView
-                    android:id="@+id/stepThree"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:background="@drawable/success"
-                    android:fontFamily="@font/sfprodisplay_medium"
-                    android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12dp" />
-            </LinearLayout>
-
             <TextView
                 android:id="@+id/gender"
                 android:layout_width="wrap_content"
@@ -140,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_alignParentRight="true"
-                android:layout_below="@+id/contentStep">
+                android:layout_below="@+id/id">
 
                 <mehdi.sakout.fancybuttons.FancyButton
                     android:id="@+id/btnEdit"

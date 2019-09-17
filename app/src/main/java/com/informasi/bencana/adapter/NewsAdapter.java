@@ -1,6 +1,8 @@
 package com.informasi.bencana.adapter;
 
 import android.content.Context;
+import android.os.Build;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +67,12 @@ public class NewsAdapter extends BaseAdapter {
 
         holder.Title.setText(item.getTitle());
         holder.Dates.setText(item.getDate());
-        holder.Description.setText(item.getDescription());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            holder.Description.setText(Html.fromHtml(item.getDescription(), Html.FROM_HTML_MODE_COMPACT));
+        } else {
+            holder.Description.setText(Html.fromHtml(item.getDescription()));
+        }
 
         return convertView;
     }

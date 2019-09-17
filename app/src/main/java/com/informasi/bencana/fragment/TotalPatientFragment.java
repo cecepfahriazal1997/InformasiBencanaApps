@@ -47,6 +47,7 @@ public class TotalPatientFragment extends Fragment {
     }
 
     private void initial() {
+        listData.clear();
         parent.apiService.getData(parent.urlPatientCountries, "object", false,
                 new ApiService.hashMapListener() {
             @Override

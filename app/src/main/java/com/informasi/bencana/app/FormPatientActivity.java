@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import com.informasi.bencana.R;
 import com.informasi.bencana.other.ApiService;
@@ -27,8 +28,9 @@ public class FormPatientActivity extends MasterActivity {
                     nameNurse, nameSupport;
     private FancyButton btnSubmit;
     private Map<String, String> param = new HashMap<>();
-    private String locationId, genderCode;
+    private String locationId, genderCode = "0";
     private IconicsImageView datePicker;
+    private String type;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,33 @@ public class FormPatientActivity extends MasterActivity {
     }
 
     private void initial() {
+        type    = getIntent().getStringExtra("type");
+
+        if (type.equals("add")) {
+            id.setText("" + getIntent().getStringExtra("number"));
+            location.setTextColor(ContextCompat.getColor(FormPatientActivity.this, R.color.colorGrayDark));
+            gender.setTextColor(ContextCompat.getColor(FormPatientActivity.this, R.color.colorGrayDark));
+        } else {
+            id.setText("" + getIntent().getStringExtra("id"));
+            name.setText("" + getIntent().getStringExtra("name"));
+            gender.setText("" + (getIntent().getStringExtra("gender").equals("0") ?
+                                    "Laki-laki" : "Perempuan"));
+            age.setText("" + getIntent().getStringExtra("age"));
+            location.setText("" + getIntent().getStringExtra("location"));
+            date.setText("" + getIntent().getStringExtra("date"));
+            weaknessCondition.setText("" + getIntent().getStringExtra("weaknessCondition"));
+            threadCondition.setText("" + getIntent().getStringExtra("threadCondition"));
+            nameDoctor.setText("" + getIntent().getStringExtra("doctorName"));
+            nameNurse.setText("" + getIntent().getStringExtra("nurseName"));
+            nameSupport.setText("" + getIntent().getStringExtra("supportName"));
+            remark.setText("" + getIntent().getStringExtra("remark"));
+
+            locationId          = getIntent().getStringExtra("location");
+            genderCode          = getIntent().getStringExtra("gender");
+            location.setTextColor(ContextCompat.getColor(FormPatientActivity.this, R.color.colorBlack));
+            gender.setTextColor(ContextCompat.getColor(FormPatientActivity.this, R.color.colorBlack));
+        }
+
         cardLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,54 +118,83 @@ public class FormPatientActivity extends MasterActivity {
                 if (location.getText().toString().isEmpty()) {
                     location.setError("Please choose location !");
                 } else if (date.getText().toString().isEmpty()) {
-                    location.setError("Please choose date !");
+                    date.setError("Please choose date !");
                 } else if (id.getText().toString().isEmpty()) {
-                    location.setError("Please enter patient id !");
+                    id.setError("Please enter patient id !");
                 } else if (name.getText().toString().isEmpty()) {
-                    location.setError("Please enter name !");
+                    name.setError("Please enter name !");
                 } else if (gender.getText().toString().isEmpty()) {
-                    location.setError("Please choose gender !");
+                    gender.setError("Please choose gender !");
                 } else if (age.getText().toString().isEmpty()) {
-                    location.setError("Please enter age !");
+                    age.setError("Please enter age !");
                 } else if (weaknessCondition.getText().toString().isEmpty()) {
-                    location.setError("Please enter weakness condition !");
+                    weaknessCondition.setError("Please enter weakness condition !");
                 } else if (threadCondition.getText().toString().isEmpty()) {
-                    location.setError("Please enter thread condition !");
+                    threadCondition.setError("Please enter thread condition !");
                 } else if (remark.getText().toString().isEmpty()) {
-                    location.setError("Please enter remark !");
+                    remark.setError("Please enter remark !");
                 } else if (nameDoctor.getText().toString().isEmpty()) {
-                    location.setError("Please enter doctor name !");
+                    nameDoctor.setError("Please enter doctor name !");
                 } else if (nameNurse.getText().toString().isEmpty()) {
-                    location.setError("Please enter nurse name !");
+                    nameNurse.setError("Please enter nurse name !");
                 } else if (nameSupport.getText().toString().isEmpty()) {
-                    location.setError("Please enter support name !");
+                    nameSupport.setError("Please enter support name !");
                 } else {
-                    Map<String, String> param = new HashMap<>();
-                    param.put("location", locationId);
-                    param.put("date", date.getText().toString());
-                    param.put("number", getIntent().getStringExtra("number"));
-                    param.put("name", name.getText().toString());
-                    param.put("gender", genderCode);
-                    param.put("age", age.getText().toString());
-                    param.put("weaknessCondition", weaknessCondition.getText().toString());
-                    param.put("threadCondition", threadCondition.getText().toString());
-                    param.put("doctorName", nameDoctor.getText().toString());
-                    param.put("nurseName", nameNurse.getText().toString());
-                    param.put("supportName", nameSupport.getText().toString());
-                    param.put("remark", remark.getText().toString());
-                    param.put("userInput", helper.getSession("name"));
-                    clientApiService.insertPatient(insertPatient, param, new ApiService.hashMapListener() {
-                        @Override
-                        public String getHashMap(Map<String, String> hashMap) {
-                            if (hashMap.get("status").equals("1")) {
-                                helper.showToast(hashMap.get("message"), 0);
-                                finish();
-                            } else {
-                                helper.showToast(hashMap.get("message"), 1);
+                    if (type.equals("add")) {
+                        Map<String, String> param = new HashMap<>();
+                        param.put("location", locationId);
+                        param.put("date", date.getText().toString());
+                        param.put("number", id.getText().toString());
+                        param.put("name", name.getText().toString());
+                        param.put("gender", genderCode);
+                        param.put("age", age.getText().toString());
+                        param.put("weaknessCondition", weaknessCondition.getText().toString());
+                        param.put("threadCondition", threadCondition.getText().toString());
+                        param.put("doctorName", nameDoctor.getText().toString());
+                        param.put("nurseName", nameNurse.getText().toString());
+                        param.put("supportName", nameSupport.getText().toString());
+                        param.put("remark", remark.getText().toString());
+                        param.put("userInput", helper.getSession("name"));
+                        clientApiService.insertPatient(insertPatient, param, new ApiService.hashMapListener() {
+                            @Override
+                            public String getHashMap(Map<String, String> hashMap) {
+                                if (hashMap.get("success").equals("1")) {
+                                    helper.showToast(hashMap.get("message"), 0);
+                                    finish();
+                                } else {
+                                    helper.showToast(hashMap.get("message"), 1);
+                                }
+                                return null;
                             }
-                            return null;
-                        }
-                    });
+                        });
+                    } else {
+                        Map<String, String> param = new HashMap<>();
+                        param.put("patientId", id.getText().toString());
+                        param.put("location", locationId);
+                        param.put("date", date.getText().toString());
+                        param.put("name", name.getText().toString());
+                        param.put("gender", genderCode);
+                        param.put("age", age.getText().toString());
+                        param.put("weaknessCondition", weaknessCondition.getText().toString());
+                        param.put("threadCondition", threadCondition.getText().toString());
+                        param.put("doctorName", nameDoctor.getText().toString());
+                        param.put("nurseName", nameNurse.getText().toString());
+                        param.put("supportName", nameSupport.getText().toString());
+                        param.put("remark", remark.getText().toString());
+                        param.put("userInput", helper.getSession("name"));
+                        clientApiService.updatePatient(updatePatient, param, new ApiService.hashMapListener() {
+                            @Override
+                            public String getHashMap(Map<String, String> hashMap) {
+                                if (hashMap.get("success").equals("1")) {
+                                    helper.showToast(hashMap.get("message"), 0);
+                                    finish();
+                                } else {
+                                    helper.showToast(hashMap.get("message"), 1);
+                                }
+                                return null;
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -153,6 +211,7 @@ public class FormPatientActivity extends MasterActivity {
                     locationId          = id;
 
                     location.setText(title);
+                    location.setTextColor(ContextCompat.getColor(FormPatientActivity.this, R.color.colorBlack));
                 }
                 break;
             case 1:
@@ -162,6 +221,7 @@ public class FormPatientActivity extends MasterActivity {
                     genderCode          = id;
 
                     gender.setText(title);
+                    gender.setTextColor(ContextCompat.getColor(FormPatientActivity.this, R.color.colorBlack));
                 }
                 break;
         }

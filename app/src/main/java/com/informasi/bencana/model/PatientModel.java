@@ -1,7 +1,8 @@
 package com.informasi.bencana.model;
 
 public class PatientModel {
-    private String id, name, doctor, gender, age, stepOne, stepTwo, stepThree;
+    private String id, name, doctor, nurse, support, gender, age, date, number, location,
+            weaknessCondition, threadCondition, remark, stepOne, stepTwo, stepThree;
 
     public PatientModel() {
     }
@@ -68,5 +69,69 @@ public class PatientModel {
 
     public void setStepThree(String stepThree) {
         this.stepThree = stepThree;
+    }
+
+    public String getNurse() {
+        return nurse;
+    }
+
+    public void setNurse(String nurse) {
+        this.nurse = nurse;
+    }
+
+    public String getSupport() {
+        return support;
+    }
+
+    public void setSupport(String support) {
+        this.support = support;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getWeaknessCondition() {
+        return weaknessCondition;
+    }
+
+    public void setWeaknessCondition(String weaknessCondition) {
+        this.weaknessCondition = weaknessCondition;
+    }
+
+    public String getThreadCondition() {
+        return threadCondition;
+    }
+
+    public void setThreadCondition(String threadCondition) {
+        this.threadCondition = threadCondition;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

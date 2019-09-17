@@ -1,19 +1,23 @@
 package com.informasi.bencana.adapter;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.core.content.ContextCompat;
 
 import com.informasi.bencana.R;
+import com.informasi.bencana.app.FormPatientActivity;
 import com.informasi.bencana.model.PatientModel;
+import com.informasi.bencana.other.ApiService;
+import com.informasi.bencana.other.FunctionHelper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -21,16 +25,23 @@ import mehdi.sakout.fancybuttons.FancyButton;
  * Created by Cecep Rokani on 3/18/2019.
  */
 public class PatientAdapter extends BaseAdapter {
-    private Context context;
+    private Activity context;
     private LayoutInflater inflater;
     private List<PatientModel> items;
     private PatientModel item;
+    private FunctionHelper helper;
+    private ApiService apiService;
+    private String urlDelete;
 
     ViewHolder holder;
 
-    public PatientAdapter(Context context, List<PatientModel> items) {
+    public PatientAdapter(Activity context, List<PatientModel> items, FunctionHelper helper,
+                          ApiService apiService, String urlDelete) {
         this.context = context;
         this.items = items;
+        this.helper = helper;
+        this.apiService = apiService;
+        this.urlDelete = urlDelete;
     }
 
     @Override
@@ -61,9 +72,6 @@ public class PatientAdapter extends BaseAdapter {
             holder.Doctor       = (TextView) convertView.findViewById(R.id.doctor);
             holder.Gender       = (TextView) convertView.findViewById(R.id.gender);
             holder.Age          = (TextView) convertView.findViewById(R.id.age);
-            holder.StepOne      = (TextView) convertView.findViewById(R.id.stepOne);
-            holder.StepTwo      = (TextView) convertView.findViewById(R.id.stepTwo);
-            holder.StepThree    = (TextView) convertView.findViewById(R.id.stepThree);
             holder.Edit         = (FancyButton) convertView.findViewById(R.id.btnEdit);
             holder.Delete       = (FancyButton) convertView.findViewById(R.id.btnDelete);
 
@@ -77,44 +85,66 @@ public class PatientAdapter extends BaseAdapter {
         holder.Id.setText(item.getId());
         holder.Name.setText(item.getName());
         holder.Doctor.setText("Doctor : " + item.getDoctor());
-        holder.Gender.setText("Gender : " + item.getGender() + " tahun");
-        holder.Age.setText("Age : " + item.getAge());
-
-        if (item.getStepOne().equals("1")) {
-            holder.StepOne.setText("");
-            holder.StepOne.setBackground(ContextCompat.getDrawable(context, R.drawable.success));
-        } else {
-            holder.StepOne.setText("1");
-            holder.StepOne.setBackground(ContextCompat.getDrawable(context, R.drawable.circle_gray));
-        }
-
-        if (item.getStepTwo().equals("1")) {
-            holder.StepTwo.setText("");
-            holder.StepTwo.setBackground(ContextCompat.getDrawable(context, R.drawable.success));
-        } else {
-            holder.StepTwo.setText("2");
-            holder.StepTwo.setBackground(ContextCompat.getDrawable(context, R.drawable.circle_gray));
-        }
-
-        if (item.getStepThree().equals("1")) {
-            holder.StepThree.setText("");
-            holder.StepThree.setBackground(ContextCompat.getDrawable(context, R.drawable.success));
-        } else {
-            holder.StepThree.setText("3");
-            holder.StepThree.setBackground(ContextCompat.getDrawable(context, R.drawable.circle_gray));
-        }
+        holder.Gender.setText("Gender : " + (item.getGender().equals("0") ? "Laki-laki" : "Perempuan"));
+        holder.Age.setText("Age : " + item.getAge() + " tahun");
 
         holder.Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Data Edit !", Toast.LENGTH_SHORT).show();
+                Map<String, String> param = new HashMap<>();
+                param.put("type", "update");
+                param.put("title", "Edit Patient");
+                param.put("id", item.getId());
+                param.put("name", item.getName());
+                param.put("gender", item.getGender());
+                param.put("age", item.getAge());
+                param.put("location", item.getLocation());
+                param.put("date", item.getDate());
+                param.put("weaknessCondition", item.getWeaknessCondition());
+                param.put("threadCondition", item.getThreadCondition());
+                param.put("doctorName", item.getDoctor());
+                param.put("nurseName", item.getNurse());
+                param.put("supportName", item.getSupport());
+                param.put("remark", item.getRemark());
+                helper.startIntent(FormPatientActivity.class, false, false, param);
             }
         });
 
         holder.Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Data Edit !", Toast.LENGTH_SHORT).show();
+                Dialog dialog   = new Dialog(context);
+                String title    = "Are you sure ?";
+                String message  = "You will delete data patient " + item.getName() + " !";
+                View.OnClickListener positive = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        apiService.deletePatient(urlDelete, item.getId(),
+                                new ApiService.hashMapListener() {
+                                    @Override
+                                    public String getHashMap(Map<String, String> hashMap) {
+                                        if (hashMap.get("success").equals("1")) {
+                                            items.remove(position);
+                                            notifyDataSetChanged();
+                                        } else {
+                                            helper.showToast(hashMap.get("message"), 0);
+                                        }
+                                        return null;
+                                    }
+                                });
+                    }
+                };
+
+                View.OnClickListener negative = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                };
+
+                helper.popupNotification(dialog, R.drawable.confirmation,
+                        title, message, positive, negative, false);
             }
         });
 
@@ -122,7 +152,7 @@ public class PatientAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView Id, Name, Doctor, Gender, Age, StepOne, StepTwo, StepThree;
+        TextView Id, Name, Doctor, Gender, Age;
         FancyButton Edit, Delete;
     }
 
