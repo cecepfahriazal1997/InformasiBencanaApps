@@ -64,6 +64,7 @@ public class FormPatientActivity extends MasterActivity {
 
     private void initial() {
         type    = getIntent().getStringExtra("type");
+        helper.setupProgressDialog(pDialog, "Saving data ...");
 
         if (type.equals("add")) {
             id.setText("" + getIntent().getStringExtra("number"));

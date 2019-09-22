@@ -209,29 +209,29 @@ public class FormHistoryActivity extends MasterActivity {
             @Override
             public void onClick(View v) {
                 if (typeRecord.getText().toString().isEmpty()) {
-                    typeRecord.setError("Please choose location !");
+                    typeRecord.setError("Please choose Type History !");
                 } else if (sympton.getText().toString().isEmpty()) {
-                    sympton.setError("Please choose date !");
+                    sympton.setError("Please choose Symptom !");
                 } else if (specific.getText().toString().isEmpty()) {
-                    specific.setError("Please enter patient id !");
+                    specific.setError("Please enter Symptom Specific!");
                 } else if (relationship.getText().toString().isEmpty()) {
-                    relationship.setError("Please enter name !");
+                    relationship.setError("Please enter Family Related !");
                 } else if (condition.getText().toString().isEmpty()) {
-                    condition.setError("Please choose gender !");
+                    condition.setError("Please enter Condition !");
                 } else if (specificCondition.getText().toString().isEmpty()) {
-                    specificCondition.setError("Please enter age !");
+                    specificCondition.setError("Please enter Specific Condition !");
                 } else if (lab.getText().toString().isEmpty()) {
-                    lab.setError("Please enter weakness condition !");
+                    lab.setError("Please enter Laboratory !");
                 } else if (radiologi.getText().toString().isEmpty()) {
-                    radiologi.setError("Please enter thread condition !");
+                    radiologi.setError("Please choose thread Radiology !");
                 } else if (diagnostic.getText().toString().isEmpty()) {
-                    diagnostic.setError("Please enter remark !");
+                    diagnostic.setError("Please choose Diagnostic !");
                 } else if (therapy.getText().toString().isEmpty()) {
-                    therapy.setError("Please enter doctor name !");
+                    therapy.setError("Please choose Therapic !");
                 } else if (rehability.getText().toString().isEmpty()) {
-                    rehability.setError("Please enter nurse name !");
+                    rehability.setError("Please choose Rehability !");
                 } else if (remark.getText().toString().isEmpty()) {
-                    remark.setError("Please enter support name !");
+                    remark.setError("Please enter Remark !");
                 } else {
                     Map<String, String> param = new HashMap<>();
                     param.put("patientId", id.getText().toString());

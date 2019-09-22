@@ -27,6 +27,7 @@ public class MasterActivity extends AppCompatActivity {
     public String dataMaster = "http://128.199.219.185/api-simsb/public/api/v1/master/dataMasterStatic?type=";
     public String historyPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/getHistory?id=";
     public String saveHistoryPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/saveHistory";
+    public String insertProgressPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/insertProgress";
     public String urlGoogleDoc   = "https://view.officeapps.live.com/op/embed.aspx?src=";
 
     // Attribute view

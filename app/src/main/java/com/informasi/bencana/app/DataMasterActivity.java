@@ -44,6 +44,18 @@ public class DataMasterActivity extends MasterActivity {
             "Mengantuk"
     };
 
+    private String progress[] = {
+            "Membaik",
+            "Stabil",
+            "Menurun"
+    };
+
+    private String statusProgress[] = {
+            "Sehat",
+            "Cacat",
+            "Meninggal"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,12 +88,15 @@ public class DataMasterActivity extends MasterActivity {
             loadFromApi(dataMaster + "rehabilitas");
         } else if (type.equals("complication")) {
             loadFromApi(dataMaster + "komplikasi");
+        } else if (type.equals("complicationDetail")) {
+            loadFromApi(dataMaster + "detailKomplikasi");
         } else {
             loadStatic(type);
         }
     }
 
     private void loadStatic(String type) {
+        listData.clear();
         if (type.equals("gender")) {
             for (int i = 0; i < title.length; i++) {
                 DataMasterModel model = new DataMasterModel();
@@ -103,6 +118,22 @@ public class DataMasterActivity extends MasterActivity {
                 DataMasterModel model = new DataMasterModel();
                 model.setId("" + (i + 1));
                 model.setTitle(symptom[i]);
+
+                listData.add(model);
+            }
+        } else if (type.equals("progress")) {
+            for (int i = 0; i < progress.length; i++) {
+                DataMasterModel model = new DataMasterModel();
+                model.setId("" + (i + 1));
+                model.setTitle(progress[i]);
+
+                listData.add(model);
+            }
+        } else if (type.equals("status")) {
+            for (int i = 0; i < statusProgress.length; i++) {
+                DataMasterModel model = new DataMasterModel();
+                model.setId("" + (i + 1));
+                model.setTitle(statusProgress[i]);
 
                 listData.add(model);
             }
@@ -133,6 +164,7 @@ public class DataMasterActivity extends MasterActivity {
                     if (hashMap.get("success").equals("1")) {
                         JSONObject result   = new JSONObject(hashMap.get("result"));
                         JSONArray list      = result.getJSONArray("data");
+                        listData.clear();
                         for (int i = 0; i < list.length(); i++) {
                             JSONObject detail   = list.getJSONObject(i);
                             DataMasterModel model     = new DataMasterModel();

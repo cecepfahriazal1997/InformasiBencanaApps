@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.informasi.bencana.R;
 import com.informasi.bencana.app.FormHistoryActivity;
 import com.informasi.bencana.app.FormPatientActivity;
+import com.informasi.bencana.app.FormProgressActivity;
 import com.informasi.bencana.model.PatientModel;
 import com.informasi.bencana.other.ApiService;
 import com.informasi.bencana.other.FunctionHelper;
@@ -170,7 +171,7 @@ public class PatientAdapter extends BaseAdapter {
                     param.put("supportName", item.getSupport());
                     param.put("remark", item.getRemark());
                     helper.startIntent(FormPatientActivity.class, false, false, param);
-                } else {
+                } else if (which == 1) {
                     Map<String, String> param = new HashMap<>();
                     param.put("title", "History Patient");
                     param.put("id", item.getId());
@@ -178,6 +179,14 @@ public class PatientAdapter extends BaseAdapter {
                     param.put("gender", item.getGender());
                     param.put("age", item.getAge());
                     helper.startIntent(FormHistoryActivity.class, false, false, param);
+                } else {
+                    Map<String, String> param = new HashMap<>();
+                    param.put("title", "Progress Patient");
+                    param.put("id", item.getId());
+                    param.put("name", item.getName());
+                    param.put("gender", item.getGender());
+                    param.put("age", item.getAge());
+                    helper.startIntent(FormProgressActivity.class, false, false, param);
                 }
             }
         });
