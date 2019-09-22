@@ -34,6 +34,16 @@ public class DataMasterActivity extends MasterActivity {
             "Perempuan"
     };
 
+    private String typeRecord[] = {
+            "Gagal",
+            "Bingung"
+    };
+
+    private String symptom[] = {
+            "Sakit",
+            "Mengantuk"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,18 +62,50 @@ public class DataMasterActivity extends MasterActivity {
         type        = getIntent().getStringExtra("type");
         if (type.equals("location")) {
             loadFromApi(listCountries);
-        } else if (type.equals("gender")) {
-            loadGender();
+        } else if (type.equals("specific")) {
+            loadFromApi(dataMaster + "gejalaSpesifik");
+        } else if (type.equals("relationship")) {
+            loadFromApi(dataMaster + "hubunganKeluarga");
+        } else if (type.equals("radiologi")) {
+            loadFromApi(dataMaster + "radiologi");
+        } else if (type.equals("diagnostic")) {
+            loadFromApi(dataMaster + "diagnosis");
+        } else if (type.equals("therapy")) {
+            loadFromApi(dataMaster + "terapi");
+        } else if (type.equals("rehability")) {
+            loadFromApi(dataMaster + "rehabilitas");
+        } else if (type.equals("complication")) {
+            loadFromApi(dataMaster + "komplikasi");
+        } else {
+            loadStatic(type);
         }
     }
 
-    private void loadGender() {
-        for (int i = 0; i < title.length; i++) {
-            DataMasterModel model     = new DataMasterModel();
-            model.setId("" + i);
-            model.setTitle(title[i]);
+    private void loadStatic(String type) {
+        if (type.equals("gender")) {
+            for (int i = 0; i < title.length; i++) {
+                DataMasterModel model = new DataMasterModel();
+                model.setId("" + i);
+                model.setTitle(title[i]);
 
-            listData.add(model);
+                listData.add(model);
+            }
+        } else if (type.equals("typeRecord")) {
+            for (int i = 0; i < typeRecord.length; i++) {
+                DataMasterModel model = new DataMasterModel();
+                model.setId("" + (i + 1));
+                model.setTitle(typeRecord[i]);
+
+                listData.add(model);
+            }
+        } else if (type.equals("symptom")) {
+            for (int i = 0; i < symptom.length; i++) {
+                DataMasterModel model = new DataMasterModel();
+                model.setId("" + (i + 1));
+                model.setTitle(symptom[i]);
+
+                listData.add(model);
+            }
         }
 
         adapter         = new DataMasterAdapter(DataMasterActivity.this, listData);
@@ -95,8 +137,8 @@ public class DataMasterActivity extends MasterActivity {
                             JSONObject detail   = list.getJSONObject(i);
                             DataMasterModel model     = new DataMasterModel();
 
-                            model.setTitle(detail.getString("name"));
-                            model.setId(detail.getString("iso1_code"));
+                            model.setId(detail.getString("id"));
+                            model.setTitle(detail.getString("title"));
 
                             listData.add(model);
                         }

@@ -1,8 +1,10 @@
 package com.informasi.bencana.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.informasi.bencana.R;
+import com.informasi.bencana.app.FormHistoryActivity;
 import com.informasi.bencana.app.FormPatientActivity;
 import com.informasi.bencana.model.PatientModel;
 import com.informasi.bencana.other.ApiService;
@@ -91,22 +94,7 @@ public class PatientAdapter extends BaseAdapter {
         holder.Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, String> param = new HashMap<>();
-                param.put("type", "update");
-                param.put("title", "Edit Patient");
-                param.put("id", item.getId());
-                param.put("name", item.getName());
-                param.put("gender", item.getGender());
-                param.put("age", item.getAge());
-                param.put("location", item.getLocation());
-                param.put("date", item.getDate());
-                param.put("weaknessCondition", item.getWeaknessCondition());
-                param.put("threadCondition", item.getThreadCondition());
-                param.put("doctorName", item.getDoctor());
-                param.put("nurseName", item.getNurse());
-                param.put("supportName", item.getSupport());
-                param.put("remark", item.getRemark());
-                helper.startIntent(FormPatientActivity.class, false, false, param);
+                showActionsDialog(position, item);
             }
         });
 
@@ -154,6 +142,46 @@ public class PatientAdapter extends BaseAdapter {
     static class ViewHolder {
         TextView Id, Name, Doctor, Gender, Age;
         FancyButton Edit, Delete;
+    }
+
+    private void showActionsDialog(final int position, final PatientModel item) {
+        CharSequence colors[] = new CharSequence[]{"Edit", "History", "Progress"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Choose option");
+        builder.setItems(colors, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                    Map<String, String> param = new HashMap<>();
+                    param.put("type", "update");
+                    param.put("title", "Edit Patient");
+                    param.put("id", item.getId());
+                    param.put("name", item.getName());
+                    param.put("gender", item.getGender());
+                    param.put("age", item.getAge());
+                    param.put("location", item.getLocation());
+                    param.put("location", item.getLocationLabel());
+                    param.put("date", item.getDate());
+                    param.put("weaknessCondition", item.getWeaknessCondition());
+                    param.put("threadCondition", item.getThreadCondition());
+                    param.put("doctorName", item.getDoctor());
+                    param.put("nurseName", item.getNurse());
+                    param.put("supportName", item.getSupport());
+                    param.put("remark", item.getRemark());
+                    helper.startIntent(FormPatientActivity.class, false, false, param);
+                } else {
+                    Map<String, String> param = new HashMap<>();
+                    param.put("title", "History Patient");
+                    param.put("id", item.getId());
+                    param.put("name", item.getName());
+                    param.put("gender", item.getGender());
+                    param.put("age", item.getAge());
+                    helper.startIntent(FormHistoryActivity.class, false, false, param);
+                }
+            }
+        });
+        builder.show();
     }
 
     public List<PatientModel> getData() {

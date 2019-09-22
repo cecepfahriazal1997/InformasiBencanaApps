@@ -87,6 +87,7 @@ public class PatientActivity extends MasterActivity {
                                     model.setGender(detail.getString("Sex"));
                                     model.setAge(detail.getString("Age"));
                                     model.setLocation(detail.getString("Location"));
+                                    model.setLocationLabel(detail.getString("nameCountries"));
                                     model.setDate(detail.getString("Time"));
                                     model.setWeaknessCondition(detail.getString("WaknessCon"));
                                     model.setThreadCondition(detail.getString("ThreadCon"));
