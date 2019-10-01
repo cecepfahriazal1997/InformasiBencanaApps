@@ -27,7 +27,19 @@ public class MasterActivity extends AppCompatActivity {
     public String dataMaster = "http://128.199.219.185/api-simsb/public/api/v1/master/dataMasterStatic?type=";
     public String historyPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/getHistory?id=";
     public String saveHistoryPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/saveHistory";
-    public String insertProgressPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/insertProgress";
+    public String insertProgressPatient = "http://128.199.219.185/api-simsb/public/api/v1/ProgressPatient/insertProgress";
+    public String updateProgressPatient = "http://128.199.219.185/api-simsb/public/api/v1/ProgressPatient/updateProgress";
+    public String deleteProgressPatient = "http://128.199.219.185/api-simsb/public/api/v1/ProgressPatient/deleteProgress";
+    public String listProgressPatient = "http://128.199.219.185/api-simsb/public/api/v1/ProgressPatient/getProgress";
+    public String listProgressPatientDetail = "http://128.199.219.185/api-simsb/public/api/v1/ProgressPatient/getProgressDetail?patientId=";
+    public String listMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/patient/getMonitoring";
+    public String insertMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/patient/insertMonitoring";
+    public String updateMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/patient/updateMonitoring";
+    public String deleteMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/patient/deleteMonitoring";
+    public String listCollabortaionPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/listCollaboration";
+    public String insertCollaboratationPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/insertCollaboration";
+    public String updateCollaborationPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/updateCollaboration";
+    public String deleteCollaborationPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/deleteCollaboration";
     public String urlGoogleDoc   = "https://view.officeapps.live.com/op/embed.aspx?src=";
 
     // Attribute view

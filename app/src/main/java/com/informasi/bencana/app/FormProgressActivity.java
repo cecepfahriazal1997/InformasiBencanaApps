@@ -70,6 +70,40 @@ public class FormProgressActivity extends MasterActivity {
         gender.setText("" + (getIntent().getStringExtra("gender").equals("0") ? "Laki-laki" :
                 "Perempuan"));
         age.setText("" + getIntent().getStringExtra("age") + " Tahun");
+
+        if (getIntent().getStringExtra("type").equals("update")) {
+            year.setText("" + getIntent().getStringExtra("year"));
+            month.setText("" + getIntent().getStringExtra("month"));
+            week.setText("" + getIntent().getStringExtra("week"));
+            day.setText("" + getIntent().getStringExtra("day"));
+            complication.setText("" + getIntent().getStringExtra("complicationLabel"));
+            complicationDetail.setText("" + getIntent().getStringExtra("complicationDtlLabel"));
+            String labelProgress = "";
+            if (getIntent().getStringExtra("progress").equals("I"))
+                labelProgress   = "Membaik";
+            else if (getIntent().getStringExtra("progress").equals("S"))
+                labelProgress   = "Stabil";
+            else if (getIntent().getStringExtra("progress").equals("D"))
+                labelProgress   = "Menurun";
+
+            String labelStatus = "";
+            if (getIntent().getStringExtra("status").equals("HE"))
+                labelStatus = "Sehat";
+            else if (getIntent().getStringExtra("status").equals("DA"))
+                labelStatus = "Meninggal";
+            else
+                labelStatus = "Cacat";
+
+            progress.setText("" + labelProgress);
+            status.setText("" + labelStatus);
+            remark.setText("" + getIntent().getStringExtra("remark"));
+
+            complicationCode = getIntent().getStringExtra("complication");
+            complicationDetailCode = getIntent().getStringExtra("complicationDtl");
+            progressCode = getIntent().getStringExtra("progress");
+            statusCode = getIntent().getStringExtra("status");
+        }
+
         cardComplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,6 +157,8 @@ public class FormProgressActivity extends MasterActivity {
                     remark.setError("Please enter Remark !");
                 } else {
                     Map<String, String> param = new HashMap<>();
+                    if (getIntent().getStringExtra("type").equals("update"))
+                        param.put("id", getIntent().getStringExtra("idProg"));
                     param.put("patientId", id.getText().toString());
                     param.put("year", year.getText().toString());
                     param.put("month", month.getText().toString());
@@ -134,18 +170,33 @@ public class FormProgressActivity extends MasterActivity {
                     param.put("status", statusCode);
                     param.put("remark", remark.getText().toString());
                     param.put("userInput", helper.getSession("name"));
-                    clientApiService.insertPatientProgress(insertProgressPatient, param, new ApiService.hashMapListener() {
-                        @Override
-                        public String getHashMap(Map<String, String> hashMap) {
-                            if (hashMap.get("success").equals("1")) {
-                                helper.showToast(hashMap.get("message"), 0);
-                                finish();
-                            } else {
-                                helper.showToast(hashMap.get("message"), 1);
+                    if (getIntent().getStringExtra("type").equals("add")) {
+                        clientApiService.insertPatientProgress(insertProgressPatient, param, new ApiService.hashMapListener() {
+                            @Override
+                            public String getHashMap(Map<String, String> hashMap) {
+                                if (hashMap.get("success").equals("1")) {
+                                    helper.showToast(hashMap.get("message"), 0);
+                                    finish();
+                                } else {
+                                    helper.showToast(hashMap.get("message"), 1);
+                                }
+                                return null;
                             }
-                            return null;
-                        }
-                    });
+                        });
+                    } else {
+                        clientApiService.updatePatientProgress(updateProgressPatient, param, new ApiService.hashMapListener() {
+                            @Override
+                            public String getHashMap(Map<String, String> hashMap) {
+                                if (hashMap.get("success").equals("1")) {
+                                    helper.showToast(hashMap.get("message"), 0);
+                                    finish();
+                                } else {
+                                    helper.showToast(hashMap.get("message"), 1);
+                                }
+                                return null;
+                            }
+                        });
+                    }
                 }
             }
         });

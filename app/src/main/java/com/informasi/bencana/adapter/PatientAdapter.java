@@ -182,6 +182,7 @@ public class PatientAdapter extends BaseAdapter {
                 } else {
                     Map<String, String> param = new HashMap<>();
                     param.put("title", "Progress Patient");
+                    param.put("type", "add");
                     param.put("id", item.getId());
                     param.put("name", item.getName());
                     param.put("gender", item.getGender());

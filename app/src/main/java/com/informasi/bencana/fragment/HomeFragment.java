@@ -14,6 +14,7 @@ import com.informasi.bencana.R;
 import com.informasi.bencana.adapter.GridViewAdapter;
 import com.informasi.bencana.app.DashboardActivity;
 import com.informasi.bencana.app.PatientActivity;
+import com.informasi.bencana.app.PatientProgressActivity;
 import com.informasi.bencana.model.GridViewModel;
 
 import java.util.ArrayList;
@@ -87,6 +88,9 @@ public class HomeFragment extends Fragment {
                 switch (position) {
                     case 0:
                         parent.functionHelper.startIntent(PatientActivity.class, false, false, null);
+                        break;
+                    case 1:
+                        parent.functionHelper.startIntent(PatientProgressActivity.class, false, false, null);
                         break;
                     default: break;
                 }
