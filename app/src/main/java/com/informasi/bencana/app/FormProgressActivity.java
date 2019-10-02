@@ -102,6 +102,14 @@ public class FormProgressActivity extends MasterActivity {
             complicationDetailCode = getIntent().getStringExtra("complicationDtl");
             progressCode = getIntent().getStringExtra("progress");
             statusCode = getIntent().getStringExtra("status");
+            status.setTextColor(ContextCompat.getColor(FormProgressActivity.this,
+                    R.color.colorBlack));
+            progress.setTextColor(ContextCompat.getColor(FormProgressActivity.this,
+                    R.color.colorBlack));
+            complication.setTextColor(ContextCompat.getColor(FormProgressActivity.this,
+                    R.color.colorBlack));
+            complicationDetail.setTextColor(ContextCompat.getColor(FormProgressActivity.this,
+                    R.color.colorBlack));
         }
 
         cardComplication.setOnClickListener(new View.OnClickListener() {

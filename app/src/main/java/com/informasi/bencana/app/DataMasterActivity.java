@@ -44,10 +44,22 @@ public class DataMasterActivity extends MasterActivity {
             "Mengantuk"
     };
 
+    private String progresId[] = {
+            "I",
+            "S",
+            "D"
+    };
+
     private String progress[] = {
             "Membaik",
             "Stabil",
             "Menurun"
+    };
+
+    private String statusProgressId[] = {
+            "HE",
+            "DA",
+            "DE"
     };
 
     private String statusProgress[] = {
@@ -124,7 +136,7 @@ public class DataMasterActivity extends MasterActivity {
         } else if (type.equals("progress")) {
             for (int i = 0; i < progress.length; i++) {
                 DataMasterModel model = new DataMasterModel();
-                model.setId("" + (i + 1));
+                model.setId("" + progresId[i]);
                 model.setTitle(progress[i]);
 
                 listData.add(model);
@@ -132,7 +144,7 @@ public class DataMasterActivity extends MasterActivity {
         } else if (type.equals("status")) {
             for (int i = 0; i < statusProgress.length; i++) {
                 DataMasterModel model = new DataMasterModel();
-                model.setId("" + (i + 1));
+                model.setId("" + statusProgressId[i]);
                 model.setTitle(statusProgress[i]);
 
                 listData.add(model);
