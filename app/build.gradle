@@ -44,5 +44,5 @@ dependencies {
     implementation 'com.mikepenz:community-material-typeface:2.7.94.1@aar'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
     implementation 'com.koushikdutta.ion:ion:2.+'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

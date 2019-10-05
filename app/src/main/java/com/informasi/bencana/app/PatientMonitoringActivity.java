@@ -11,8 +11,8 @@ import android.widget.ListView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.informasi.bencana.R;
-import com.informasi.bencana.adapter.PatientProgressAdapter;
-import com.informasi.bencana.model.PatientProgressModel;
+import com.informasi.bencana.adapter.PatientMonitoringAdapter;
+import com.informasi.bencana.model.PatientMonitoringModel;
 import com.informasi.bencana.other.ApiService;
 
 import org.json.JSONArray;
@@ -22,11 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class PatientProgressActivity extends MasterActivity {
+public class PatientMonitoringActivity extends MasterActivity {
     private ListView listView;
-    private PatientProgressAdapter adapter;
-    private List<PatientProgressModel> listData = new ArrayList<>();
-    private List<PatientProgressModel> searchData = new ArrayList<>();
+    private PatientMonitoringAdapter adapter;
+    private List<PatientMonitoringModel> listData = new ArrayList<>();
+    private List<PatientMonitoringModel> searchData = new ArrayList<>();
     private Toolbar toolbar;
     private EditText keyword;
     private boolean onPaused = false;
@@ -34,7 +34,7 @@ public class PatientProgressActivity extends MasterActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient_progress);
+        setContentView(R.layout.activity_patient_monitoring);
         toolbar             = findViewById(R.id.toolbar);
         listView            = findViewById(R.id.listView);
         keyword             = findViewById(R.id.keyword);
@@ -64,7 +64,7 @@ public class PatientProgressActivity extends MasterActivity {
         });
 
         listData.clear();
-        clientApiService.getData(listProgressPatient, "object", true,
+        clientApiService.getData(listMonitoring, "object", true,
                 new ApiService.hashMapListener() {
                     @Override
                     public String getHashMap(Map<String, String> hashMap) {
@@ -75,7 +75,7 @@ public class PatientProgressActivity extends MasterActivity {
                                 JSONArray list      = result.getJSONArray("data");
                                 for (int i = 0; i < list.length(); i++) {
                                     JSONObject detail       = list.getJSONObject(i);
-                                    PatientProgressModel model = new PatientProgressModel();
+                                    PatientMonitoringModel model = new PatientMonitoringModel();
                                     model.setId(detail.getString("PatientId"));
                                     model.setGender(detail.getString("Sex"));
                                     model.setAge(detail.getString("Age"));
@@ -113,7 +113,7 @@ public class PatientProgressActivity extends MasterActivity {
                     searchData.add(listData.get(i));
                 }
             }
-            adapter         = new PatientProgressAdapter(PatientProgressActivity.this, searchData, helper,
+            adapter         = new PatientMonitoringAdapter(PatientMonitoringActivity.this, searchData, helper,
                                 clientApiService, deletePatient);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();

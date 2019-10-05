@@ -60,8 +60,8 @@ public class ProgressActivity extends MasterActivity {
                         @Override
                         public String getHashMap(Map<String, String> hashMap) {
                             try {
+                                helper.showProgressDialog(pDialog, false);
                                 if (hashMap.get("success").equals("1")) {
-                                    helper.showProgressDialog(pDialog, true);
                                     JSONObject result   = new JSONObject(hashMap.get("result"));
                                     JSONArray list      = result.getJSONArray("data");
                                     for (int i = 0; i < list.length(); i++) {
@@ -87,7 +87,6 @@ public class ProgressActivity extends MasterActivity {
                                     listView.setAdapter(adapter);
                                     adapter.notifyDataSetChanged();
                                     helper.setListViewHeightBasedOnChildren(listView);
-                                    helper.showProgressDialog(pDialog, false);
                                 } else {
                                     helper.popupDialog("Oops", hashMap.get("message"), false);
                                 }

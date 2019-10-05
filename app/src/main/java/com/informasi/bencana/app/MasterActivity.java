@@ -32,10 +32,11 @@ public class MasterActivity extends AppCompatActivity {
     public String deleteProgressPatient = "http://128.199.219.185/api-simsb/public/api/v1/ProgressPatient/deleteProgress";
     public String listProgressPatient = "http://128.199.219.185/api-simsb/public/api/v1/ProgressPatient/getProgress";
     public String listProgressPatientDetail = "http://128.199.219.185/api-simsb/public/api/v1/ProgressPatient/getProgressDetail?patientId=";
-    public String listMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/patient/getMonitoring";
-    public String insertMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/patient/insertMonitoring";
-    public String updateMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/patient/updateMonitoring";
-    public String deleteMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/patient/deleteMonitoring";
+    public String listMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/MonitoringPatient/getMonitoring";
+    public String listMonitoringDetail = "http://128.199.219.185/api-simsb/public/api/v1/MonitoringPatient/getMonitoringDetail?patientId=";
+    public String insertMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/MonitoringPatient/insertMonitoring";
+    public String updateMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/MonitoringPatient/updateMonitoring";
+    public String deleteMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/MonitoringPatient/deleteMonitoring";
     public String listCollabortaionPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/listCollaboration";
     public String insertCollaboratationPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/insertCollaboration";
     public String updateCollaborationPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/updateCollaboration";

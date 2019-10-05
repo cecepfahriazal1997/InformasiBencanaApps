@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.informasi.bencana.R;
-import com.informasi.bencana.app.FormProgressActivity;
-import com.informasi.bencana.model.PatientProgressModel;
+import com.informasi.bencana.app.FormMonitoringActivity;
+import com.informasi.bencana.model.PatientMonitoringModel;
 import com.informasi.bencana.other.ApiService;
 import com.informasi.bencana.other.FunctionHelper;
 
@@ -24,11 +24,11 @@ import mehdi.sakout.fancybuttons.FancyButton;
 /**
  * Created by Cecep Rokani on 3/18/2019.
  */
-public class ProgressAdapter extends BaseAdapter {
+public class MonitoringAdapter extends BaseAdapter {
     private Activity context;
     private LayoutInflater inflater;
-    private List<PatientProgressModel> items;
-    private PatientProgressModel item;
+    private List<PatientMonitoringModel> items;
+    private PatientMonitoringModel item;
     private FunctionHelper helper;
     private ApiService apiService;
     private String urlDelete;
@@ -36,8 +36,8 @@ public class ProgressAdapter extends BaseAdapter {
 
     ViewHolder holder;
 
-    public ProgressAdapter(Activity context, List<PatientProgressModel> items, FunctionHelper helper,
-                           ApiService apiService, String urlDelete, Map<String, String> paramPatient) {
+    public MonitoringAdapter(Activity context, List<PatientMonitoringModel> items, FunctionHelper helper,
+                             ApiService apiService, String urlDelete, Map<String, String> paramPatient) {
         this.context = context;
         this.items = items;
         this.helper = helper;
@@ -79,7 +79,7 @@ public class ProgressAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        PatientProgressModel item = items.get(position);
+        PatientMonitoringModel item = items.get(position);
 
         holder.Year.setText(item.getDay() + " " + helper.intToMonth(Integer.parseInt(item.getMonth())) + " " + item.getYear());
         holder.Month.setText("Minggu ke : " + item.getWeek());
@@ -88,7 +88,7 @@ public class ProgressAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Map<String, String> param = new HashMap<>();
-                param.put("title", "Edit Progress Patient");
+                param.put("title", "Edit Monitoring Patient");
                 param.put("type", "update");
                 param.put("id", paramPatient.get("id"));
                 param.put("name", paramPatient.get("name"));
@@ -98,15 +98,10 @@ public class ProgressAdapter extends BaseAdapter {
                 param.put("month", item.getMonth());
                 param.put("week", item.getWeek());
                 param.put("day", item.getDay());
-                param.put("idProg", item.getProgressId());
-                param.put("complication", item.getComplication());
-                param.put("complicationLabel", item.getComplicationLabel());
-                param.put("complicationDtl", item.getComplicationDtl());
-                param.put("complicationDtlLabel", item.getComplicationDtlLabel());
-                param.put("progress", item.getProgress());
-                param.put("status", item.getStatus());
-                param.put("remark", item.getRemark());
-                helper.startIntent(FormProgressActivity.class, false, false, param);
+                param.put("monitoringId", item.getMonitoringId());
+                param.put("fact", item.getFact());
+                param.put("problem", item.getProblem());
+                helper.startIntent(FormMonitoringActivity.class, false, false, param);
             }
         });
 
@@ -120,7 +115,7 @@ public class ProgressAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                        apiService.deleteProgress(urlDelete, item.getProgressId(),
+                        apiService.deleteMonitoring(urlDelete, item.getMonitoringId(),
                                 new ApiService.hashMapListener() {
                                     @Override
                                     public String getHashMap(Map<String, String> hashMap) {
@@ -156,7 +151,7 @@ public class ProgressAdapter extends BaseAdapter {
         FancyButton Edit, Delete;
     }
 
-    public List<PatientProgressModel> getData() {
+    public List<PatientMonitoringModel> getData() {
         return items;
     }
 }
