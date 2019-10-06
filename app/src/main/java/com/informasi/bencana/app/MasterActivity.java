@@ -37,10 +37,11 @@ public class MasterActivity extends AppCompatActivity {
     public String insertMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/MonitoringPatient/insertMonitoring";
     public String updateMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/MonitoringPatient/updateMonitoring";
     public String deleteMonitoring = "http://128.199.219.185/api-simsb/public/api/v1/MonitoringPatient/deleteMonitoring";
-    public String listCollabortaionPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/listCollaboration";
-    public String insertCollaboratationPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/insertCollaboration";
-    public String updateCollaborationPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/updateCollaboration";
-    public String deleteCollaborationPatient = "http://128.199.219.185/api-simsb/public/api/v1/patient/deleteCollaboration";
+    public String listCollabortaionPatient = "http://128.199.219.185/api-simsb/public/api/v1/CollaborationPatient/getCollaboration";
+    public String listCollabortaionPatientDetail = "http://128.199.219.185/api-simsb/public/api/v1/CollaborationPatient/getCollaborationDetail?patientId=";
+    public String insertCollaboratationPatient = "http://128.199.219.185/api-simsb/public/api/v1/CollaborationPatient/insertCollaboration";
+    public String updateCollaborationPatient = "http://128.199.219.185/api-simsb/public/api/v1/CollaborationPatient/updateCollaboration";
+    public String deleteCollaborationPatient = "http://128.199.219.185/api-simsb/public/api/v1/CollaborationPatient/deleteCollaboration";
     public String urlGoogleDoc   = "https://view.officeapps.live.com/op/embed.aspx?src=";
 
     // Attribute view
