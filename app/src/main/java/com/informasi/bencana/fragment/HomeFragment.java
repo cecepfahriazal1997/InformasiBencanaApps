@@ -17,6 +17,7 @@ import com.informasi.bencana.app.PatientActivity;
 import com.informasi.bencana.app.PatientCollabActivity;
 import com.informasi.bencana.app.PatientMonitoringActivity;
 import com.informasi.bencana.app.PatientProgressActivity;
+import com.informasi.bencana.app.ReportActivity;
 import com.informasi.bencana.model.GridViewModel;
 
 import java.util.ArrayList;
@@ -99,6 +100,9 @@ public class HomeFragment extends Fragment {
                         break;
                     case 3:
                         parent.functionHelper.startIntent(PatientCollabActivity.class, false, false, null);
+                        break;
+                    case 4:
+                        parent.functionHelper.startIntent(ReportActivity.class, false, false, null);
                         break;
                     default: break;
                 }

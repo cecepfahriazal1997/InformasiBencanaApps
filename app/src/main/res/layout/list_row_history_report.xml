@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorTransparentGray"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Tahap 1"
+        android:textColor="@color/colorBlack"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="02 September 2019"
+        android:textColor="@color/colorGrayDark"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/sfprodisplay_regular"
+        android:text="Meningkat"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:textSize="12dp"
+        android:background="@drawable/border_fill_primary"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"/>
+</RelativeLayout>

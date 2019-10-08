@@ -20,6 +20,7 @@ import android.text.Html;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -628,5 +629,12 @@ public class FunctionHelper {
         new DatePickerDialog(activity, dates, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    public View inflateView(int layout) {
+        View view;
+        LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view = inflater.inflate(layout, null);
+        return view;
     }
 }

@@ -42,6 +42,10 @@ public class MasterActivity extends AppCompatActivity {
     public String insertCollaboratationPatient = "http://128.199.219.185/api-simsb/public/api/v1/CollaborationPatient/insertCollaboration";
     public String updateCollaborationPatient = "http://128.199.219.185/api-simsb/public/api/v1/CollaborationPatient/updateCollaboration";
     public String deleteCollaborationPatient = "http://128.199.219.185/api-simsb/public/api/v1/CollaborationPatient/deleteCollaboration";
+    public String listReport = "http://128.199.219.185/api-simsb/public/api/v1/Report/getReportProgress";
+    public String listNeedAssesmen = "http://128.199.219.185/api-simsb/public/api/v1/AssessmentNeed/listData";
+    public String saveNeedAssesmen = "http://128.199.219.185/api-simsb/public/api/v1/AssessmentNeed/saveData";
+    public String deleteNeedAssesmen = "http://128.199.219.185/api-simsb/public/api/v1/AssessmentNeed/deleteData";
     public String urlGoogleDoc   = "https://view.officeapps.live.com/op/embed.aspx?src=";
 
     // Attribute view
