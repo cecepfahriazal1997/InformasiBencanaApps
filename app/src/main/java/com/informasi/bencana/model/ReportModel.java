@@ -1,7 +1,7 @@
 package com.informasi.bencana.model;
 
 public class ReportModel {
-    private String id, name, doctor, nurse, gender, age, listProgress;
+    private String id, name, doctor, nurse, gender, age, listProgress, listYear;
 
     public ReportModel() {
     }
@@ -60,5 +60,13 @@ public class ReportModel {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public String getListYear() {
+        return listYear;
+    }
+
+    public void setListYear(String listYear) {
+        this.listYear = listYear;
     }
 }

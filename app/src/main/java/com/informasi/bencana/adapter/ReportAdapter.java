@@ -92,6 +92,7 @@ public class ReportAdapter extends BaseAdapter {
                 param.put("age", item.getAge());
                 param.put("nurse", item.getNurse());
                 param.put("listProgress", item.getListProgress());
+                param.put("listYear", item.getListYear());
                 helper.startIntent(ReportDetailActivity.class, false, false, param);
             }
         });

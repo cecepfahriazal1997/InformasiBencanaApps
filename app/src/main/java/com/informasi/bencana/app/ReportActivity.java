@@ -83,6 +83,7 @@ public class ReportActivity extends MasterActivity {
                                     model.setDoctor(detail.getString("doctor"));
                                     model.setNurse(detail.getString("nurse"));
                                     model.setListProgress(detail.getString("progress"));
+                                    model.setListYear(detail.getString("year"));
 
                                     listData.add(model);
                                 }

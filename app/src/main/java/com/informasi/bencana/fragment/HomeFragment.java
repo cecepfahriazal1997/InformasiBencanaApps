@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment {
             R.drawable.monitor,
             R.drawable.collaboration,
             R.drawable.report,
-            R.drawable.grafic,
+//            R.drawable.grafic,
             R.drawable.accessment
     };
 
@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
             "Monitor",
             "Kolaborasi",
             "Laporan",
-            "Grafik",
+//            "Grafik",
             "Assesment Kebutuhan"
     };
 
