@@ -1168,4 +1168,151 @@ public class ApiService {
             Log.e("Exception Login", "Exception", e);
         }
     }
+
+    // Fungsi ini digunakan untuk update data pasien
+    public void deleteAssesmen(final String url, final String id, final hashMapListener listener) {
+        Map<String, String> hash = new HashMap<String, String>();
+        hash.clear();
+        try {
+            if (Patterns.WEB_URL.matcher(url).matches()) {
+                functionHelper.showProgressDialog(pDialog, true);
+                Ion.with(activity).load(url)
+                        .noCache()
+                        .setTimeout(6000)
+                        .setBodyParameter("id", id)
+                        .asString()
+                        .withResponse()
+                        .setCallback(new FutureCallback<Response<String>>() {
+                            @Override
+                            public void onCompleted(Exception e, Response<String> result) {
+                                try {
+                                    functionHelper.showProgressDialog(pDialog, false);
+                                    if (e == null) {
+                                        if (result.getHeaders().code() == 200) {
+                                            JSONObject results      = new JSONObject(result.getResult());
+                                            String status           = results.getString("status");
+                                            String message          = results.getString("message");
+
+                                            if (status.equals("1")) {
+                                                hash.put("success", "1");
+                                                hash.put("message", message);
+                                                listener.getHashMap(hash);
+                                            } else {
+                                                hash.put("success", "0");
+                                                hash.put("message", message);
+                                                listener.getHashMap(hash);
+                                            }
+                                        } else {
+                                            hash.put("success", "0");
+                                            hash.put("message", result.getHeaders().message());
+                                            listener.getHashMap(hash);
+                                        }
+                                    } else {
+                                        hash.put("success", "0");
+                                        hash.put("message", e.getLocalizedMessage());
+                                        listener.getHashMap(hash);
+                                    }
+                                } catch (Exception ex) {
+                                    hash.put("success", "0");
+                                    hash.put("message", "Insert data has failed, please try again later !");
+                                    listener.getHashMap(hash);
+                                    Log.e("Exception Login", "exception", ex);
+                                }
+                            }
+                        });
+            } else {
+                hash.put("success", "0");
+                hash.put("message", "Your URL Address is not valid !");
+                listener.getHashMap(hash);
+            }
+        } catch (Exception e) {
+            hash.put("success", "0");
+            hash.put("message", "Insert data has failed, please try again later !");
+            listener.getHashMap(hash);
+            Log.e("Exception Login", "Exception", e);
+        }
+    }
+
+    // Fungsi ini digunakan untuk insert data pasien
+    public void saveNeedAsses(final String url, final Map<String, String> param,
+                              final hashMapListener listener) {
+        Map<String, String> hash = new HashMap<String, String>();
+        hash.clear();
+        try {
+            if (Patterns.WEB_URL.matcher(url).matches()) {
+                functionHelper.showProgressDialog(pDialog, true);
+                Ion.with(activity).load(url)
+                        .noCache()
+                        .setTimeout(6000)
+                        .setBodyParameter("id", param.get("id"))
+                        .setBodyParameter("location", param.get("location"))
+                        .setBodyParameter("date", param.get("date"))
+                        .setBodyParameter("cases", param.get("cases"))
+                        .setBodyParameter("diseases", param.get("diseases"))
+                        .setBodyParameter("service", param.get("service"))
+                        .setBodyParameter("place", param.get("place"))
+                        .setBodyParameter("medicalE", param.get("medicalE"))
+                        .setBodyParameter("supportingE", param.get("supportingE"))
+                        .setBodyParameter("drug", param.get("drug"))
+                        .setBodyParameter("medicalS", param.get("medicalS"))
+                        .setBodyParameter("nonMedicalS", param.get("nonMedicalS"))
+                        .setBodyParameter("general", param.get("general"))
+                        .setBodyParameter("specialistD", param.get("specialistD"))
+                        .setBodyParameter("nurse", param.get("nurse"))
+                        .setBodyParameter("nonMedical", param.get("nonMedical"))
+                        .setBodyParameter("ambulance", param.get("ambulance"))
+                        .setBodyParameter("relatedTransportation", param.get("relatedTransportation"))
+                        .setBodyParameter("communication", param.get("communication"))
+                        .asString()
+                        .withResponse()
+                        .setCallback(new FutureCallback<Response<String>>() {
+                            @Override
+                            public void onCompleted(Exception e, Response<String> result) {
+                                try {
+                                    functionHelper.showProgressDialog(pDialog, false);
+                                    if (e == null) {
+                                        if (result.getHeaders().code() == 200) {
+                                            JSONObject results      = new JSONObject(result.getResult());
+                                            String status           = results.getString("status");
+                                            String message          = results.getString("message");
+
+                                            if (status.equals("1")) {
+                                                hash.put("success", "1");
+                                                hash.put("message", message);
+                                                listener.getHashMap(hash);
+                                            } else {
+                                                hash.put("success", "0");
+                                                hash.put("message", message);
+                                                listener.getHashMap(hash);
+                                            }
+                                        } else {
+                                            hash.put("success", "0");
+                                            hash.put("message", result.getHeaders().message());
+                                            listener.getHashMap(hash);
+                                        }
+                                    } else {
+                                        hash.put("success", "0");
+                                        hash.put("message", e.getLocalizedMessage());
+                                        listener.getHashMap(hash);
+                                    }
+                                } catch (Exception ex) {
+                                    hash.put("success", "0");
+                                    hash.put("message", "Insert data has failed, please try again later !");
+                                    listener.getHashMap(hash);
+                                    Log.e("Exception Login", "exception", ex);
+                                }
+                            }
+                        });
+            } else {
+                hash.put("success", "0");
+                hash.put("message", "Your URL Address is not valid !");
+                listener.getHashMap(hash);
+            }
+        } catch (Exception e) {
+            hash.put("success", "0");
+            hash.put("message", "Insert data has failed, please try again later !");
+            listener.getHashMap(hash);
+            Log.e("Exception Login", "Exception", e);
+        }
+    }
 }

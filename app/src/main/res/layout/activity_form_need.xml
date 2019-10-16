@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:stateListAnimator="@null"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="32dp"
+            android:paddingTop="16dp"
+            android:paddingRight="32dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Negara"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:foreground="?attr/selectableItemBackground"
+                card_view:cardBackgroundColor="@android:color/white"
+                card_view:cardCornerRadius="0dp"
+                card_view:cardElevation="0dp"
+                card_view:cardPreventCornerOverlap="false"
+                card_view:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp">
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/sfprodisplay_regular"
+                        android:text="Pilih Negara"
+                        android:textColor="@color/colorGrayDark"
+                        android:textSize="16dp" />
+
+                    <com.mikepenz.iconics.view.IconicsImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        app:iiv_color="@color/colorGray"
+                        app:iiv_icon="gmd-keyboard-arrow-right" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/location"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/colorTransparentGray" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Waktu"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp"
+                android:layout_marginTop="16dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/sfprodisplay_regular"
+                    android:hint="yyyy-mm-dd"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="8dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorTransparentGray" />
+
+                <com.mikepenz.iconics.view.IconicsImageView
+                    android:id="@+id/datePicker"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_margin="8dp"
+                    app:iiv_color="@color/colorGray"
+                    app:iiv_icon="gmd-date-range" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Cases"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/cases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Cases ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Diseases"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/diseases"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Diseases ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Service Need"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/serviceNeed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Service Need ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Places"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/places"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Places ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Medical Equipment"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/medical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Medical Equipment ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Supporting Equipment"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/supporting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Supporting Equipment ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Drug"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/drug"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Drug ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Medical Supply"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/medicalSupply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Medical Supply ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Non Medical Supply"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/nonMedicalSupply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Medical Supply ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="General Practitioner"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/general"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan General Practitioner ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Specialist Doctor"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/specialistDoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Specialist Doctor ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Nurse"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/nurse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Nurse ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Non Medical Staff"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/nonMedical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Non Medical Staff ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Ambulance"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/ambulance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Ambulance ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Related Transportation"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/related"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Related Transportation..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Communication"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/communication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Communication ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"
+                fancy:fb_defaultColor="@color/colorPrimary"
+                fancy:fb_focusColor="@color/colorPrimaryDark"
+                fancy:fb_radius="32dp"
+                fancy:fb_text="Submit"
+                fancy:fb_textFontRes="@font/sfprodisplay_bold"
+                fancy:fb_textSize="16dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.informasi.bencana.R;
 import com.informasi.bencana.adapter.GridViewAdapter;
 import com.informasi.bencana.app.DashboardActivity;
+import com.informasi.bencana.app.NeedAssesmentActivity;
 import com.informasi.bencana.app.PatientActivity;
 import com.informasi.bencana.app.PatientCollabActivity;
 import com.informasi.bencana.app.PatientMonitoringActivity;
@@ -103,6 +104,9 @@ public class HomeFragment extends Fragment {
                         break;
                     case 4:
                         parent.functionHelper.startIntent(ReportActivity.class, false, false, null);
+                        break;
+                    case 5:
+                        parent.functionHelper.startIntent(NeedAssesmentActivity.class, false, false, null);
                         break;
                     default: break;
                 }
