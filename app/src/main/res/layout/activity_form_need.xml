@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Cases"
+                android:text="Kasus"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -157,7 +157,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Cases ..."
+                android:hint="Masukan Kasus ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Diseases"
+                android:text="Penyakit"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -182,7 +182,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Diseases ..."
+                android:hint="Masukan Penyakit ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -196,7 +196,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Service Need"
+                android:text="Kebutuhan Layanan"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -207,7 +207,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Service Need ..."
+                android:hint="Masukan Kebutuhan Layanan ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -221,7 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Places"
+                android:text="Tempat"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -232,7 +232,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Places ..."
+                android:hint="Masukan Tempat ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -246,7 +246,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Medical Equipment"
+                android:text="Peralatan Medis"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -257,7 +257,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Medical Equipment ..."
+                android:hint="Masukan Peralatan Medis ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -271,7 +271,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Supporting Equipment"
+                android:text="Peralatan Mendukung"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -282,7 +282,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Supporting Equipment ..."
+                android:hint="Masukan Peralatan Mendukung ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -296,7 +296,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Drug"
+                android:text="Obat"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -307,7 +307,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Drug ..."
+                android:hint="Masukan Obat ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -321,7 +321,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Medical Supply"
+                android:text="Pasokan Medis"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -332,7 +332,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Medical Supply ..."
+                android:hint="Masukan Pasokan Medis ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -346,7 +346,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Non Medical Supply"
+                android:text="Pasokan Non Medis"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -357,7 +357,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Medical Supply ..."
+                android:hint="Masukan Pasokan Non Medis ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -371,7 +371,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="General Practitioner"
+                android:text="Dokter Umum"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -382,7 +382,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan General Practitioner ..."
+                android:hint="Masukan Dokter Umum ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -396,7 +396,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Specialist Doctor"
+                android:text="Dokter Spesialis"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -407,7 +407,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Specialist Doctor ..."
+                android:hint="Masukan Dokter Spesialis ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -421,7 +421,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Nurse"
+                android:text="Perawat"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -432,7 +432,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Nurse ..."
+                android:hint="Masukan Perawat ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -446,7 +446,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Non Medical Staff"
+                android:text="Staff Non Medis"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -457,7 +457,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Non Medical Staff ..."
+                android:hint="Masukan Staff Non Medis ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -471,7 +471,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Ambulance"
+                android:text="Ambulan"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -482,7 +482,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Ambulance ..."
+                android:hint="Masukan Ambulan ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -496,7 +496,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Related Transportation"
+                android:text="Transportasi Terkait"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -507,7 +507,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Related Transportation..."
+                android:hint="Masukan Transportasi Terkait..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -521,7 +521,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Communication"
+                android:text="Komunikasi"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -532,7 +532,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Communication ..."
+                android:hint="Masukan Komunikasi ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
