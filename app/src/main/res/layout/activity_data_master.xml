@@ -21,33 +21,70 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ListView
-            android:id="@+id/listView"
+        <LinearLayout
+            android:id="@+id/contentKeyword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            android:clipToPadding="false"
-            android:divider="@color/colorTransparentGray"
-            android:dividerHeight="1dp"
-            android:footerDividersEnabled="false"
-            android:headerDividersEnabled="false"
-            android:scrollbars="none" />
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            android:background="@drawable/border_fill_white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <FrameLayout
-            android:id="@+id/emptyState"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            <com.mikepenz.iconics.view.IconicsImageView
+                android:id="@+id/icon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="16dp"
+                app:iiv_color="@color/colorGray"
+                app:iiv_icon="gmd-search" />
 
-        <FrameLayout
-            android:id="@+id/notifBar"
+            <EditText
+                android:id="@+id/keyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="Search data by name patient or name doctor ..."
+                android:padding="12dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorGray"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" />
-    </RelativeLayout>
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:clipToPadding="false"
+                android:divider="@color/colorTransparentGray"
+                android:dividerHeight="1dp"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:scrollbars="none" />
+
+            <FrameLayout
+                android:id="@+id/emptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+            <FrameLayout
+                android:id="@+id/notifBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

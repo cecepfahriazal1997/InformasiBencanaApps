@@ -2,10 +2,14 @@ package com.informasi.bencana.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -26,8 +30,11 @@ public class DataMasterActivity extends MasterActivity {
     private ListView listView;
     private DataMasterAdapter adapter;
     private List<DataMasterModel> listData = new ArrayList<>();
+    private List<DataMasterModel> searchData = new ArrayList<>();
     private Toolbar toolbar;
     private String type;
+    private EditText keyword;
+    private LinearLayout contentKeyword;
 
     private String title[] = {
             "Laki-laki",
@@ -74,6 +81,8 @@ public class DataMasterActivity extends MasterActivity {
         setContentView(R.layout.activity_data_master);
         toolbar             = findViewById(R.id.toolbar);
         listView            = findViewById(R.id.listView);
+        keyword             = findViewById(R.id.keyword);
+        contentKeyword      = findViewById(R.id.contentKeyword);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Choose Data");
@@ -103,8 +112,24 @@ public class DataMasterActivity extends MasterActivity {
         } else if (type.equals("complicationDetail")) {
             loadFromApi(dataMaster + "detailKomplikasi");
         } else {
+            contentKeyword.setVisibility(View.GONE);
             loadStatic(type);
         }
+
+        keyword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchData();
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
     }
 
     private void loadStatic(String type) {
@@ -150,21 +175,7 @@ public class DataMasterActivity extends MasterActivity {
                 listData.add(model);
             }
         }
-
-        adapter         = new DataMasterAdapter(DataMasterActivity.this, listData);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        helper.setListViewHeightBasedOnChildren(listView);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("id", listData.get(position).getId());
-                resultIntent.putExtra("title", listData.get(position).getTitle());
-                setResult(RESULT_OK, resultIntent);
-                finish();
-            }
-        });
+        searchData();
     }
     
     private void loadFromApi(final String url) {
@@ -186,21 +197,7 @@ public class DataMasterActivity extends MasterActivity {
 
                             listData.add(model);
                         }
-
-                        adapter         = new DataMasterAdapter(DataMasterActivity.this, listData);
-                        listView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
-                        helper.setListViewHeightBasedOnChildren(listView);
-                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent resultIntent = new Intent();
-                                resultIntent.putExtra("id", listData.get(position).getId());
-                                resultIntent.putExtra("title", listData.get(position).getTitle());
-                                setResult(RESULT_OK, resultIntent);
-                                finish();
-                            }
-                        });
+                        searchData();
                     } else {
                         helper.popupDialog("Oops", hashMap.get("message"), false);
                     }
@@ -208,6 +205,35 @@ public class DataMasterActivity extends MasterActivity {
                     e.printStackTrace();
                 }
                 return null;
+            }
+        });
+    }
+
+    private void searchData() {
+        String key = keyword.getText().toString();
+        searchData.clear();
+        for (int i = 0; i < listData.size(); i++) {
+            if (key != null) {
+                if (listData.get(i).getTitle().toLowerCase().contains(key.toLowerCase())) {
+                    searchData.add(listData.get(i));
+                }
+            } else {
+                searchData.add(listData.get(i));
+            }
+        }
+
+        adapter         = new DataMasterAdapter(DataMasterActivity.this, searchData);
+        listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        helper.setListViewHeightBasedOnChildren(listView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("id", searchData.get(position).getId());
+                resultIntent.putExtra("title", searchData.get(position).getTitle());
+                setResult(RESULT_OK, resultIntent);
+                finish();
             }
         });
     }
