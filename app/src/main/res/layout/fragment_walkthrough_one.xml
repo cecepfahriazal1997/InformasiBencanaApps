@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="PERINGATAN BUKA"
+        android:textColor="@color/colorRedDark"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="HARUS DIMENGERTI APLIKASI INI BERISI MATERI PROFESIONAL, HANYA DIGUNAKAN OLEH PROFESIONAL MEDIS YANG TELAH DILATIH"
+        android:textColor="@color/colorBlack"
+        android:textSize="16dp" />
+
+    <ImageView
+        android:layout_width="92dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="16dp"
+        android:src="@mipmap/logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="PENELITI"
+        android:textColor="@color/colorRedDark"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Dr. dr. H. Boy Subirosa Sabarguna, MARS"
+        android:textColor="@color/colorBlack"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Tomy Abuzairi, ST, MSc, Phd"
+        android:textColor="@color/colorGrayDark2"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="DR. Dr. Aria Kekalih, MT"
+        android:textColor="@color/colorGrayDark2"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Drg. Agus Sugiharto, MARS"
+        android:textColor="@color/colorGrayDark2"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Dr. Levina Chandra Khoe, MPH"
+        android:textColor="@color/colorGrayDark2"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="DISLAIMER"
+        android:textColor="@color/colorRedDark"
+        android:textSize="24dp"
+        android:textStyle="italic|bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="APLIKASI INI BERISI MATERI PROFESIONAL, HANYA DIGUNAKAN OLEH PROFESIONAL MEDIS YANG TELAH DILATIH KAMI TIDAK BERTANGGUNG JAWAB ATAS PEMAKAIAN YANG TIDAK SESUAI."
+        android:textColor="@color/colorBlack"
+        android:textSize="16dp" />
+</LinearLayout>

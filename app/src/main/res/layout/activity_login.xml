@@ -83,6 +83,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -95,7 +96,7 @@
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             fancy:fb_defaultColor="@color/colorPrimary"
@@ -106,6 +107,7 @@
             fancy:fb_textSize="16dp" />
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

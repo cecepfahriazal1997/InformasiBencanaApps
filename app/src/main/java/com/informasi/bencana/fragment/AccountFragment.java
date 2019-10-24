@@ -23,6 +23,7 @@ import com.informasi.bencana.app.LoginActivity;
 import com.informasi.bencana.app.ProfileActivity;
 import com.informasi.bencana.app.UserGuideActivity;
 import com.informasi.bencana.app.ViewHtmlActivity;
+import com.informasi.bencana.app.WalkthroughActivity;
 import com.informasi.bencana.other.ApiService;
 
 import java.util.HashMap;
@@ -127,7 +128,7 @@ public class AccountFragment extends Fragment {
                     public void onClick(View v) {
                         dialog.dismiss();
                         parent.functionHelper.clearSession();
-                        parent.functionHelper.startIntent(LoginActivity.class, true, true, null);
+                        parent.functionHelper.startIntent(WalkthroughActivity.class, true, true, null);
                     }
                 };
 

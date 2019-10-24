@@ -41,7 +41,7 @@ public class SplashScreenActivity extends MasterActivity {
         if (helper.getSession("id") != null)
             helper.startIntent(DashboardActivity.class, true, true, null);
         else
-            helper.startIntent(LoginActivity.class, true, true, null);
+            helper.startIntent(WalkthroughActivity.class, true, true, null);
     }
 
     public void onStop() {
