@@ -25,19 +25,17 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="DEPARTEMEN KEHAKIMAN DAN HAK ASASI MANUSIA R.I\nDIREKTORAT JENDERAL HAK KEKAYAAN INTELEKTUAL"
-            android:textColor="@color/colorBlack"
-            android:textSize="14dp" />
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
-            android:src="@mipmap/form_permohonan" />
+            android:src="@mipmap/paten_one" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/paten_two" />
     </LinearLayout>
 </ScrollView>
