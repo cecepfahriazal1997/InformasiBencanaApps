@@ -78,34 +78,37 @@ public class NeedAssesmentActivity extends MasterActivity {
                             if (hashMap.get("success").equals("1")) {
                                 helper.showProgressDialog(pDialog, true);
                                 JSONObject result   = new JSONObject(hashMap.get("result"));
-                                JSONArray list      = result.getJSONArray("data");
-                                for (int i = 0; i < list.length(); i++) {
-                                    JSONObject detail       = list.getJSONObject(i);
-                                    ModelNeedAssesment model = new ModelNeedAssesment();
-                                    model.setId(detail.getString("id"));
-                                    model.setLocation(detail.getString("location"));
-                                    model.setDate(detail.getString("waktu"));
-                                    model.setCases(detail.getString("cases"));
-                                    model.setDiseases(detail.getString("diseases"));
-                                    model.setService(detail.getString("service"));
-                                    model.setPlace(detail.getString("place"));
-                                    model.setMedicalE(detail.getString("medicalE"));
-                                    model.setSupportingE(detail.getString("supportingE"));
-                                    model.setDrug(detail.getString("drug"));
-                                    model.setMedicalS(detail.getString("medicalS"));
-                                    model.setNmedicalS(detail.getString("nmedicalS"));
-                                    model.setGeneral(detail.getString("general"));
-                                    model.setSpecialistD(detail.getString("specialistD"));
-                                    model.setNurse(detail.getString("nurse"));
-                                    model.setNmedical(detail.getString("nmedical"));
-                                    model.setAmbulance(detail.getString("ambulance"));
-                                    model.setRelateDtr(detail.getString("relatedtr"));
-                                    model.setCom(detail.getString("com"));
-                                    model.setLocationLabel(detail.getString("nameLocation"));
+                                if (result.getString("status").equals("1")) {
+                                    JSONArray list      = result.getJSONArray("data");
+                                    for (int i = 0; i < list.length(); i++) {
+                                        JSONObject detail       = list.getJSONObject(i);
+                                        ModelNeedAssesment model = new ModelNeedAssesment();
+                                        model.setId(detail.getString("id"));
+                                        model.setLocation(detail.getString("location"));
+                                        model.setDate(detail.getString("waktu"));
+                                        model.setCases(detail.getString("cases"));
+                                        model.setDiseases(detail.getString("diseases"));
+                                        model.setService(detail.getString("service"));
+                                        model.setPlace(detail.getString("place"));
+                                        model.setMedicalE(detail.getString("medicalE"));
+                                        model.setSupportingE(detail.getString("supportingE"));
+                                        model.setDrug(detail.getString("drug"));
+                                        model.setMedicalS(detail.getString("medicalS"));
+                                        model.setNmedicalS(detail.getString("nmedicalS"));
+                                        model.setGeneral(detail.getString("general"));
+                                        model.setSpecialistD(detail.getString("specialistD"));
+                                        model.setNurse(detail.getString("nurse"));
+                                        model.setNmedical(detail.getString("nmedical"));
+                                        model.setAmbulance(detail.getString("ambulance"));
+                                        model.setRelateDtr(detail.getString("relatedtr"));
+                                        model.setCom(detail.getString("com"));
+                                        model.setLocationLabel(detail.getString("nameLocation"));
 
-                                    listData.add(model);
+                                        listData.add(model);
+                                    }
+                                    search(null);
                                 }
-                                search(null);
+                                helper.showProgressDialog(pDialog, false);
                                 btnAdd.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -115,7 +118,6 @@ public class NeedAssesmentActivity extends MasterActivity {
                                         helper.startIntent(FormNeedAssesmentActivity.class, false, false, param);
                                     }
                                 });
-                                helper.showProgressDialog(pDialog, false);
                             } else {
                                 helper.popupDialog("Oops", hashMap.get("message"), false);
                             }

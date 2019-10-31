@@ -108,7 +108,7 @@ public class PatientActivity extends MasterActivity {
                                         Map<String, String> param = new HashMap<>();
                                         param.put("type", "add");
                                         param.put("title", "Add Patient");
-                                        param.put("number", String.valueOf(listData.size()));
+                                        param.put("number", String.valueOf(listData.size() + 1));
                                         helper.startIntent(FormPatientActivity.class, false, false, param);
                                     }
                                 });

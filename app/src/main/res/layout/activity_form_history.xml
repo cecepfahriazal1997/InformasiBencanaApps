@@ -495,7 +495,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Nama Pasien ..."
+                android:hint="Masukan Laboratorium ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
