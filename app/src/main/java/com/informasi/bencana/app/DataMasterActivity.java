@@ -186,18 +186,20 @@ public class DataMasterActivity extends MasterActivity {
                 try {
                     if (hashMap.get("success").equals("1")) {
                         JSONObject result   = new JSONObject(hashMap.get("result"));
-                        JSONArray list      = result.getJSONArray("data");
-                        listData.clear();
-                        for (int i = 0; i < list.length(); i++) {
-                            JSONObject detail   = list.getJSONObject(i);
-                            DataMasterModel model     = new DataMasterModel();
+                        if (result.getBoolean("status")) {
+                            JSONArray list      = result.getJSONArray("data");
+                            listData.clear();
+                            for (int i = 0; i < list.length(); i++) {
+                                JSONObject detail   = list.getJSONObject(i);
+                                DataMasterModel model     = new DataMasterModel();
 
-                            model.setId(detail.getString("id"));
-                            model.setTitle(detail.getString("title"));
+                                model.setId(detail.getString("id"));
+                                model.setTitle(detail.getString("title"));
 
-                            listData.add(model);
+                                listData.add(model);
+                            }
+                            searchData();
                         }
-                        searchData();
                     } else {
                         helper.popupDialog("Oops", hashMap.get("message"), false);
                     }

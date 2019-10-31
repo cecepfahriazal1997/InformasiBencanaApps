@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputLayout;
 import com.informasi.bencana.R;
 import com.informasi.bencana.app.DashboardActivity;
-import com.informasi.bencana.app.LoginActivity;
 import com.informasi.bencana.app.ProfileActivity;
 import com.informasi.bencana.app.UserGuideActivity;
 import com.informasi.bencana.app.ViewHtmlActivity;

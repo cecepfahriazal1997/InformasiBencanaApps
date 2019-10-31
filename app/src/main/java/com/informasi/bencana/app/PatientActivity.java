@@ -78,30 +78,32 @@ public class PatientActivity extends MasterActivity {
                             if (hashMap.get("success").equals("1")) {
                                 helper.showProgressDialog(pDialog, true);
                                 JSONObject result   = new JSONObject(hashMap.get("result"));
-                                JSONArray list      = result.getJSONArray("data");
-                                for (int i = 0; i < list.length(); i++) {
-                                    JSONObject detail       = list.getJSONObject(i);
-                                    PatientModel model = new PatientModel();
-                                    model.setId(detail.getString("PatientId"));
-                                    model.setName(detail.getString("PatientNm"));
-                                    model.setGender(detail.getString("Sex"));
-                                    model.setAge(detail.getString("Age"));
-                                    model.setLocation(detail.getString("Location"));
-                                    model.setLocationLabel(detail.getString("nameCountries"));
-                                    model.setDate(detail.getString("Time"));
-                                    model.setWeaknessCondition(detail.getString("WaknessCon"));
-                                    model.setThreadCondition(detail.getString("ThreadCon"));
-                                    model.setDoctor(detail.getString("DoctorNm"));
-                                    model.setNurse(detail.getString("NurseNm"));
-                                    model.setSupport(detail.getString("SupportNm"));
-                                    model.setRemark(detail.getString("Remark"));
-                                    model.setStepOne("0");
-                                    model.setStepTwo("0");
-                                    model.setStepThree("0");
+                                if (result.getString("status").equals("1")) {
+                                    JSONArray list      = result.getJSONArray("data");
+                                    for (int i = 0; i < list.length(); i++) {
+                                        JSONObject detail       = list.getJSONObject(i);
+                                        PatientModel model = new PatientModel();
+                                        model.setId(detail.getString("PatientId"));
+                                        model.setName(detail.getString("PatientNm"));
+                                        model.setGender(detail.getString("Sex"));
+                                        model.setAge(detail.getString("Age"));
+                                        model.setLocation(detail.getString("Location"));
+                                        model.setLocationLabel(detail.getString("nameCountries"));
+                                        model.setDate(detail.getString("Time"));
+                                        model.setWeaknessCondition(detail.getString("WaknessCon"));
+                                        model.setThreadCondition(detail.getString("ThreadCon"));
+                                        model.setDoctor(detail.getString("DoctorNm"));
+                                        model.setNurse(detail.getString("NurseNm"));
+                                        model.setSupport(detail.getString("SupportNm"));
+                                        model.setRemark(detail.getString("Remark"));
+                                        model.setStepOne("0");
+                                        model.setStepTwo("0");
+                                        model.setStepThree("0");
 
-                                    listData.add(model);
+                                        listData.add(model);
+                                    }
+                                    search(null);
                                 }
-                                search(null);
                                 btnAdd.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {

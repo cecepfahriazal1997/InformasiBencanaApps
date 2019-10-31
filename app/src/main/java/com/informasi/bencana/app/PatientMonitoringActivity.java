@@ -70,25 +70,25 @@ public class PatientMonitoringActivity extends MasterActivity {
                     public String getHashMap(Map<String, String> hashMap) {
                         try {
                             if (hashMap.get("success").equals("1")) {
-                                helper.showProgressDialog(pDialog, true);
                                 JSONObject result   = new JSONObject(hashMap.get("result"));
-                                JSONArray list      = result.getJSONArray("data");
-                                for (int i = 0; i < list.length(); i++) {
-                                    JSONObject detail       = list.getJSONObject(i);
-                                    PatientMonitoringModel model = new PatientMonitoringModel();
-                                    model.setId(detail.getString("PatientId"));
-                                    model.setGender(detail.getString("Sex"));
-                                    model.setAge(detail.getString("Age"));
-                                    model.setSupport(detail.getString("SupportNm"));
-                                    model.setName(detail.getString("PatientNm"));
-                                    model.setDoctor(detail.getString("DoctorNm"));
-                                    model.setNurse(detail.getString("NurseNm"));
-                                    model.setDate(detail.getString("Time"));
+                                if (result.getString("status").equals("1")) {
+                                    JSONArray list      = result.getJSONArray("data");
+                                    for (int i = 0; i < list.length(); i++) {
+                                        JSONObject detail       = list.getJSONObject(i);
+                                        PatientMonitoringModel model = new PatientMonitoringModel();
+                                        model.setId(detail.getString("PatientId"));
+                                        model.setGender(detail.getString("Sex"));
+                                        model.setAge(detail.getString("Age"));
+                                        model.setSupport(detail.getString("SupportNm"));
+                                        model.setName(detail.getString("PatientNm"));
+                                        model.setDoctor(detail.getString("DoctorNm"));
+                                        model.setNurse(detail.getString("NurseNm"));
+                                        model.setDate(detail.getString("Time"));
 
-                                    listData.add(model);
+                                        listData.add(model);
+                                    }
+                                    search(null);
                                 }
-                                search(null);
-                                helper.showProgressDialog(pDialog, false);
                             } else {
                                 helper.popupDialog("Oops", hashMap.get("message"), false);
                             }

@@ -63,30 +63,34 @@ public class ProgressActivity extends MasterActivity {
                                 helper.showProgressDialog(pDialog, false);
                                 if (hashMap.get("success").equals("1")) {
                                     JSONObject result   = new JSONObject(hashMap.get("result"));
-                                    JSONArray list      = result.getJSONArray("data");
-                                    for (int i = 0; i < list.length(); i++) {
-                                        JSONObject detail       = list.getJSONObject(i);
-                                        PatientProgressModel model = new PatientProgressModel();
-                                        model.setProgressId(detail.getString("id_prog"));
-                                        model.setYear(detail.getString("Year"));
-                                        model.setMonth(detail.getString("Month"));
-                                        model.setWeek(detail.getString("Week"));
-                                        model.setDay(detail.getString("Tgl"));
-                                        model.setComplication(detail.getString("Complication"));
-                                        model.setComplicationLabel(detail.getString("ComplicationLabel"));
-                                        model.setComplicationDtl(detail.getString("ComplicationDtl"));
-                                        model.setComplicationDtlLabel(detail.getString("ComplicationDtlLabel"));
-                                        model.setProgress(detail.getString("Progress"));
-                                        model.setStatus(detail.getString("Status"));
-                                        model.setRemark(detail.getString("Remark"));
-                                        listData.add(model);
-                                    }
+                                    if (result.getString("status").equals("1")) {
+                                        JSONArray list      = result.getJSONArray("data");
+                                        for (int i = 0; i < list.length(); i++) {
+                                            JSONObject detail       = list.getJSONObject(i);
+                                            PatientProgressModel model = new PatientProgressModel();
+                                            model.setProgressId(detail.getString("id_prog"));
+                                            model.setYear(detail.getString("Year"));
+                                            model.setMonth(detail.getString("Month"));
+                                            model.setWeek(detail.getString("Week"));
+                                            model.setDay(detail.getString("Tgl"));
+                                            model.setComplication(detail.getString("Complication"));
+                                            model.setComplicationLabel(detail.getString("ComplicationLabel"));
+                                            model.setComplicationDtl(detail.getString("ComplicationDtl"));
+                                            model.setComplicationDtlLabel(detail.getString("ComplicationDtlLabel"));
+                                            model.setProgress(detail.getString("Progress"));
+                                            model.setStatus(detail.getString("Status"));
+                                            model.setRemark(detail.getString("Remark"));
+                                            listData.add(model);
+                                        }
 
-                                    adapter         = new ProgressAdapter(ProgressActivity.this, listData, helper,
-                                            clientApiService, deleteProgressPatient, paramPatient);
-                                    listView.setAdapter(adapter);
-                                    adapter.notifyDataSetChanged();
-                                    helper.setListViewHeightBasedOnChildren(listView);
+                                        adapter         = new ProgressAdapter(ProgressActivity.this, listData, helper,
+                                                clientApiService, deleteProgressPatient, paramPatient);
+                                        listView.setAdapter(adapter);
+                                        adapter.notifyDataSetChanged();
+                                        helper.setListViewHeightBasedOnChildren(listView);
+                                    } else {
+                                        helper.popupDialog("Oops", hashMap.get("message"), false);
+                                    }
                                 } else {
                                     helper.popupDialog("Oops", hashMap.get("message"), false);
                                 }

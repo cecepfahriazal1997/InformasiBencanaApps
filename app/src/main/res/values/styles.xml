@@ -17,12 +17,6 @@
     </style>
 
     <!-- Login application theme. -->
-    <style name="LoginTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
     <style name="styleTextTab" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">10dp</item>

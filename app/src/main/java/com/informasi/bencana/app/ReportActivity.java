@@ -70,25 +70,25 @@ public class ReportActivity extends MasterActivity {
                     public String getHashMap(Map<String, String> hashMap) {
                         try {
                             if (hashMap.get("success").equals("1")) {
-                                helper.showProgressDialog(pDialog, true);
                                 JSONObject result   = new JSONObject(hashMap.get("result"));
-                                JSONArray list      = result.getJSONArray("data");
-                                for (int i = 0; i < list.length(); i++) {
-                                    JSONObject detail       = list.getJSONObject(i);
-                                    ReportModel model = new ReportModel();
-                                    model.setId(detail.getString("id"));
-                                    model.setGender(detail.getString("gender"));
-                                    model.setAge(detail.getString("age"));
-                                    model.setName(detail.getString("name"));
-                                    model.setDoctor(detail.getString("doctor"));
-                                    model.setNurse(detail.getString("nurse"));
-                                    model.setListProgress(detail.getString("progress"));
-                                    model.setListYear(detail.getString("year"));
+                                if (result.getString("status").equals("1")) {
+                                    JSONArray list      = result.getJSONArray("data");
+                                    for (int i = 0; i < list.length(); i++) {
+                                        JSONObject detail       = list.getJSONObject(i);
+                                        ReportModel model = new ReportModel();
+                                        model.setId(detail.getString("id"));
+                                        model.setGender(detail.getString("gender"));
+                                        model.setAge(detail.getString("age"));
+                                        model.setName(detail.getString("name"));
+                                        model.setDoctor(detail.getString("doctor"));
+                                        model.setNurse(detail.getString("nurse"));
+                                        model.setListProgress(detail.getString("progress"));
+                                        model.setListYear(detail.getString("year"));
 
-                                    listData.add(model);
+                                        listData.add(model);
+                                    }
+                                    search(null);
                                 }
-                                search(null);
-                                helper.showProgressDialog(pDialog, false);
                             } else {
                                 helper.popupDialog("Oops", hashMap.get("message"), false);
                             }

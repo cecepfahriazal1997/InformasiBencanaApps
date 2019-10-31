@@ -203,7 +203,6 @@
                         app:iiv_icon="gmd-lock" />
 
                     <TextView
-                        android:id="@+id/title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -254,7 +253,6 @@
                         app:iiv_icon="gmd-phone-in-talk" />
 
                     <TextView
-                        android:id="@+id/title3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -305,7 +303,6 @@
                         app:iiv_icon="gmd-security" />
 
                     <TextView
-                        android:id="@+id/title4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -356,7 +353,6 @@
                         app:iiv_icon="gmd-receipt" />
 
                     <TextView
-                        android:id="@+id/title5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

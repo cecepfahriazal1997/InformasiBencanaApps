@@ -89,7 +89,7 @@ public class FormProgressActivity extends MasterActivity {
             String labelStatus = "";
             if (getIntent().getStringExtra("status").equals("HE"))
                 labelStatus = "Sehat";
-            else if (getIntent().getStringExtra("status").equals("DA"))
+            else if (getIntent().getStringExtra("status").equals("DE"))
                 labelStatus = "Meninggal";
             else
                 labelStatus = "Cacat";

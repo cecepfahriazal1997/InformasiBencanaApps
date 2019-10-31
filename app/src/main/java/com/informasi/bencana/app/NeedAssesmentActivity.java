@@ -76,7 +76,6 @@ public class NeedAssesmentActivity extends MasterActivity {
                     public String getHashMap(Map<String, String> hashMap) {
                         try {
                             if (hashMap.get("success").equals("1")) {
-                                helper.showProgressDialog(pDialog, true);
                                 JSONObject result   = new JSONObject(hashMap.get("result"));
                                 if (result.getString("status").equals("1")) {
                                     JSONArray list      = result.getJSONArray("data");
@@ -108,7 +107,6 @@ public class NeedAssesmentActivity extends MasterActivity {
                                     }
                                     search(null);
                                 }
-                                helper.showProgressDialog(pDialog, false);
                                 btnAdd.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
