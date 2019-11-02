@@ -76,7 +76,7 @@ public class FormPatientActivity extends MasterActivity {
             gender.setText("" + (getIntent().getStringExtra("gender").equals("0") ?
                                     "Laki-laki" : "Perempuan"));
             age.setText("" + getIntent().getStringExtra("age"));
-            location.setText("" + getIntent().getStringExtra("location"));
+            location.setText("" + getIntent().getStringExtra("locationLabel"));
             date.setText("" + getIntent().getStringExtra("date"));
             weaknessCondition.setText("" + getIntent().getStringExtra("weaknessCondition"));
             threadCondition.setText("" + getIntent().getStringExtra("threadCondition"));

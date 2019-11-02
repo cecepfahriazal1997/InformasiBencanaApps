@@ -162,7 +162,7 @@ public class PatientAdapter extends BaseAdapter {
                     param.put("gender", item.getGender());
                     param.put("age", item.getAge());
                     param.put("location", item.getLocation());
-                    param.put("location", item.getLocationLabel());
+                    param.put("locationLabel", item.getLocationLabel());
                     param.put("date", item.getDate());
                     param.put("weaknessCondition", item.getWeaknessCondition());
                     param.put("threadCondition", item.getThreadCondition());

@@ -222,10 +222,10 @@ public class ReportDetailActivity extends MasterActivity {
         BarDataSet set1;
         set1 = new BarDataSet(values, "Bulan");
         set1.setDrawIcons(false);
-        set1.setColors(new int[]{
-                ContextCompat.getColor(this, R.color.colorPrimary),
+                set1.setColors(new int[]{
+                ContextCompat.getColor(this, R.color.colorRed),
                 ContextCompat.getColor(this, R.color.colorYellow),
-                ContextCompat.getColor(this, R.color.colorRed)});
+                ContextCompat.getColor(this, R.color.colorPrimary)});
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
 
