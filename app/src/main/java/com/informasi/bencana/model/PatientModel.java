@@ -1,7 +1,7 @@
 package com.informasi.bencana.model;
 
 public class PatientModel {
-    private String id, name, doctor, nurse, support, gender, age, date, number, location,
+    private String id, name, doctor, nurse, support, gender, age, date, number, location, phoneDoctor,
             weaknessCondition, threadCondition, remark, stepOne, stepTwo, stepThree, locationLabel;
 
     public PatientModel() {
@@ -141,5 +141,13 @@ public class PatientModel {
 
     public void setLocationLabel(String locationLabel) {
         this.locationLabel = locationLabel;
+    }
+
+    public String getPhoneDoctor() {
+        return phoneDoctor;
+    }
+
+    public void setPhoneDoctor(String phoneDoctor) {
+        this.phoneDoctor = phoneDoctor;
     }
 }

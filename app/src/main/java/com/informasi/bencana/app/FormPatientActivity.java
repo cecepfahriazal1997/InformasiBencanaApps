@@ -25,7 +25,7 @@ public class FormPatientActivity extends MasterActivity {
     private CardView cardLocation, cardGender;
     private TextView location, gender;
     private EditText date, id, name, age, weaknessCondition, threadCondition, remark, nameDoctor,
-                    nameNurse, nameSupport;
+                    nameNurse, nameSupport, phoneDoctor;
     private FancyButton btnSubmit;
     private Map<String, String> param = new HashMap<>();
     private String locationId, genderCode = "0";
@@ -46,6 +46,7 @@ public class FormPatientActivity extends MasterActivity {
         id              = (EditText) findViewById(R.id.id);
         name            = (EditText) findViewById(R.id.name);
         age             = (EditText) findViewById(R.id.age);
+        phoneDoctor     = (EditText) findViewById(R.id.phoneDoctor);
         weaknessCondition   = (EditText) findViewById(R.id.weaknessCondition);
         threadCondition     = (EditText) findViewById(R.id.threadCondition);
         remark              = (EditText) findViewById(R.id.remark);
@@ -84,6 +85,7 @@ public class FormPatientActivity extends MasterActivity {
             nameNurse.setText("" + getIntent().getStringExtra("nurseName"));
             nameSupport.setText("" + getIntent().getStringExtra("supportName"));
             remark.setText("" + getIntent().getStringExtra("remark"));
+            phoneDoctor.setText("" + getIntent().getStringExtra("phoneDoctor"));
 
             locationId          = getIntent().getStringExtra("location");
             genderCode          = getIntent().getStringExtra("gender");
@@ -129,9 +131,9 @@ public class FormPatientActivity extends MasterActivity {
                 } else if (age.getText().toString().isEmpty()) {
                     age.setError("Please enter age !");
                 } else if (weaknessCondition.getText().toString().isEmpty()) {
-                    weaknessCondition.setError("Please enter weakness condition !");
+                    weaknessCondition.setError("Please enter diagnostic !");
                 } else if (threadCondition.getText().toString().isEmpty()) {
-                    threadCondition.setError("Please enter thread condition !");
+                    threadCondition.setError("Please enter risk factor !");
                 } else if (remark.getText().toString().isEmpty()) {
                     remark.setError("Please enter remark !");
                 } else if (nameDoctor.getText().toString().isEmpty()) {
@@ -140,6 +142,8 @@ public class FormPatientActivity extends MasterActivity {
                     nameNurse.setError("Please enter nurse name !");
                 } else if (nameSupport.getText().toString().isEmpty()) {
                     nameSupport.setError("Please enter support name !");
+                } else if (phoneDoctor.getText().toString().isEmpty()) {
+                    phoneDoctor.setError("Please enter number phone doctor !");
                 } else {
                     if (type.equals("add")) {
                         Map<String, String> param = new HashMap<>();
@@ -155,6 +159,7 @@ public class FormPatientActivity extends MasterActivity {
                         param.put("nurseName", nameNurse.getText().toString());
                         param.put("supportName", nameSupport.getText().toString());
                         param.put("remark", remark.getText().toString());
+                        param.put("phoneDoctor", phoneDoctor.getText().toString());
                         param.put("userInput", helper.getSession("name"));
                         clientApiService.insertPatient(insertPatient, param, new ApiService.hashMapListener() {
                             @Override
@@ -182,6 +187,7 @@ public class FormPatientActivity extends MasterActivity {
                         param.put("nurseName", nameNurse.getText().toString());
                         param.put("supportName", nameSupport.getText().toString());
                         param.put("remark", remark.getText().toString());
+                        param.put("phoneDoctor", phoneDoctor.getText().toString());
                         param.put("userInput", helper.getSession("name"));
                         clientApiService.updatePatient(updatePatient, param, new ApiService.hashMapListener() {
                             @Override

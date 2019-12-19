@@ -84,6 +84,7 @@ public class PatientCollabActivity extends MasterActivity {
                                         model.setDoctor(detail.getString("DoctorNm"));
                                         model.setNurse(detail.getString("NurseNm"));
                                         model.setDate(detail.getString("Time"));
+                                        model.setPhoneDoctor(detail.getString("DoctorWA"));
 
                                         listData.add(model);
                                     }

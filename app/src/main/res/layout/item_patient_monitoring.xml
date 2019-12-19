@@ -98,6 +98,16 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/id">
 
+                <ImageView
+                    android:id="@+id/whatsapp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@mipmap/whatsapp"
+                    android:scaleType="fitXY"
+                    android:backgroundTint="@color/colorTransparent"
+                    android:layout_marginRight="8dp"
+                    android:visibility="gone"/>
+
                 <mehdi.sakout.fancybuttons.FancyButton
                     android:id="@+id/btnDetail"
                     android:layout_width="32dp"

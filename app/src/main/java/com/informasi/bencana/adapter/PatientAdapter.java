@@ -170,6 +170,7 @@ public class PatientAdapter extends BaseAdapter {
                     param.put("nurseName", item.getNurse());
                     param.put("supportName", item.getSupport());
                     param.put("remark", item.getRemark());
+                    param.put("phoneDoctor", item.getPhoneDoctor());
                     helper.startIntent(FormPatientActivity.class, false, false, param);
                 } else if (which == 1) {
                     Map<String, String> param = new HashMap<>();

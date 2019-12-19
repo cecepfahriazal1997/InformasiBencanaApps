@@ -96,6 +96,7 @@ public class PatientActivity extends MasterActivity {
                                         model.setNurse(detail.getString("NurseNm"));
                                         model.setSupport(detail.getString("SupportNm"));
                                         model.setRemark(detail.getString("Remark"));
+                                        model.setPhoneDoctor(detail.getString("DoctorWA"));
                                         model.setStepOne("0");
                                         model.setStepTwo("0");
                                         model.setStepThree("0");

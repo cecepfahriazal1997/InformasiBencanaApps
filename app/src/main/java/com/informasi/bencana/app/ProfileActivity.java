@@ -14,9 +14,12 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileActivity extends MasterActivity {
     private Toolbar toolbar;
     private TextView name, email, username, phone;
+    private CircleImageView imageProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,7 @@ public class ProfileActivity extends MasterActivity {
         email               = findViewById(R.id.email);
         username            = findViewById(R.id.username);
         phone               = findViewById(R.id.phone);
+        imageProfile        = findViewById(R.id.avatar);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Detail Profile");
@@ -37,6 +41,7 @@ public class ProfileActivity extends MasterActivity {
     }
 
     private void loadData() {
+        clientApiService.getImageOnlineImageViewCircle(helper.getSession("image"), imageProfile);
         helper.setupProgressDialog(pDialog, "Loading data ...");
         clientApiService.getData(urlProfile + helper.getSession("id"), "object", false,
                 new ApiService.hashMapListener() {

@@ -317,7 +317,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Kondisi Kelemahan"
+                android:text="Diagnosa"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -328,7 +328,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Kondisi Kelemahan Pasien ..."
+                android:hint="Masukan Diagnosa Pasien ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -342,7 +342,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Kondisi Ancaman"
+                android:text="Faktor Resiko"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />
 
@@ -353,7 +353,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:hint="Masukan Kondisi Ancaman Pasien ..."
+                android:hint="Masukan Faktor Resiko Pasien ..."
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
@@ -406,6 +406,31 @@
                 android:background="@drawable/border_outline_white"
                 android:fontFamily="@font/sfprodisplay_regular"
                 android:hint="Masukan Nama Dokter ..."
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Nomor WA Dokter"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/phoneDoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Contoh : +6289111222xxx"
                 android:paddingLeft="16dp"
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"

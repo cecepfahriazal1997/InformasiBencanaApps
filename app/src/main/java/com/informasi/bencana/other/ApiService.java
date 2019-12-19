@@ -2,8 +2,10 @@ package com.informasi.bencana.other;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.util.Patterns;
+import android.widget.ImageView;
 
 import com.informasi.bencana.app.DashboardActivity;
 import com.koushikdutta.async.future.FutureCallback;
@@ -15,6 +17,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ApiService {
     private Activity activity;
@@ -33,6 +37,48 @@ public class ApiService {
     // Fungsi ini digunakan untuk mengambil data hashmap dari reponse API
     public interface hashMapListener {
         String getHashMap(Map<String, String> hashMap);
+    }
+
+    public void getImageOnlineImageView(String url, final ImageView imageView)
+    {
+        try {
+            Ion.with(activity)
+                    .load(url)
+                    .setLogging("LOAD IMAGE", Log.DEBUG)
+                    .noCache()
+                    .withBitmap()
+                    .asBitmap()
+                    .setCallback(new FutureCallback<Bitmap>() {
+                        @Override
+                        public void onCompleted(Exception e, final Bitmap result) {
+                            if (result != null)
+                                imageView.setImageBitmap(result);
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getImageOnlineImageViewCircle(String url, final CircleImageView imageView)
+    {
+        try {
+            Ion.with(activity)
+                    .load(url)
+                    .setLogging("LOAD IMAGE", Log.DEBUG)
+                    .noCache()
+                    .withBitmap()
+                    .asBitmap()
+                    .setCallback(new FutureCallback<Bitmap>() {
+                        @Override
+                        public void onCompleted(Exception e, final Bitmap result) {
+                            if (result != null)
+                                imageView.setImageBitmap(result);
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Fungsi ini digunakan untuk melakukan login ke aplikasi dengan token facebook atau token google
@@ -67,6 +113,7 @@ public class ApiService {
                                                 functionHelper.saveSession("name", detailProfile.getString("name"));
                                                 functionHelper.saveSession("email", detailProfile.getString("email"));
                                                 functionHelper.saveSession("phone", detailProfile.getString("phone"));
+                                                functionHelper.saveSession("image", detailProfile.getString("image"));
 
                                                 functionHelper.startIntent(DashboardActivity.class, true, true,
                                                         null);
@@ -255,6 +302,7 @@ public class ApiService {
                         .setBodyParameter("nurseName", param.get("nurseName"))
                         .setBodyParameter("supportName", param.get("supportName"))
                         .setBodyParameter("remark", param.get("remark"))
+                        .setBodyParameter("phoneDoctor", param.get("phoneDoctor"))
                         .setBodyParameter("userInput", param.get("userInput"))
                         .asString()
                         .withResponse()
@@ -332,6 +380,7 @@ public class ApiService {
                         .setBodyParameter("nurseName", param.get("nurseName"))
                         .setBodyParameter("supportName", param.get("supportName"))
                         .setBodyParameter("remark", param.get("remark"))
+                        .setBodyParameter("phoneDoctor", param.get("phoneDoctor"))
                         .setBodyParameter("userInput", param.get("userInput"))
                         .asString()
                         .withResponse()

@@ -28,6 +28,7 @@ import com.informasi.bencana.other.ApiService;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class AccountFragment extends Fragment {
@@ -35,6 +36,7 @@ public class AccountFragment extends Fragment {
     private CardView cardUserGuide, cardChangePassword, cardContact, cardPrivacy, cardTermService;
     private FancyButton btnLogout;
     private TextView detailProfile, name, email;
+    private CircleImageView imageProfile;
 
     public AccountFragment() {
         parent          = (DashboardActivity) getActivity();
@@ -60,6 +62,7 @@ public class AccountFragment extends Fragment {
         detailProfile       = rootView.findViewById(R.id.detailProfile);
         name                = rootView.findViewById(R.id.name);
         email               = rootView.findViewById(R.id.email);
+        imageProfile        = rootView.findViewById(R.id.avatar);
 
         initial();
         return rootView;
@@ -68,6 +71,8 @@ public class AccountFragment extends Fragment {
     private void initial() {
         name.setText("" + parent.functionHelper.getSession("name"));
         email.setText("" + parent.functionHelper.getSession("email"));
+        parent.apiService.getImageOnlineImageViewCircle(parent.functionHelper.getSession("image"), imageProfile);
+
         detailProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

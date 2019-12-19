@@ -2,10 +2,14 @@ package com.informasi.bencana.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.informasi.bencana.R;
@@ -14,6 +18,8 @@ import com.informasi.bencana.model.PatientCollabModel;
 import com.informasi.bencana.other.ApiService;
 import com.informasi.bencana.other.FunctionHelper;
 
+import java.net.URI;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +79,7 @@ public class PatientCollabAdapter extends BaseAdapter {
             holder.Gender       = (TextView) convertView.findViewById(R.id.gender);
             holder.Age          = (TextView) convertView.findViewById(R.id.age);
             holder.Detail       = (FancyButton) convertView.findViewById(R.id.btnDetail);
+            holder.Whatsapp     = (ImageView) convertView.findViewById(R.id.whatsapp);
 
             convertView.setTag(holder);
         } else {
@@ -102,12 +109,42 @@ public class PatientCollabAdapter extends BaseAdapter {
             }
         });
 
+        if (!item.getPhoneDoctor().isEmpty()) {
+            holder.Whatsapp.setVisibility(View.VISIBLE);
+            holder.Whatsapp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (helper.isPackageInstalled(context,"com.whatsapp")) {
+                        PackageManager packageManager = context.getPackageManager();
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+
+                        try {
+                            String url = "https://api.whatsapp.com/send?phone="+ item.getPhoneDoctor()
+                                    +"&text=" + URLEncoder.encode("Hallo, Dokter " + item.getDoctor(), "UTF-8");
+                            i.setPackage("com.whatsapp");
+                            i.setData(Uri.parse(url));
+                            if (i.resolveActivity(packageManager) != null) {
+                                context.startActivity(i);
+                            }
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    } else {
+                        helper.popupDialog("Opps", "Silahkan download aplikasi Whatsapp terlebih dahulu !", false);
+                    }
+                }
+            });
+        } else {
+            holder.Whatsapp.setVisibility(View.INVISIBLE);
+        }
+
         return convertView;
     }
 
     static class ViewHolder {
         TextView Id, Name, Doctor, Nurse, Gender, Age;
         FancyButton Detail;
+        ImageView Whatsapp;
     }
 
     public List<PatientCollabModel> getData() {

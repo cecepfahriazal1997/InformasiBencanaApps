@@ -1,11 +1,13 @@
 package com.informasi.bencana.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -23,12 +25,15 @@ import com.informasi.bencana.model.GridViewModel;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HomeFragment extends Fragment {
     private GridViewAdapter customGridAdapter;
     private ArrayList<GridViewModel> listData = new ArrayList();
     private GridView gridView;
     private DashboardActivity parent;
     private TextView name, email;
+    private CircleImageView imageProfile;
     private int icon[] = {
             R.drawable.patient,
             R.drawable.progress,
@@ -65,6 +70,7 @@ public class HomeFragment extends Fragment {
         gridView            = (GridView) rootView.findViewById(R.id.gridView);
         name                = (TextView) rootView.findViewById(R.id.name);
         email               = (TextView) rootView.findViewById(R.id.email);
+        imageProfile        = (CircleImageView) rootView.findViewById(R.id.avatar);
 
         initial();
 
@@ -74,6 +80,8 @@ public class HomeFragment extends Fragment {
     private void initial() {
         name.setText("" + parent.functionHelper.getSession("name"));
         email.setText("" + parent.functionHelper.getSession("email"));
+        parent.apiService.getImageOnlineImageViewCircle(parent.functionHelper.getSession("image"), imageProfile);
+
         for (int i = 0; i < title.length; i++) {
             GridViewModel model = new GridViewModel();
             model.setImage(icon[i]);
