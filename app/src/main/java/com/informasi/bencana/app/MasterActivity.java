@@ -46,6 +46,7 @@ public class MasterActivity extends AppCompatActivity {
     public String listNeedAssesmen = "http://api.atp-sb-medis.com/public/api/v1/AssessmentNeed/listData";
     public String saveNeedAssesmen = "http://api.atp-sb-medis.com/public/api/v1/AssessmentNeed/saveData";
     public String deleteNeedAssesmen = "http://api.atp-sb-medis.com/public/api/v1/AssessmentNeed/deleteData";
+    public String urlDisaster = "http://api.atp-sb-medis.com/public/api/v1/Dashboard/prepareDisaster";
     public String urlGoogleDoc   = "https://view.officeapps.live.com/op/embed.aspx?src=";
 
     // Attribute view

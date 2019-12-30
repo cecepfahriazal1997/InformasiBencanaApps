@@ -1,13 +1,11 @@
 package com.informasi.bencana.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -15,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.informasi.bencana.R;
 import com.informasi.bencana.adapter.GridViewAdapter;
 import com.informasi.bencana.app.DashboardActivity;
+import com.informasi.bencana.app.DisasterActivity;
 import com.informasi.bencana.app.NeedAssesmentActivity;
 import com.informasi.bencana.app.PatientActivity;
 import com.informasi.bencana.app.PatientCollabActivity;
@@ -41,7 +40,8 @@ public class HomeFragment extends Fragment {
             R.drawable.collaboration,
             R.drawable.report,
 //            R.drawable.grafic,
-            R.drawable.accessment
+            R.drawable.accessment,
+            R.drawable.process,
     };
 
     private String title[] = {
@@ -51,7 +51,8 @@ public class HomeFragment extends Fragment {
             "Kolaborasi",
             "Laporan",
 //            "Grafik",
-            "Assesment Kebutuhan"
+            "Assesment Kebutuhan",
+            "Saat Bencana"
     };
 
     public HomeFragment() {
@@ -115,6 +116,9 @@ public class HomeFragment extends Fragment {
                         break;
                     case 5:
                         parent.functionHelper.startIntent(NeedAssesmentActivity.class, false, false, null);
+                        break;
+                    case 6:
+                        parent.functionHelper.startIntent(DisasterActivity.class, false, false, null);
                         break;
                     default: break;
                 }
