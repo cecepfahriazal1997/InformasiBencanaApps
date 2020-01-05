@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class DisasterActivity extends MasterActivity {
         listView            = findViewById(R.id.listView);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Download User Guide");
+        getSupportActionBar().setTitle("Disaster");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initial();
@@ -69,9 +70,11 @@ public class DisasterActivity extends MasterActivity {
                                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Intent i = new Intent(Intent.ACTION_VIEW);
-                                        i.setData(Uri.parse(listData.get(position).getImage()));
-                                        startActivity(i);
+                                        Map<String, String> hashMap = new HashMap<>();
+                                        hashMap.put("title", listData.get(position).getTitle());
+                                        hashMap.put("typeFile", "text");
+                                        hashMap.put("content", listData.get(position).getImage());
+                                        helper.startIntent(MultiFormatActivity.class, false, false, hashMap);
                                     }
                                 });
                             } else {

@@ -540,24 +540,10 @@ public class FunctionHelper {
         webView.setHapticFeedbackEnabled(false);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.setBackgroundColor(Color.TRANSPARENT);
         webView.setLayerType(WebView.LAYER_TYPE_NONE, null);
-        if (urlContent.contains("{") && urlContent.contains("}") || urlContent.contains("\\(")) {
-            webView.loadDataWithBaseURL("http://bar",
-                    "<head><style type='text/css'>body{color: " + textColor
-                            + "; font-size: 14px}</style></head><script type='text/javascript' "
-                            + "src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'>"
-                            + "</script><math>" + urlContent + "</math>",
-                    "text/html", "utf-8", "");
-        } else {
-            String text = "<html><head>"
-                    + "<style type='text/css'>body{color: " + textColor + ";font-size: 14px;}"
-                    + "</style></head>"
-                    + "<body>"
-                    + urlContent
-                    + "</body></html>";
-            webView.loadData(text, "text/html", null);
-        }
+        webView.loadData(urlContent, "text/html", "UTF-8");
     }
 
     // Fungsi ini digunakan untuk menampilkan konten doc, ppt, serta pdf pada webview
@@ -569,6 +555,8 @@ public class FunctionHelper {
         webView.setLayoutParams(lp);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
+        webView.clearCache(true);
+        webView.clearHistory();
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.setWebViewClient(new WebViewClient(){
             @Override

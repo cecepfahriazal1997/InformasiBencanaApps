@@ -34,9 +34,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:text="Pasien"
+                android:text="Title"
                 android:textColor="@color/colorPrimary"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:gravity="center"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
