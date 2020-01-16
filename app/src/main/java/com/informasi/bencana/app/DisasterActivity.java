@@ -59,6 +59,7 @@ public class DisasterActivity extends MasterActivity {
 
                                     model.setTitle(detail.getString("title"));
                                     model.setImage(detail.getString("image"));
+                                    model.setType(detail.getString("type"));
 
                                     listData.add(model);
                                 }
@@ -70,11 +71,16 @@ public class DisasterActivity extends MasterActivity {
                                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                     @Override
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        Map<String, String> hashMap = new HashMap<>();
-                                        hashMap.put("title", listData.get(position).getTitle());
-                                        hashMap.put("typeFile", "text");
-                                        hashMap.put("content", listData.get(position).getImage());
-                                        helper.startIntent(MultiFormatActivity.class, false, false, hashMap);
+                                        if (position == 2) {
+                                            helper.startIntent(KlasifikasiDisasterActivity.class, false, false, hashMap);
+                                        } else {
+                                            Map<String, String> hashMap = new HashMap<>();
+                                            hashMap.put("title", listData.get(position).getTitle());
+                                            hashMap.put("typeFile", "text");
+                                            hashMap.put("content", listData.get(position).getImage());
+                                            hashMap.put("loadType", listData.get(position).getType());
+                                            helper.startIntent(MultiFormatActivity.class, false, false, hashMap);
+                                        }
                                     }
                                 });
                             } else {

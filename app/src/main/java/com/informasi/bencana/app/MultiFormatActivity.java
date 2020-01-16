@@ -19,7 +19,7 @@ import com.informasi.bencana.R;
 public class MultiFormatActivity extends MasterActivity {
     private Toolbar toolbar;
     private WebView webView;
-    private String typeFile, content;
+    private String typeFile, content, loadType;
     private RelativeLayout contentLayout;
     private FrameLayout notifBar;
     private FrameLayout emptyState;
@@ -51,6 +51,7 @@ public class MultiFormatActivity extends MasterActivity {
             helper.setupProgressDialog(pDialog, "Loading ...");
             typeFile            = getIntent().getStringExtra("typeFile");
             content             = getIntent().getStringExtra("content");
+            loadType            = getIntent().getStringExtra("loadType");
 
             if (typeFile.equalsIgnoreCase("doc") ||
                     typeFile.equalsIgnoreCase("embed")) {
@@ -72,7 +73,7 @@ public class MultiFormatActivity extends MasterActivity {
     private void formatText(String content) {
         contentLayout.setPadding(32, 32, 32, 32);
         webView.setVisibility(View.VISIBLE);
-        helper.formatIsText(webView, content, "#000");
+        helper.formatIsText(webView, content, loadType);
     }
 
     @Override

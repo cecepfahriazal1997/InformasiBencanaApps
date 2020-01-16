@@ -521,7 +521,7 @@ public class FunctionHelper {
     }
 
     // Fungsi ini digunakan untuk setup webview yang memiliki konten text
-    public void formatIsText(final WebView webView, final String urlContent, final String textColor)
+    public void formatIsText(final WebView webView, final String urlContent, final String type)
     {
         webView.clearCache(true);
         webView.clearHistory();
@@ -543,7 +543,11 @@ public class FunctionHelper {
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.setBackgroundColor(Color.TRANSPARENT);
         webView.setLayerType(WebView.LAYER_TYPE_NONE, null);
-        webView.loadData(urlContent, "text/html", "UTF-8");
+
+        if (type.equals("url"))
+            webView.loadUrl(urlContent);
+        else
+            webView.loadData(urlContent, "text/html", "UTF-8");
     }
 
     // Fungsi ini digunakan untuk menampilkan konten doc, ppt, serta pdf pada webview

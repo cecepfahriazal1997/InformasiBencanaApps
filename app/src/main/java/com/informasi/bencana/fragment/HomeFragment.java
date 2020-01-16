@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
             R.drawable.report,
 //            R.drawable.grafic,
             R.drawable.accessment,
-            R.drawable.question,
+            R.drawable.guide,
     };
 
     private String title[] = {
@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
             "Laporan",
 //            "Grafik",
             "Asesmen Kebutuhan",
-            "Informasi"
+            "Panduan Saat Bencana"
     };
 
     public HomeFragment() {
