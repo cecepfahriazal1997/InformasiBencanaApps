@@ -47,7 +47,7 @@ public class KlasifikasiDisasterAdapter extends ArrayAdapter<String> {
         if (!this.data.get(position).isEmpty()) {
             apiService.getImageOnlineImageView(this.data.get(position), holder.imageView);
         }
-        holder.imageView.getLayoutParams().height = 400;
+        holder.imageView.getLayoutParams().height = 500;
         holder.imageView.requestLayout();
         return row;
     }

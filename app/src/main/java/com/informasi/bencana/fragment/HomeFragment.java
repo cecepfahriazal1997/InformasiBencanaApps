@@ -45,14 +45,14 @@ public class HomeFragment extends Fragment {
     };
 
     private String title[] = {
-            "Pasien",
-            "Perkembangan",
-            "Monitor",
-            "Kolaborasi",
-            "Laporan",
+            "Pasien\n",
+            "Perkembangan\n",
+            "Monitor\n",
+            "Kolaborasi\n",
+            "Laporan\n",
 //            "Grafik",
-            "Asesmen Kebutuhan",
-            "Panduan Saat Bencana"
+            "Asesmen\nKebutuhan",
+            "Panduan\nSaat Bencana"
     };
 
     public HomeFragment() {

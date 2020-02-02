@@ -28,12 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
-            android:src="@mipmap/paten_one" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@mipmap/paten_two" />
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/hak_paten" />
     </LinearLayout>
 </ScrollView>

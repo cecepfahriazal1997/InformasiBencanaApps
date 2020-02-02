@@ -12,14 +12,12 @@
         android:foreground="?attr/selectableItemBackground"
         card_view:cardBackgroundColor="@android:color/white"
         card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="8dp"
+        card_view:cardElevation="1dp"
         card_view:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/country"
@@ -27,31 +25,41 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sfprodisplay_regular"
                 android:text="Indonesia"
-                android:textColor="@color/colorGrayDark"
-                android:textSize="16dp"
-                android:gravity="center"
-                android:layout_gravity="center"/>
+                android:textColor="@color/colorBlack"
+                android:textSize="18dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/number"
+                android:layout_margin="16dp"/>
 
-            <TextView
-                android:id="@+id/total"
+            <LinearLayout
+                android:id="@+id/number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/sfprodisplay_bold"
-                android:text="63"
-                android:textColor="@color/colorPrimary"
-                android:textSize="48dp"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
                 android:gravity="center"
-                android:layout_gravity="center"/>
+                android:background="@color/colorPrimary"
+                android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/sfprodisplay_medium"
-                android:text="Orang"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16dp"
-                android:gravity="right"
-                android:layout_gravity="right"/>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprodisplay_bold"
+                    android:text="63"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="48dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprodisplay_medium"
+                    android:text="Orang"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16dp"/>
+            </LinearLayout>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

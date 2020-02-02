@@ -12,7 +12,7 @@
         android:foreground="?attr/selectableItemBackground"
         card_view:cardBackgroundColor="@android:color/white"
         card_view:cardCornerRadius="8dp"
-        card_view:cardElevation="4dp"
+        card_view:cardElevation="1dp"
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -20,19 +20,19 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="82dp"
-                android:layout_height="82dp"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
                 android:src="@drawable/logo_blue" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/sfprodisplay_regular"
                 android:text="Title"
                 android:textColor="@color/colorPrimary"
