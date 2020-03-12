@@ -1,26 +1,25 @@
 package com.informasi.bencana.app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.informasi.bencana.R;
 import com.informasi.bencana.adapter.KlasifikasiDisasterAdapter;
-import com.informasi.bencana.model.DisasterModel;
-import com.informasi.bencana.other.ApiService;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class KlasifikasiDisasterActivity extends MasterActivity {
@@ -28,6 +27,7 @@ public class KlasifikasiDisasterActivity extends MasterActivity {
     private KlasifikasiDisasterAdapter adapter;
     private Toolbar toolbar;
     private ArrayList<String> listPhotos = new ArrayList<>();
+    private TextView reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class KlasifikasiDisasterActivity extends MasterActivity {
         setContentView(R.layout.activity_klasifikasi_disaster);
         toolbar             = findViewById(R.id.toolbar);
         gridView            = findViewById(R.id.gridView);
+        reference           = findViewById(R.id.reference);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Klasifikasi Disaster");
@@ -44,6 +45,20 @@ public class KlasifikasiDisasterActivity extends MasterActivity {
     }
 
     private void initial() {
+        String url                  = reference.getText().toString();
+        SpannableString content     = new SpannableString(reference.getText().toString() + ", 2019-12-14, 21.45");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        reference.setText(content);
+        reference.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPrimaryDark));
+        reference.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+
         listPhotos.clear();
         listPhotos.add("http://atp-sb-medis.com/image/menu-1.png");
         listPhotos.add("http://atp-sb-medis.com/image/menu-2.png");

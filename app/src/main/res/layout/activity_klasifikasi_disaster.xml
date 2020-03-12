@@ -44,6 +44,28 @@
             android:verticalSpacing="8dp"
             android:visibility="visible" />
 
+        <LinearLayout
+            android:layout_below="@+id/gridView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Sumber : "/>
+
+            <TextView
+                android:id="@+id/reference"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="https://www.slideshare.net/antogesek/bencana-dan-triage"/>
+        </LinearLayout>
+
         <FrameLayout
             android:id="@+id/emptyState"
             android:layout_width="match_parent"

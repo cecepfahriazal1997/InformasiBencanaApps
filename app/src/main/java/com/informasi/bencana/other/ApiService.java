@@ -15,8 +15,13 @@ import com.koushikdutta.ion.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -32,11 +37,29 @@ public class ApiService {
 
         Ion.getDefault(activity).getConscryptMiddleware().enable(false);
         Ion.getDefault(activity).configure().setLogging("LOG GET API", Log.DEBUG);
+        configApiService();
     }
 
     // Fungsi ini digunakan untuk mengambil data hashmap dari reponse API
     public interface hashMapListener {
         String getHashMap(Map<String, String> hashMap);
+    }
+
+    private void configApiService() {
+        Ion.getDefault(activity).getConscryptMiddleware().enable(false);
+        Ion.getDefault(activity).configure().setLogging("LOG GET API", Log.DEBUG);
+        Ion.getDefault(activity).getHttpClient().getSSLSocketMiddleware().setTrustManagers(new TrustManager[] {new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(final X509Certificate[] chain, final String authType) throws CertificateException {}
+
+            @Override
+            public void checkServerTrusted(final X509Certificate[] chain, final String authType) throws CertificateException {}
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        }});
     }
 
     public void getImageOnlineImageView(String url, final ImageView imageView)

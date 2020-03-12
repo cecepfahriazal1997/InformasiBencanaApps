@@ -18,7 +18,6 @@ import com.informasi.bencana.model.PatientCollabModel;
 import com.informasi.bencana.other.ApiService;
 import com.informasi.bencana.other.FunctionHelper;
 
-import java.net.URI;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;

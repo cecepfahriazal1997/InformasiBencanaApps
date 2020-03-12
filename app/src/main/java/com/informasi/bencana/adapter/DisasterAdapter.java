@@ -6,18 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.informasi.bencana.R;
-import com.informasi.bencana.app.MultiFormatActivity;
 import com.informasi.bencana.model.DisasterModel;
 import com.informasi.bencana.other.FunctionHelper;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Cecep Rokani on 3/18/2019.

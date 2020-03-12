@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import androidx.fragment.app.Fragment;
 
@@ -23,6 +24,11 @@ public class WalkthroughTwoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_walkthrough_two, container, false);
 
+        WebView webView = v.findViewById(R.id.webView);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.loadDataWithBaseURL("file:///android_asset/", "<img src='hak_paten.jpg' />",
+                "text/html", "utf-8", null);
         return v;
     }
 }
