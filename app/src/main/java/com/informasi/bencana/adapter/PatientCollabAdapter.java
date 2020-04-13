@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,8 @@ public class PatientCollabAdapter extends BaseAdapter {
             holder.Age          = (TextView) convertView.findViewById(R.id.age);
             holder.Detail       = (FancyButton) convertView.findViewById(R.id.btnDetail);
             holder.Whatsapp     = (ImageView) convertView.findViewById(R.id.whatsapp);
+            holder.Skype        = (ImageView) convertView.findViewById(R.id.skype);
+            holder.Zoom         = (ImageView) convertView.findViewById(R.id.zoom);
 
             convertView.setTag(holder);
         } else {
@@ -93,6 +96,7 @@ public class PatientCollabAdapter extends BaseAdapter {
         holder.Nurse.setText("Perawat : " + item.getNurse());
         holder.Gender.setText("Gender : " + (item.getGender().equals("0") ? "Laki-laki" : "Perempuan"));
         holder.Age.setText("Age : " + item.getAge() + " tahun");
+        holder.Zoom.setVisibility(View.VISIBLE);
 
         holder.Detail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +112,45 @@ public class PatientCollabAdapter extends BaseAdapter {
             }
         });
 
-        if (!item.getPhoneDoctor().isEmpty()) {
+        holder.Zoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    String url = "https://zoom.us/join";
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    context.startActivity(i);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        if (!item.getEmailDoctor().isEmpty() && !item.getEmailDoctor().equals("null")) {
+            holder.Skype.setVisibility(View.VISIBLE);
+            holder.Skype.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Intent intent = context.getPackageManager()
+                                .getLaunchIntentForPackage("com.skype.raider");
+                        if (intent == null) {
+                            intent = new Intent(Intent.ACTION_VIEW);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.setData(Uri.parse("market://details?id=" + "com.skype.raider"));
+                            context.startActivity(intent);
+                        } else {
+                            Intent sky = new Intent("android.intent.action.VIEW");
+                            sky.setData(Uri.parse("skype:" + item.getEmailDoctor()));
+                            context.startActivity(sky);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+        if (!item.getPhoneDoctor().isEmpty() && !item.getPhoneDoctor().equals("null")) {
             holder.Whatsapp.setVisibility(View.VISIBLE);
             holder.Whatsapp.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -134,7 +176,7 @@ public class PatientCollabAdapter extends BaseAdapter {
                 }
             });
         } else {
-            holder.Whatsapp.setVisibility(View.INVISIBLE);
+            holder.Whatsapp.setVisibility(View.GONE);
         }
 
         return convertView;
@@ -143,7 +185,7 @@ public class PatientCollabAdapter extends BaseAdapter {
     static class ViewHolder {
         TextView Id, Name, Doctor, Nurse, Gender, Age;
         FancyButton Detail;
-        ImageView Whatsapp;
+        ImageView Whatsapp, Skype, Zoom;
     }
 
     public List<PatientCollabModel> getData() {

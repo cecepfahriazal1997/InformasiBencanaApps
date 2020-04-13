@@ -444,6 +444,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/sfprodisplay_medium"
+                android:text="Email Dokter"
+                android:textColor="@color/colorGray"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/emailDoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_outline_white"
+                android:fontFamily="@font/sfprodisplay_regular"
+                android:hint="Masukan Email Dokter"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/sfprodisplay_medium"
                 android:text="Nama Perawat"
                 android:textColor="@color/colorGray"
                 android:textSize="14dp" />

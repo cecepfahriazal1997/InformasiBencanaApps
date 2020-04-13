@@ -25,7 +25,7 @@ public class FormPatientActivity extends MasterActivity {
     private CardView cardLocation, cardGender;
     private TextView location, gender;
     private EditText date, id, name, age, weaknessCondition, threadCondition, remark, nameDoctor,
-                    nameNurse, nameSupport, phoneDoctor;
+                    nameNurse, nameSupport, phoneDoctor, emailDoctor;
     private FancyButton btnSubmit;
     private Map<String, String> param = new HashMap<>();
     private String locationId, genderCode = "0";
@@ -55,6 +55,7 @@ public class FormPatientActivity extends MasterActivity {
         nameSupport         = (EditText) findViewById(R.id.nameSupport);
         btnSubmit           = (FancyButton) findViewById(R.id.btnSubmit);
         datePicker          = (IconicsImageView) findViewById(R.id.datePicker);
+        emailDoctor         = (EditText) findViewById(R.id.emailDoctor);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("" + getIntent().getStringExtra("title"));
@@ -86,6 +87,7 @@ public class FormPatientActivity extends MasterActivity {
             nameSupport.setText("" + getIntent().getStringExtra("supportName"));
             remark.setText("" + getIntent().getStringExtra("remark"));
             phoneDoctor.setText("" + getIntent().getStringExtra("phoneDoctor"));
+            emailDoctor.setText("" + getIntent().getStringExtra("emailDoctor"));
 
             locationId          = getIntent().getStringExtra("location");
             genderCode          = getIntent().getStringExtra("gender");
@@ -144,6 +146,8 @@ public class FormPatientActivity extends MasterActivity {
                     nameSupport.setError("Please enter support name !");
                 } else if (phoneDoctor.getText().toString().isEmpty()) {
                     phoneDoctor.setError("Please enter number phone doctor !");
+                } else if (emailDoctor.getText().toString().isEmpty()) {
+                    emailDoctor.setError("Please enter email doctor !");
                 } else {
                     if (type.equals("add")) {
                         Map<String, String> param = new HashMap<>();
@@ -160,6 +164,7 @@ public class FormPatientActivity extends MasterActivity {
                         param.put("supportName", nameSupport.getText().toString());
                         param.put("remark", remark.getText().toString());
                         param.put("phoneDoctor", phoneDoctor.getText().toString());
+                        param.put("emailDoctor", emailDoctor.getText().toString());
                         param.put("userInput", helper.getSession("name"));
                         clientApiService.insertPatient(insertPatient, param, new ApiService.hashMapListener() {
                             @Override
@@ -188,6 +193,7 @@ public class FormPatientActivity extends MasterActivity {
                         param.put("supportName", nameSupport.getText().toString());
                         param.put("remark", remark.getText().toString());
                         param.put("phoneDoctor", phoneDoctor.getText().toString());
+                        param.put("emailDoctor", emailDoctor.getText().toString());
                         param.put("userInput", helper.getSession("name"));
                         clientApiService.updatePatient(updatePatient, param, new ApiService.hashMapListener() {
                             @Override

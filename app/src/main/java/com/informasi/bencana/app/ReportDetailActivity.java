@@ -185,13 +185,13 @@ public class ReportDetailActivity extends MasterActivity {
                             status.setText("Sehat");
                             values2.set(i, new BarEntry((i + 1), 3));
                         } else if (detail.getString("status").equalsIgnoreCase("DA")) {
-                            status.setBackground(ContextCompat.getDrawable(ReportDetailActivity.this, R.drawable.border_fill_red));
-                            status.setText("Meninggal");
-                            values2.set(i, new BarEntry((i + 1), 1));
-                        } else {
                             status.setBackground(ContextCompat.getDrawable(ReportDetailActivity.this, R.drawable.border_fill_yelow));
                             status.setText("Cacat");
                             values2.set(i, new BarEntry((i + 1), 2));
+                        } else {
+                            status.setBackground(ContextCompat.getDrawable(ReportDetailActivity.this, R.drawable.border_fill_red));
+                            status.setText("Meninggal");
+                            values2.set(i, new BarEntry((i + 1), 1));
                         }
                         listStatus.addView(view);
                     }
@@ -223,9 +223,9 @@ public class ReportDetailActivity extends MasterActivity {
         set1 = new BarDataSet(values, "Bulan");
         set1.setDrawIcons(false);
                 set1.setColors(new int[]{
-                ContextCompat.getColor(this, R.color.colorRed),
+                ContextCompat.getColor(this, R.color.colorPrimary),
                 ContextCompat.getColor(this, R.color.colorYellow),
-                ContextCompat.getColor(this, R.color.colorPrimary)});
+                ContextCompat.getColor(this, R.color.colorRed)});
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
 

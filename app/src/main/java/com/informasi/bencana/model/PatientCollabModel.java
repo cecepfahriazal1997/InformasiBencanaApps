@@ -2,7 +2,7 @@ package com.informasi.bencana.model;
 
 public class PatientCollabModel {
     private String id, name, doctor, nurse, support, collabId, gender, age, date, year, month, week,
-            day, problem, recommend, collaborativeC, collaborativeD, feedback, detailId, phoneDoctor;
+            day, problem, recommend, collaborativeC, collaborativeD, feedback, detailId, phoneDoctor, emailDoctor;
 
     public PatientCollabModel() {
     }
@@ -165,5 +165,13 @@ public class PatientCollabModel {
 
     public void setPhoneDoctor(String phoneDoctor) {
         this.phoneDoctor = phoneDoctor;
+    }
+
+    public String getEmailDoctor() {
+        return emailDoctor;
+    }
+
+    public void setEmailDoctor(String emailDoctor) {
+        this.emailDoctor = emailDoctor;
     }
 }
