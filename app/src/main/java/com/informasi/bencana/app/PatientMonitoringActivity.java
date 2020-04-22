@@ -5,8 +5,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -16,6 +20,7 @@ import com.informasi.bencana.model.PatientMonitoringModel;
 import com.informasi.bencana.other.ApiService;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -30,6 +35,8 @@ public class PatientMonitoringActivity extends MasterActivity {
     private Toolbar toolbar;
     private EditText keyword;
     private boolean onPaused = false;
+    private Spinner year;
+    private List<String> years = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,7 @@ public class PatientMonitoringActivity extends MasterActivity {
         toolbar             = findViewById(R.id.toolbar);
         listView            = findViewById(R.id.listView);
         keyword             = findViewById(R.id.keyword);
+        year                = findViewById(R.id.year);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Patient");
@@ -73,6 +81,10 @@ public class PatientMonitoringActivity extends MasterActivity {
                                 JSONObject result   = new JSONObject(hashMap.get("result"));
                                 if (result.getString("status").equals("1")) {
                                     JSONArray list      = result.getJSONArray("data");
+                                    JSONArray listYear  = result.getJSONArray("years");
+
+                                    initYear(listYear);
+
                                     for (int i = 0; i < list.length(); i++) {
                                         JSONObject detail       = list.getJSONObject(i);
                                         PatientMonitoringModel model = new PatientMonitoringModel();
@@ -84,6 +96,7 @@ public class PatientMonitoringActivity extends MasterActivity {
                                         model.setDoctor(detail.getString("DoctorNm"));
                                         model.setNurse(detail.getString("NurseNm"));
                                         model.setDate(detail.getString("Time"));
+                                        model.setYear(detail.getString("Year"));
 
                                         listData.add(model);
                                     }
@@ -102,15 +115,29 @@ public class PatientMonitoringActivity extends MasterActivity {
 
     private void search(String keyword) {
         try {
+            String tempYear = years.get(year.getSelectedItemPosition());
             searchData.clear();
             for (int i = 0; i < listData.size(); i++) {
-                if (keyword != null) {
-                    if (listData.get(i).getName().toLowerCase().contains(keyword.toLowerCase()) ||
-                        listData.get(i).getDoctor().toLowerCase().contains(keyword.toLowerCase())) {
-                        searchData.add(listData.get(i));
+                if (tempYear != null && !tempYear.equals("Lihat Semua")) {
+                    if (listData.get(i).getYear().equals(tempYear)) {
+                        if (keyword != null) {
+                            if (listData.get(i).getName().toLowerCase().contains(keyword.toLowerCase()) ||
+                                    listData.get(i).getDoctor().toLowerCase().contains(keyword.toLowerCase())) {
+                                searchData.add(listData.get(i));
+                            }
+                        } else {
+                            searchData.add(listData.get(i));
+                        }
                     }
                 } else {
-                    searchData.add(listData.get(i));
+                    if (keyword != null) {
+                        if (listData.get(i).getName().toLowerCase().contains(keyword.toLowerCase()) ||
+                                listData.get(i).getDoctor().toLowerCase().contains(keyword.toLowerCase())) {
+                            searchData.add(listData.get(i));
+                        }
+                    } else {
+                        searchData.add(listData.get(i));
+                    }
                 }
             }
             adapter         = new PatientMonitoringAdapter(PatientMonitoringActivity.this, searchData, helper,
@@ -121,6 +148,34 @@ public class PatientMonitoringActivity extends MasterActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void initYear(JSONArray data) {
+        years.clear();
+        years.add("Lihat Semua");
+
+        for (int i = 0; i < data.length(); i++) {
+            try {
+                years.add(data.getString(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, years);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        year.setAdapter(dataAdapter);
+        year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                search(keyword.getText().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override

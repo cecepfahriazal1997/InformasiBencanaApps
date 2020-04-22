@@ -159,7 +159,7 @@ public class AccountFragment extends Fragment {
             @Override
             public String getHashMap(Map<String, String> hashMap) {
                 parent.functionHelper.showToast(hashMap.get("message"), 0);
-                if (hashMap.get("status").equals("1"))
+                if (hashMap.get("success").equals("1"))
                     builder.dismiss();
                 return null;
             }

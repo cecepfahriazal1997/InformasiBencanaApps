@@ -45,7 +45,7 @@ public class TotalPatientAdapter extends ArrayAdapter<TotalPatientModel> {
 
         TotalPatientModel item = (TotalPatientModel) this.data.get(position);
         holder.country.setText(item.getCountry());
-        holder.total.setText(item.getTotal());
+        holder.total.setText(item.getTotal() + " Orang");
         return row;
     }
 }

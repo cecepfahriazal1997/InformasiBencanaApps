@@ -2,7 +2,7 @@ package com.informasi.bencana.model;
 
 public class PatientModel {
     private String id, name, doctor, nurse, support, gender, age, date, number, location, phoneDoctor,
-            weaknessCondition, threadCondition, remark, stepOne, stepTwo, stepThree, locationLabel, emailDoctor;
+            weaknessCondition, threadCondition, remark, stepOne, stepTwo, stepThree, locationLabel, emailDoctor, year;
 
     public PatientModel() {
     }
@@ -157,5 +157,13 @@ public class PatientModel {
 
     public void setEmailDoctor(String emailDoctor) {
         this.emailDoctor = emailDoctor;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }

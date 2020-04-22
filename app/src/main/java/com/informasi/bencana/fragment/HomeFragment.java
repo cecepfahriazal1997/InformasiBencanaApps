@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
     private String title[] = {
             "Pasien\n",
             "Perkembangan\n",
-            "Monitor\n",
+            "Monitoring\n",
             "Kolaborasi\n",
             "Laporan\n",
 //            "Grafik",

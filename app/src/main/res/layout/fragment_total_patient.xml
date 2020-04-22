@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:horizontalSpacing="1dp"
+        android:background="@color/colorWhite"
         android:listSelector="@android:color/transparent"
         android:numColumns="1"
         android:padding="10dp"

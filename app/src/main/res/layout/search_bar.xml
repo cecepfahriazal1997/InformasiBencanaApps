@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="0.3"
+        android:background="@drawable/round_white">
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/year"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:spinnerMode="dialog" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="0.7"
+        android:layout_height="40dp"
+        android:background="@drawable/round_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.mikepenz.iconics.view.IconicsImageView
+            android:id="@+id/icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="16dp"
+            app:iiv_color="@color/colorGray"
+            app:iiv_icon="gmd-search" />
+
+        <EditText
+            android:id="@+id/keyword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Search data by name patient or name doctor ..."
+            android:textColorHint="@color/colorGray"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:paddingHorizontal="8dp"
+            android:background="@null"
+            android:textColor="@color/colorBlack"
+            android:textSize="14dp" />
+    </LinearLayout>
+</LinearLayout>

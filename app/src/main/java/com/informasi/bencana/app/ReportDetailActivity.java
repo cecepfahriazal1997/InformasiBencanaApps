@@ -165,7 +165,7 @@ public class ReportDetailActivity extends MasterActivity {
                     if (detail.getString("year").equals(year)) {
                         if (detail.getString("progress").equalsIgnoreCase("I")) {
                             status.setBackground(ContextCompat.getDrawable(ReportDetailActivity.this, R.drawable.border_fill_primary));
-                            status.setText("Meningkat");
+                            status.setText("Membaik");
                             values.set(i, new BarEntry((i + 1), 3));
                         } else if (detail.getString("progress").equalsIgnoreCase("S")) {
                             status.setBackground(ContextCompat.getDrawable(ReportDetailActivity.this, R.drawable.border_fill_yelow));
@@ -220,7 +220,7 @@ public class ReportDetailActivity extends MasterActivity {
 
     private void setDataChart(BarChart chart, ArrayList<BarEntry> values) {
         BarDataSet set1;
-        set1 = new BarDataSet(values, "Bulan");
+        set1 = new BarDataSet(values, "Minggu Ke");
         set1.setDrawIcons(false);
                 set1.setColors(new int[]{
                 ContextCompat.getColor(this, R.color.colorPrimary),

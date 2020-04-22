@@ -57,6 +57,8 @@ public class DashboardActivity extends MasterActivity {
         tabIconColor            = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary);
         tabIconColor2           = ContextCompat.getColor(getApplicationContext(), R.color.colorGray);
 
+        functionHelper.setupProgressDialog(pDialog, "Please wait ...");
+
         setupViewPager(viewPager);
         functionHelper.hideKeyboard();
 

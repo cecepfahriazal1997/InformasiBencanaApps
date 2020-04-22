@@ -43,12 +43,14 @@ public class DataMasterActivity extends MasterActivity {
 
     private String typeRecord[] = {
             "Gagal",
-            "Bingung"
+            "Bingung",
+            "Dan Lain-lain"
     };
 
     private String symptom[] = {
             "Sakit",
-            "Mengantuk"
+            "Mengantuk",
+            "Dan Lain-lain"
     };
 
     private String progresId[] = {
