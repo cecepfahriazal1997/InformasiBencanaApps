@@ -10,6 +10,8 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.exoplayer2.Player;
+import com.google.android.exoplayer2.ui.PlayerView;
 import com.informasi.bencana.R;
 
 /**
@@ -19,10 +21,12 @@ import com.informasi.bencana.R;
 public class MultiFormatActivity extends MasterActivity {
     private Toolbar toolbar;
     private WebView webView;
+    private PlayerView video;
     private String typeFile, content, loadType;
     private RelativeLayout contentLayout;
     private FrameLayout notifBar;
     private FrameLayout emptyState;
+    private boolean isPause = false, canDestroy = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class MultiFormatActivity extends MasterActivity {
             contentLayout   = (RelativeLayout) findViewById(R.id.layoutData);
             notifBar        = (FrameLayout) findViewById(R.id.notifBar);
             emptyState      = (FrameLayout) findViewById(R.id.emptyState);
+            video           = (PlayerView) findViewById(R.id.video);
 
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle("" + getIntent().getStringExtra("title"));
@@ -55,7 +60,9 @@ public class MultiFormatActivity extends MasterActivity {
 
             if (typeFile.equalsIgnoreCase("doc") ||
                     typeFile.equalsIgnoreCase("embed")) {
-                formatIsEmbed(content);
+                formatIsEmbed(urlGoogleDoc + content);
+            } else if (typeFile.equalsIgnoreCase("video")) {
+                formatVideo(content);
             } else {
                 formatText(content);
             }
@@ -73,7 +80,14 @@ public class MultiFormatActivity extends MasterActivity {
     private void formatText(String content) {
         contentLayout.setPadding(32, 32, 32, 32);
         webView.setVisibility(View.VISIBLE);
-        helper.formatIsText(webView, content, loadType);
+        helper.formatIsText(pDialog, webView, content, loadType);
+    }
+
+    private void formatVideo(String content)
+    {
+        video.setVisibility(View.VISIBLE);
+        webView.setVisibility(View.GONE);
+        helper.formatIsVideo(video, content);
     }
 
     @Override
@@ -92,5 +106,64 @@ public class MultiFormatActivity extends MasterActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+//    @Override
+//    public void onBackPressed() {
+//        if (typeFile.equalsIgnoreCase("video") && video.getPlayer().isPlaying()) {
+//            video.getPlayer().release();
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (canDestroy)
+            releaseVideoPlayer();
+    }
+
+    private void releaseVideoPlayer() {
+        if (typeFile != null) {
+            if (typeFile.equalsIgnoreCase("video")) {
+                if (video.getPlayer() != null && video.getPlayer().getPlaybackState() == Player.STATE_READY
+                        && video.getPlayer().getPlayWhenReady())
+                    video.getPlayer().release();
+            }
+        }
+    }
+
+    private void playVideo(boolean isPlay) {
+        if (typeFile.equalsIgnoreCase("video")) {
+            video.getPlayer().setPlayWhenReady(isPlay);
+            video.getPlayer().getPlaybackState();
+        }
+    }
+
+    public void onPause() {
+        super.onPause();
+        playVideo(false);
+        isPause = true;
+    }
+
+    public void onResume() {
+        super.onResume();
+        try {
+            if (isPause) {
+                playVideo(true);
+                canDestroy  = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (canDestroy)
+            releaseVideoPlayer();
     }
 }

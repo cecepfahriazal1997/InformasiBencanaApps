@@ -1,16 +1,16 @@
 package com.informasi.bencana.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.informasi.bencana.R;
@@ -79,9 +79,7 @@ public class PatientCollabAdapter extends BaseAdapter {
             holder.Gender       = (TextView) convertView.findViewById(R.id.gender);
             holder.Age          = (TextView) convertView.findViewById(R.id.age);
             holder.Detail       = (FancyButton) convertView.findViewById(R.id.btnDetail);
-            holder.Whatsapp     = (ImageView) convertView.findViewById(R.id.whatsapp);
-            holder.Skype        = (ImageView) convertView.findViewById(R.id.skype);
-            holder.Zoom         = (ImageView) convertView.findViewById(R.id.zoom);
+            holder.Communicate  = convertView.findViewById(R.id.btnCommunicate);
 
             convertView.setTag(holder);
         } else {
@@ -96,7 +94,6 @@ public class PatientCollabAdapter extends BaseAdapter {
         holder.Nurse.setText("Perawat : " + item.getNurse());
         holder.Gender.setText("Gender : " + (item.getGender().equals("0") ? "Laki-laki" : "Perempuan"));
         holder.Age.setText("Age : " + item.getAge() + " tahun");
-        holder.Zoom.setVisibility(View.VISIBLE);
 
         holder.Detail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,57 +109,51 @@ public class PatientCollabAdapter extends BaseAdapter {
             }
         });
 
-        holder.Zoom.setOnClickListener(new View.OnClickListener() {
+        holder.Communicate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    String url = "https://zoom.us/join";
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    context.startActivity(i);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                showActionsDialog(item);
             }
         });
 
-        if (!item.getEmailDoctor().isEmpty() && !item.getEmailDoctor().equals("null")) {
-            holder.Skype.setVisibility(View.VISIBLE);
-            holder.Skype.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        Intent intent = context.getPackageManager()
-                                .getLaunchIntentForPackage("com.skype.raider");
-                        if (intent == null) {
-                            intent = new Intent(Intent.ACTION_VIEW);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.setData(Uri.parse("market://details?id=" + "com.skype.raider"));
-                            context.startActivity(intent);
-                        } else {
-                            Intent sky = new Intent("android.intent.action.VIEW");
-                            sky.setData(Uri.parse("skype:" + item.getEmailDoctor()));
-                            context.startActivity(sky);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-        if (!item.getPhoneDoctor().isEmpty() && !item.getPhoneDoctor().equals("null")) {
-            holder.Whatsapp.setVisibility(View.VISIBLE);
-            holder.Whatsapp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (helper.isPackageInstalled(context,"com.whatsapp")) {
+        return convertView;
+    }
+
+    static class ViewHolder {
+        TextView Id, Name, Doctor, Nurse, Gender, Age;
+        FancyButton Detail, Communicate;
+//        ImageView Whatsapp, Skype, Zoom;
+    }
+
+    public List<PatientCollabModel> getData() {
+        return items;
+    }
+
+
+    private void showActionsDialog(final PatientCollabModel item) {
+        CharSequence options[] = new CharSequence[]{"Zoom","Skype","Whatsapp"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Hubungi Dokter Melalui :");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                    Intent intent = context.getPackageManager()
+                            .getLaunchIntentForPackage("us.zoom.videomeetings");
+                    if (intent == null) {
+                        helper.showToast("Silahkan download Aplikasi Zoom untuk memulai video conference dengan Dokter " + item.getDoctor(), 1);
+                        intent = new Intent(Intent.ACTION_VIEW);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setData(Uri.parse("market://details?id=" + "us.zoom.videomeetings"));
+                        context.startActivity(intent);
+                    } else {
                         PackageManager packageManager = context.getPackageManager();
                         Intent i = new Intent(Intent.ACTION_VIEW);
 
                         try {
-                            String url = "https://api.whatsapp.com/send?phone="+ item.getPhoneDoctor()
-                                    +"&text=" + URLEncoder.encode("Hallo, Dokter " + item.getDoctor(), "UTF-8");
-                            i.setPackage("com.whatsapp");
+                            String url = "https://zoom.us/join";
+                            i.setPackage("us.zoom.videomeetings");
                             i.setData(Uri.parse(url));
                             if (i.resolveActivity(packageManager) != null) {
                                 context.startActivity(i);
@@ -170,25 +161,57 @@ public class PatientCollabAdapter extends BaseAdapter {
                         } catch (Exception e){
                             e.printStackTrace();
                         }
-                    } else {
-                        helper.popupDialog("Opps", "Silahkan download aplikasi Whatsapp terlebih dahulu !", false);
+                    }
+                } else if (which == 1) {
+                    if (!item.getEmailDoctor().isEmpty() && !item.getEmailDoctor().equals("null")) {
+                        try {
+                            Intent intent = context.getPackageManager()
+                                    .getLaunchIntentForPackage("com.skype.raider");
+                            if (intent == null) {
+                                helper.showToast("Silahkan download Aplikasi Skype untuk memulai video conference dengan Dokter " + item.getDoctor(), 1);
+                                intent = new Intent(Intent.ACTION_VIEW);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.setData(Uri.parse("market://details?id=" + "com.skype.raider"));
+                                context.startActivity(intent);
+                            } else {
+                                Intent sky = new Intent("android.intent.action.VIEW");
+                                sky.setData(Uri.parse("skype:" + item.getEmailDoctor()));
+                                context.startActivity(sky);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    if (!item.getPhoneDoctor().isEmpty() && !item.getPhoneDoctor().equals("null")) {
+                        Intent intent = context.getPackageManager()
+                                .getLaunchIntentForPackage("com.whatsapp");
+                        if (intent == null) {
+                            helper.showToast("Silahkan download Aplikasi Whatsapp untuk menghubungi Dokter " + item.getDoctor(), 1);
+                            intent = new Intent(Intent.ACTION_VIEW);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.setData(Uri.parse("market://details?id=" + "com.whatsapp"));
+                            context.startActivity(intent);
+                        } else {
+                            PackageManager packageManager = context.getPackageManager();
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+
+                            try {
+                                String url = "https://api.whatsapp.com/send?phone="+ item.getPhoneDoctor()
+                                        +"&text=" + URLEncoder.encode("Hallo, Dokter " + item.getDoctor(), "UTF-8");
+                                i.setPackage("com.whatsapp");
+                                i.setData(Uri.parse(url));
+                                if (i.resolveActivity(packageManager) != null) {
+                                    context.startActivity(i);
+                                }
+                            } catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }
-            });
-        } else {
-            holder.Whatsapp.setVisibility(View.GONE);
-        }
-
-        return convertView;
-    }
-
-    static class ViewHolder {
-        TextView Id, Name, Doctor, Nurse, Gender, Age;
-        FancyButton Detail;
-        ImageView Whatsapp, Skype, Zoom;
-    }
-
-    public List<PatientCollabModel> getData() {
-        return items;
+            }
+        });
+        builder.show();
     }
 }

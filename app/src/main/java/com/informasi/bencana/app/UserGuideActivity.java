@@ -33,7 +33,7 @@ public class UserGuideActivity extends MasterActivity {
         listView            = findViewById(R.id.listView);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Download User Guide");
+        getSupportActionBar().setTitle("User Guide");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initial();
@@ -55,7 +55,7 @@ public class UserGuideActivity extends MasterActivity {
                                     model.setTitle(detail.getString("title"));
                                     model.setDescription(detail.getString("description"));
                                     model.setType(detail.getString("type"));
-                                    model.setUrl(urlGoogleDoc + detail.getString("file"));
+                                    model.setUrl(detail.getString("file"));
 
                                     listData.add(model);
                                 }

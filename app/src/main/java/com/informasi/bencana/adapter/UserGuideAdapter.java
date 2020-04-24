@@ -54,6 +54,8 @@ public class UserGuideAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        UserGuideModel item = items.get(position);
+
         if(inflater == null)
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -64,13 +66,10 @@ public class UserGuideAdapter extends BaseAdapter {
             holder.Description  = (TextView) convertView.findViewById(R.id.description);
             holder.Images       = (ImageView) convertView.findViewById(R.id.image);
             holder.Download     = (Button) convertView.findViewById(R.id.download);
-
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
-        UserGuideModel item = items.get(position);
 
         holder.Title.setText(item.getTitle());
         holder.Description.setText(item.getDescription());
@@ -79,6 +78,8 @@ public class UserGuideAdapter extends BaseAdapter {
             holder.Images.setImageResource(R.drawable.file_pdf);
         else if (item.getType().matches("doc(.*)"))
             holder.Images.setImageResource(R.drawable.file_doc);
+        else if (item.getType().matches("video"))
+            holder.Images.setImageResource(R.drawable.file_video);
         else
             holder.Images.setImageResource(R.drawable.file);
 

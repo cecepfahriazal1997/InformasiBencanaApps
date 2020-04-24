@@ -132,6 +132,19 @@
                     android:visibility="gone"/>
 
                 <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/btnCommunicate"
+                    android:layout_width="32dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    fancy:fb_defaultColor="@color/colorAccent"
+                    fancy:fb_focusColor="@color/colorAccent"
+                    fancy:fb_fontIconResource="&#xf095;"
+                    fancy:fb_fontIconSize="24dp"
+                    fancy:fb_radius="4dp"
+                    fancy:fb_text=""
+                    fancy:fb_textSize="16dp" />
+
+                <mehdi.sakout.fancybuttons.FancyButton
                     android:id="@+id/btnDetail"
                     android:layout_width="32dp"
                     android:layout_height="32dp"

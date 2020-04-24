@@ -161,7 +161,7 @@
                         android:layout_toLeftOf="@+id/iconDetail"
                         android:layout_toRightOf="@+id/icon"
                         android:fontFamily="@font/sfprodisplay_regular"
-                        android:text="Download User Guide"
+                        android:text="User Guide"
                         android:textColor="@color/colorGrayDark"
                         android:textSize="16dp" />
 

@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -44,9 +45,22 @@ import android.widget.Toast;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.exoplayer2.ExoPlaybackException;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.Player;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.ProgressiveMediaSource;
+import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.upstream.DataSource;
+import com.google.android.exoplayer2.upstream.DataSpec;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.upstream.HttpDataSource;
+import com.google.android.exoplayer2.util.Util;
 import com.informasi.bencana.R;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -521,8 +535,9 @@ public class FunctionHelper {
     }
 
     // Fungsi ini digunakan untuk setup webview yang memiliki konten text
-    public void formatIsText(final WebView webView, final String urlContent, final String type)
+    public void formatIsText(final ProgressDialog pDialog, final WebView webView, final String urlContent, final String type)
     {
+        showProgressDialog(pDialog, true);
         webView.clearCache(true);
         webView.clearHistory();
         webView.setVerticalScrollBarEnabled(true);
@@ -543,11 +558,30 @@ public class FunctionHelper {
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.setBackgroundColor(Color.TRANSPARENT);
         webView.setLayerType(WebView.LAYER_TYPE_NONE, null);
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                // TODO Auto-generated method stub
+                view.loadUrl(url);
+                return true;
+            }
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                showProgressDialog(pDialog, false);
+                super.onReceivedSslError(view, handler, error);
+            }
 
-        if (type.equals("url"))
+            @Override
+            public void onPageFinished(final WebView view, final String url) {
+                showProgressDialog(pDialog, false);
+            }
+        });
+
+        if (type.equals("url")) {
             webView.loadUrl(urlContent);
-        else
+        } else {
             webView.loadData(urlContent, "text/html", "UTF-8");
+        }
     }
 
     // Fungsi ini digunakan untuk menampilkan konten doc, ppt, serta pdf pada webview
@@ -581,6 +615,40 @@ public class FunctionHelper {
             }
         });
         webView.loadUrl(url);
+    }
+
+    // Fungsi ini digunakan untuk mengsetup video player yang menampilkan video dari server
+    public void formatIsVideo(PlayerView video, String linkVideo){
+        SimpleExoPlayer player = ExoPlayerFactory.newSimpleInstance(activity);
+        video.setPlayer(player);
+        DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(activity,
+                Util.getUserAgent(activity, activity.getString(R.string.app_name)));
+        MediaSource videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(Uri.parse(linkVideo));
+        player.prepare(videoSource);
+        player.addListener(new Player.EventListener() {
+            @Override
+            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                if (playWhenReady && playbackState == Player.STATE_READY) {
+                } else if (playWhenReady) {
+                } else {
+                }
+            }
+
+            @Override
+            public void onPlayerError(ExoPlaybackException error) {
+                if (error.type == ExoPlaybackException.TYPE_SOURCE) {
+                    IOException cause = error.getSourceException();
+                    if (cause instanceof HttpDataSource.HttpDataSourceException) {
+                        HttpDataSource.HttpDataSourceException httpError = (HttpDataSource.HttpDataSourceException) cause;
+                        DataSpec requestDataSpec = httpError.dataSpec;
+                        if (httpError instanceof HttpDataSource.InvalidResponseCodeException) {
+                            Log.e("Error MPlayer", ((HttpDataSource.InvalidResponseCodeException) httpError).responseMessage);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     public String intToMonth(int month) {

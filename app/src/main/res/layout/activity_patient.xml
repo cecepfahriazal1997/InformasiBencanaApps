@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sfprodisplay_bold"
                 android:textColor="@color/colorGrayDark2"
+                android:textSize="14dp"
                 android:scrollbarSize="12dp"
                 android:text="Keterangan : "
                 android:layout_marginHorizontal="16dp"
@@ -92,27 +93,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorPrimary"
                 android:scrollbarSize="12dp"
-                android:text="Tambah History : Klik tombol icon pencil -> History"
-                android:background="@drawable/border_fill_yelow"
+                android:textSize="14dp"
+                android:text="1. Tambah History : Klik tombol icon pencil -> History"
                 android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sfprodisplay_medium"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14dp"
                 android:scrollbarSize="12dp"
-                android:text="Tambah Progress : Klik tombol icon pencil -> Progress"
-                android:background="@drawable/border_fill_yelow"
+                android:text="2. Tambah Progress : Klik tombol icon pencil -> Progress"
                 android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="4dp"/>
+                android:layout_marginHorizontal="16dp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
