@@ -264,7 +264,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_toRightOf="@+id/labelY"
                             android:gravity="center"
-                            android:text="Bulan"
+                            android:text="Minggu ke"
                             android:textSize="12dp" />
                     </RelativeLayout>
 
@@ -363,7 +363,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_toRightOf="@+id/labelY2"
                             android:gravity="center"
-                            android:text="Bulan"
+                            android:text="Minggu ke"
                             android:textSize="12dp" />
                     </RelativeLayout>
 

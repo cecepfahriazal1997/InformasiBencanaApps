@@ -46,7 +46,7 @@
                         android:layout_toLeftOf="@+id/date"
                         android:fontFamily="@font/sfprodisplay_medium"
                         android:text="Petunjuk Pemakaian / User Guide"
-                        android:textColor="@color/colorGrayDark"
+                        android:textColor="@color/colorBlack"
                         android:textSize="16dp" />
 
                     <TextView
@@ -56,7 +56,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/sfprodisplay_regular"
                         android:text="Petunjuk pemakaian dalam Sistem Informasi Medis Bencana, mencakup dari memasukkan data, mengedit data, serta menghapus data."
-                        android:textColor="@color/colorGray"
+                        android:textColor="@color/colorGrayDark"
                         android:textSize="14dp" />
                 </LinearLayout>
 

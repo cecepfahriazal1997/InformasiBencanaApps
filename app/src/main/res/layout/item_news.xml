@@ -32,7 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfprodisplay_medium"
-                    android:textColor="@color/colorGrayDark"
+                    android:textColor="@color/colorBlack"
                     android:textSize="16dp"
                     android:layout_alignParentStart="true"
                     android:layout_toLeftOf="@+id/date"
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfprodisplay_regular"
-                    android:textColor="@color/colorGray2"
+                    android:textColor="@color/colorGrayDark"
                     android:textSize="12dp"
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/sfprodisplay_regular"
-                android:textColor="@color/colorGray"
+                android:textColor="@color/colorGray2"
                 android:textSize="14dp"
                 android:maxLines="4"
                 android:ellipsize="end"/>

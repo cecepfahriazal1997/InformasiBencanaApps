@@ -102,7 +102,6 @@
                 android:layout_below="@+id/id">
 
                 <ImageView
-                    android:id="@+id/zoom"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@mipmap/zoom"
@@ -112,7 +111,6 @@
                     android:visibility="gone"/>
 
                 <ImageView
-                    android:id="@+id/skype"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@mipmap/skype"
@@ -122,7 +120,6 @@
                     android:visibility="gone"/>
 
                 <ImageView
-                    android:id="@+id/whatsapp"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@mipmap/whatsapp"

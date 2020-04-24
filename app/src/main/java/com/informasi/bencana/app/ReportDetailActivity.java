@@ -220,12 +220,12 @@ public class ReportDetailActivity extends MasterActivity {
 
     private void setDataChart(BarChart chart, ArrayList<BarEntry> values) {
         BarDataSet set1;
-        set1 = new BarDataSet(values, "Minggu Ke");
+        set1 = new MyBarDataSet(values, "Minggu Ke");
         set1.setDrawIcons(false);
-                set1.setColors(new int[]{
-                ContextCompat.getColor(this, R.color.colorPrimary),
+        set1.setColors(new int[]{
+                ContextCompat.getColor(this, R.color.colorRed),
                 ContextCompat.getColor(this, R.color.colorYellow),
-                ContextCompat.getColor(this, R.color.colorRed)});
+                ContextCompat.getColor(this, R.color.colorPrimary)});
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
 
@@ -241,8 +241,29 @@ public class ReportDetailActivity extends MasterActivity {
         chart.getXAxis().setLabelCount(12);
         chart.getAxisRight().setEnabled(false);
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+//        chart.getAxisLeft().setDrawGridLines(false);
+//        chart.getXAxis().setDrawGridLines(false);
         chart.setData(data);
         chart.notifyDataSetChanged();
         chart.invalidate();
+    }
+
+    public class MyBarDataSet extends BarDataSet {
+        List<BarEntry> yVals;
+        public MyBarDataSet(List<BarEntry> yVals, String label) {
+            super(yVals, label);
+            this.yVals = yVals;
+        }
+
+        @Override
+        public int getColor(int index) {
+            if(this.yVals.get(index).getY() == 1)
+                return mColors.get(0);
+            else if(this.yVals.get(index).getY() == 2)
+                return mColors.get(1);
+            else
+                return mColors.get(2);
+        }
+
     }
 }
