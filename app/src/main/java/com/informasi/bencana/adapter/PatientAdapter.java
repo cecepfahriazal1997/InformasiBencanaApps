@@ -95,7 +95,7 @@ public class PatientAdapter extends BaseAdapter {
         holder.Edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showActionsDialog(position, item);
+                showActionsDialog(item);
             }
         });
 
@@ -145,7 +145,7 @@ public class PatientAdapter extends BaseAdapter {
         FancyButton Edit, Delete;
     }
 
-    private void showActionsDialog(final int position, final PatientModel item) {
+    private void showActionsDialog(final PatientModel item) {
         CharSequence colors[] = new CharSequence[]{"Edit", "History", "Progress"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

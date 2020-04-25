@@ -149,12 +149,9 @@ public class PatientCollabAdapter extends BaseAdapter {
                         context.startActivity(intent);
                     } else {
                         PackageManager packageManager = context.getPackageManager();
-                        Intent i = new Intent(Intent.ACTION_VIEW);
 
                         try {
-                            String url = "https://zoom.us/join";
-                            i.setPackage("us.zoom.videomeetings");
-                            i.setData(Uri.parse(url));
+                            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("zoomus://"));
                             if (i.resolveActivity(packageManager) != null) {
                                 context.startActivity(i);
                             }
@@ -181,6 +178,8 @@ public class PatientCollabAdapter extends BaseAdapter {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                    } else {
+                        helper.showToast("Email dokter kosong !", 0);
                     }
                 } else {
                     if (!item.getPhoneDoctor().isEmpty() && !item.getPhoneDoctor().equals("null")) {
@@ -208,6 +207,8 @@ public class PatientCollabAdapter extends BaseAdapter {
                                 e.printStackTrace();
                             }
                         }
+                    } else {
+                        helper.showToast("Nomor telepon dokter kosong !", 0);
                     }
                 }
             }
